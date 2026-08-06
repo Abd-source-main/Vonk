@@ -22,6 +22,12 @@
 :root{
   --ink:#0e1012; --paper:#f7f5f2; --paper-2:#efece7; --card:#fff;
   --orange:#E67206; --glow:#E57827; --mute:#5b6469; --line:rgba(14,16,18,.11);
+  /* same hue, deeper values — the bright brand orange only reaches 2.85:1
+     against #f7f5f2, so it can carry shapes but never text.
+     -ink  → display type   (3.9:1, clears AA large)
+     -deep → small type      (5.3:1, clears AA normal) */
+  --orange-ink:#C25E04;
+  --orange-deep:#A34E03;
   --font-h:'Outfit',system-ui,sans-serif; --font-b:'Rubik',system-ui,sans-serif;
   --pad:clamp(1.25rem,4vw,4rem);
 }
@@ -31,11 +37,13 @@ body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--font-b)
 h1,h2,h3{font-family:var(--font-h);line-height:1.08;margin:0;letter-spacing:-.025em;font-weight:700}
 p{margin:0}
 a{color:inherit}
-img{max-width:100%;display:block}
+/* height:auto is not optional — without it the width/height attributes on the
+   hero mark win and the image renders stretched to its full 1209px */
+img{max-width:100%;height:auto;display:block}
 :focus-visible{outline:3px solid var(--orange);outline-offset:3px;border-radius:4px}
 .wrap{max-width:1240px;margin-inline:auto;padding-inline:var(--pad)}
-.eyebrow{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange);margin-bottom:.9rem;display:block}
-.spark{color:var(--orange)}
+.eyebrow{font-family:var(--font-h);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--orange-deep);margin-bottom:.9rem;display:block}
+.spark{color:var(--orange-ink)}
 .skip{position:absolute;left:-9999px;top:0;z-index:60;background:var(--orange);color:#fff;padding:.9rem 1.4rem;font-weight:600}
 .skip:focus{left:1rem;top:1rem}
 
@@ -46,9 +54,12 @@ img{max-width:100%;display:block}
 .nav.is-stuck{background:rgba(247,245,242,.95);box-shadow:0 8px 30px -22px rgba(14,16,18,.6)}
 .nav__logo{display:flex;align-items:center;margin-right:auto;text-decoration:none}
 .nav__logo img{height:34px;width:auto}
-.nav__links{display:flex;gap:.2rem;list-style:none;margin:0;padding:0}
-.nav__links a{text-decoration:none;font-size:.92rem;font-weight:500;color:var(--mute);padding:.6rem .85rem;border-radius:9px;display:block;transition:color .2s,background-color .2s}
-.nav__links a:hover{color:var(--ink);background:rgba(14,16,18,.055)}
+.nav__links{display:flex;align-items:center;gap:.2rem;list-style:none;margin:0;padding:0}
+.nav__links a:not(.btn){text-decoration:none;font-size:.92rem;font-weight:500;color:var(--mute);padding:.6rem .85rem;border-radius:9px;display:block;transition:color .2s,background-color .2s}
+.nav__links a:not(.btn):hover{color:var(--ink);background:rgba(14,16,18,.055)}
+/* the section you are actually looking at, so the bar reports position */
+.nav__links a[aria-current="true"]{color:var(--ink);background:rgba(230,114,6,.1)}
+.nav__cta{margin-left:.5rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font-family:var(--font-h);font-weight:600;font-size:1rem;
   padding:.85rem 1.5rem;min-height:48px;border-radius:11px;border:1px solid transparent;text-decoration:none;cursor:pointer;white-space:nowrap;
   transition:background-color .2s,color .2s,border-color .2s,box-shadow .2s}
@@ -59,67 +70,156 @@ img{max-width:100%;display:block}
 .btn--sm{padding:.6rem 1.15rem;font-size:.92rem;min-height:44px}
 .nav__toggle{display:none;background:none;border:1px solid var(--line);border-radius:9px;width:46px;height:46px;color:var(--ink);cursor:pointer;align-items:center;justify-content:center}
 
-/* ---------- intro ---------- */
-.intro{min-height:100svh;display:flex;align-items:center;position:relative;overflow:hidden}
-.intro__disc{position:absolute;right:-14vw;top:50%;translate:0 -50%;width:min(72vw,760px);aspect-ratio:1;border-radius:50%;
-  background:radial-gradient(circle at 50% 50%, rgba(230,114,6,.3) 0%, rgba(230,114,6,.13) 45%, rgba(230,114,6,0) 70%);pointer-events:none}
-.intro__inner{position:relative;z-index:2;max-width:46rem;padding-block:8rem 4rem}
-.intro h1{font-size:clamp(2.6rem,7vw,5.4rem);font-weight:800;text-wrap:balance}
-.intro__lede{font-size:clamp(1.06rem,1.6vw,1.28rem);color:var(--mute);margin-top:1.5rem;max-width:34rem}
-.intro__actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2.4rem}
-.intro__proof{display:flex;flex-wrap:wrap;gap:.55rem;margin-top:2.6rem;list-style:none;padding:0}
-.intro__proof li{font-size:.87rem;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.5rem 1rem;display:flex;align-items:center;gap:.45rem}
-.intro__proof svg{width:15px;height:15px;color:var(--orange)}
+/* =========================================================
+   INTRO — "live circuit"
+   No haze anywhere. The atmosphere is geometry: hairline columns
+   like an engineer's sheet, a masthead that changes scale mid-
+   sentence, and one hard orange block behind a white plate.
+   Everything crisp — nothing blurred has any colour but orange.
+   ========================================================= */
+.intro{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;
+  padding-block:clamp(7.5rem,15vh,10rem) clamp(3.5rem,8vh,5.5rem)}
 
-/* ---------- horizontal sections ---------- */
-.rail-track{position:relative}
-.rail-stage{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--paper)}
-.strip{display:flex;height:100%;width:400vw;will-change:transform;transform:translate3d(0,0,0)}
-.panel{position:relative;width:100vw;height:100%;flex:0 0 100vw;overflow:hidden}
-.panel img{
-  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;
-  will-change:transform;
-}
-.panel__scrim{
-  position:absolute;inset:0;
-  background:linear-gradient(105deg, rgba(247,245,242,.97) 0%, rgba(247,245,242,.92) 26%, rgba(247,245,242,.55) 46%, rgba(247,245,242,.05) 66%, rgba(247,245,242,0) 100%);
-}
-.panel__copy{
-  position:absolute;inset:0;display:flex;align-items:center;
-  padding-inline:max(var(--pad), calc((100vw - 1240px)/2 + var(--pad)));
-}
-.panel__inner{max-width:31rem;will-change:transform,opacity}
-.panel__num{font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:.2em;color:var(--orange);display:block;margin-bottom:.75rem}
-.panel h2{font-size:clamp(2rem,4.4vw,3.5rem);font-weight:800;text-wrap:balance}
-.panel p{color:var(--mute);font-size:clamp(1rem,1.4vw,1.12rem);margin-top:1rem;max-width:28rem}
-.panel__tags{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:1.35rem 0 0}
-.panel__tags li{font-size:.85rem;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem}
-.panel__actions{margin-top:1.7rem}
+/* the sheet: hairline columns, faded out top and bottom */
+.intro__sheet{position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(90deg,rgba(14,16,18,.055) 1px,transparent 1px);
+  background-size:clamp(64px,7vw,104px) 100%;
+  -webkit-mask-image:linear-gradient(180deg,transparent 0,#000 15%,#000 66%,transparent 100%);
+          mask-image:linear-gradient(180deg,transparent 0,#000 15%,#000 66%,transparent 100%)}
 
-/* stage chrome */
-.dots{position:absolute;right:var(--pad);top:50%;translate:0 -50%;z-index:20;display:grid;gap:.6rem}
-.dots button{
-  width:11px;height:11px;padding:0;border-radius:50%;cursor:pointer;
-  border:1px solid rgba(14,16,18,.28);background:transparent;
-  transition:background-color .25s,border-color .25s,transform .25s;
+.intro__grid{position:relative;z-index:2;width:100%;max-width:1680px;margin-inline:auto;
+  padding-inline:var(--pad);display:grid;gap:clamp(3rem,6vw,4.5rem);align-items:center}
+@media(min-width:1040px){
+  .intro__grid{grid-template-columns:minmax(0,1.24fr) minmax(0,.76fr)}
 }
-.dots button.is-on{background:var(--orange);border-color:var(--orange);transform:scale(1.25)}
-.counter{
-  position:absolute;left:var(--pad);bottom:2.2rem;z-index:20;
-  font-family:var(--font-h);font-size:.78rem;font-weight:600;letter-spacing:.16em;color:var(--mute)
+
+/* eyebrow, with a rule running into it */
+.intro__index{display:flex;align-items:center;gap:.8rem;margin:0 0 clamp(1.5rem,3vh,2.1rem);
+  font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mute)}
+.intro__index::before{content:'';flex:0 0 auto;width:clamp(30px,4.5vw,64px);height:2px;background:var(--orange)}
+
+/* the masthead: three lines, three scales, one sentence */
+.intro__title{margin:0;font-weight:800;letter-spacing:-.035em}
+.intro__title>span{display:block}
+.intro__t1{font-family:var(--font-b);font-size:clamp(1rem,1.65vw,1.35rem);font-weight:400;
+  letter-spacing:0;line-height:1.35;color:var(--mute);margin-bottom:clamp(.6rem,1.5vh,1.1rem)}
+/* .86 keeps it tight without the ascenders of f/b/l/t touching the line above.
+   9.5vw, not 11vw: this word sits in the 1.24fr column, which is ~57% of the
+   viewport, and "comfortable" measures 5.23em — at 11vw it ran 53px past the
+   column and the wipe's clip-path sheared the final "e" clean off. */
+.intro__t2{font-size:clamp(3.25rem,9.5vw,9.5rem);line-height:.86;letter-spacing:-.055em;
+  color:var(--orange-ink);margin-left:-.045em}
+.intro__t3{font-size:clamp(1.85rem,4.5vw,3.8rem);line-height:1.02;margin-top:clamp(.25rem,.9vh,.55rem)}
+
+.intro__lede{font-size:clamp(1rem,1.35vw,1.14rem);color:var(--mute);line-height:1.7;
+  max-width:31rem;margin-top:clamp(1.5rem,3.2vh,2.2rem)}
+.intro__actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:clamp(1.7rem,3.4vh,2.4rem)}
+
+/* proof as a spec strip, divided by hairlines — not a row of pills */
+.intro__spec{list-style:none;padding:0;margin:clamp(2.2rem,4.6vh,3.2rem) 0 0;
+  display:flex;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:1.05rem}
+.intro__spec li{display:flex;align-items:center;gap:.55rem;
+  font-family:var(--font-h);font-size:.82rem;font-weight:500;color:var(--mute)}
+.intro__spec li+li{margin-left:clamp(.9rem,2.2vw,1.9rem);
+  padding-left:clamp(.9rem,2.2vw,1.9rem);border-left:1px solid var(--line)}
+.intro__spec svg{width:14px;height:14px;color:var(--orange);flex:0 0 auto}
+
+/* the plate: a white card, a hard orange block behind it, current running the top edge */
+.intro__plate{position:relative;width:min(100%,370px);justify-self:center}
+@media(min-width:1040px){.intro__plate{justify-self:end}}
+.intro__plate::before{content:'';position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:0;
+  width:240%;aspect-ratio:1;border-radius:50%;pointer-events:none;
+  background:radial-gradient(circle,rgba(230,114,6,.16) 0%,rgba(230,114,6,.055) 38%,rgba(230,114,6,0) 68%)}
+.intro__block{position:absolute;inset:0;z-index:1;border-radius:16px;background:var(--orange);
+  translate:14px 14px}
+.intro__card{position:relative;z-index:2;display:grid;grid-template-rows:1fr auto;
+  border-radius:16px;background:var(--card);border:1px solid rgba(14,16,18,.14);overflow:hidden;
+  box-shadow:0 34px 64px -44px rgba(14,16,18,.55)}
+.intro__card img{width:60%;margin:auto;padding-block:clamp(1.8rem,4.5vw,2.6rem)}
+.intro__current{position:absolute;top:0;left:0;right:0;height:2px;z-index:3;overflow:hidden}
+.intro__current::after{content:'';position:absolute;top:0;bottom:0;left:0;width:40%;
+  background:linear-gradient(90deg,rgba(230,114,6,0),var(--glow),rgba(230,114,6,0));
+  animation:current 3.4s linear infinite}
+@keyframes current{from{transform:translateX(-100%)}to{transform:translateX(350%)}}
+.intro__foot,.circuit__foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  border-top:1px solid var(--line);padding:.85rem 1.1rem;
+  font-family:var(--font-h);font-size:.68rem;font-weight:700;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--mute)}
+.intro__foot b,.circuit__foot b{color:var(--orange-ink)}
+
+/* scroll cue, with a charge falling down the wire */
+.intro__scroll{position:absolute;left:var(--pad);bottom:clamp(1.4rem,3.5vh,2.4rem);z-index:2;
+  display:none;align-items:center;gap:.75rem;text-decoration:none;
+  font-family:var(--font-h);font-size:.66rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mute);transition:color .2s}
+@media(min-width:1040px){.intro__scroll{display:inline-flex}}
+.intro__scroll:hover{color:var(--orange-deep)}
+.intro__scroll i{position:relative;flex:0 0 auto;display:block;width:1px;height:36px;
+  background:var(--line);overflow:hidden}
+.intro__scroll i::after{content:'';position:absolute;left:0;top:0;width:1px;height:44%;background:var(--orange);
+  animation:drop 2.2s cubic-bezier(.55,0,.45,1) infinite}
+@keyframes drop{0%{transform:translateY(-110%)}55%,100%{transform:translateY(240%)}}
+
+/* one orchestrated load: everything rises in sequence, the big word wipes in */
+[data-rise]{animation:rise .85s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--d,0ms)}
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+/* backwards, not both: `both` leaves inset(0 0 0 0) applied forever, which
+   clips anything the glyphs overhang past the box. Once the wipe is done the
+   clip-path should be gone entirely. */
+.intro__t2{animation:wipe 1s cubic-bezier(.16,1,.3,1) .24s backwards}
+@keyframes wipe{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* =========================================================
+   OVERVIEW — the four circuits
+   The scroll-hijacked rail is gone. The same four stories now
+   read as a ledger: a hairline rule opens each entry, and the
+   plate carries the hero's hard orange block, flipping sides
+   down the page so the eye zig-zags instead of scanning a column.
+   ========================================================= */
+.circuits{margin-top:clamp(2rem,4.5vw,3.25rem)}
+.circuit{position:relative;display:grid;gap:clamp(1.75rem,4vw,2.75rem);align-items:center;
+  border-top:1px solid var(--line);padding-block:clamp(2.75rem,5.5vw,4.5rem)}
+@media(min-width:900px){
+  .circuit{grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);gap:clamp(3rem,6vw,5.5rem)}
+  .circuit:nth-child(even) .circuit__plate{order:-1}
 }
-.counter b{color:var(--ink);font-size:1.05rem}
-.counter.is-held{animation:held .5s ease}
-@keyframes held{0%{color:var(--orange);transform:translateX(0)}
-  25%{transform:translateX(-2px)}55%{transform:translateX(2px)}100%{color:var(--mute);transform:translateX(0)}}
-.hint{
-  position:absolute;right:var(--pad);bottom:2.2rem;z-index:20;display:flex;align-items:center;gap:.5rem;
-  font-family:var(--font-h);font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);
-  transition:opacity .35s ease
+.circuit__index{display:flex;align-items:center;gap:.85rem;margin:0 0 1.05rem;
+  font-family:var(--font-h);font-size:.72rem;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--mute)}
+.circuit__index b{color:var(--orange-ink);font-size:.95rem;letter-spacing:.06em}
+.circuit__index::after{content:'';flex:1 1 auto;height:1px;background:var(--line)}
+.circuit h3{font-size:clamp(1.75rem,3.6vw,2.7rem);font-weight:800;letter-spacing:-.03em;text-wrap:balance}
+.circuit__body{color:var(--mute);font-size:clamp(1rem,1.3vw,1.08rem);margin-top:1rem;max-width:34rem}
+.tags{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;padding:0;margin:1.5rem 0 0}
+.tags li{font-family:var(--font-h);font-size:.82rem;font-weight:500;color:var(--mute);
+  background:var(--card);border:1px solid var(--line);border-radius:999px;padding:.42rem .95rem}
+.circuit__actions{margin-top:1.8rem}
+
+/* the plate: same construction as the hero card, mirrored on alternate rows */
+.circuit__plate{position:relative}
+.circuit__plate::before{content:'';position:absolute;inset:0;z-index:0;border-radius:16px;
+  background:var(--orange);translate:14px 14px}
+@media(min-width:900px){
+  .circuit:nth-child(even) .circuit__plate::before{translate:-14px 14px}
 }
-.hint svg{width:16px;height:16px;color:var(--orange)}
+.circuit__frame{position:relative;z-index:1;display:grid;grid-template-rows:1fr auto;
+  border-radius:16px;overflow:hidden;background:var(--card);border:1px solid rgba(14,16,18,.14);
+  box-shadow:0 34px 64px -44px rgba(14,16,18,.55)}
+.circuit__frame img{width:100%;aspect-ratio:4/3;object-fit:cover;
+  transition:transform .7s cubic-bezier(.16,1,.3,1)}
+/* contained by overflow:hidden, so nothing around it shifts */
+.circuit__frame:hover img{transform:scale(1.04)}
+
+/* scroll reveal — one shared utility, staggered per row */
+[data-reveal]{opacity:0;transform:translateY(22px);
+  transition:opacity .75s cubic-bezier(.16,1,.3,1),transform .75s cubic-bezier(.16,1,.3,1);
+  transition-delay:var(--rd,0ms)}
+[data-reveal].is-in{opacity:1;transform:none}
 
 /* ---------- sections ---------- */
+/* the bar is fixed, so anchored jumps have to clear it */
+section[id]{scroll-margin-top:6rem}
 .section{padding-block:clamp(4.5rem,9vw,7.5rem)}
 .section--alt{background:var(--paper-2)}
 .section__head{max-width:44rem;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
@@ -146,12 +246,13 @@ img{max-width:100%;display:block}
 .contact-list li{display:flex;gap:.85rem;align-items:flex-start;font-size:.98rem}
 .contact-list svg{width:19px;height:19px;color:var(--orange);flex:0 0 auto;margin-top:.25rem}
 .contact-list a{text-decoration:none}
-.contact-list a:hover{color:var(--orange)}
+.contact-list a:hover{color:var(--orange-deep)}
 .contact-list .sub{color:var(--mute);font-size:.85rem}
 form{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:clamp(1.4rem,3vw,2.15rem)}
 .field{margin-bottom:1.05rem}
 .field label{display:block;font-size:.87rem;font-weight:500;margin-bottom:.4rem}
-.field .req{color:var(--orange)}
+.field .req{color:var(--orange-deep)}
+.field select{cursor:pointer}
 .field input,.field select,.field textarea{width:100%;background:var(--paper);border:1px solid rgba(14,16,18,.16);border-radius:10px;
   color:var(--ink);font-family:var(--font-b);font-size:1rem;padding:.8rem .95rem;min-height:48px;transition:border-color .2s,box-shadow .2s,background-color .2s}
 .field textarea{min-height:112px;resize:vertical}
@@ -173,32 +274,35 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
 .footer img{height:52px;width:auto;margin-bottom:1rem}
 .footer nav ul{list-style:none;padding:0;margin:0;display:grid;gap:.5rem}
 .footer nav a{text-decoration:none}
-.footer nav a:hover{color:var(--orange)}
+.footer nav a:hover{color:var(--orange-deep)}
 .footer__legal{margin-top:2.5rem;padding-top:1.4rem;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:.4rem 1.5rem;font-size:.81rem}
 
 @media(max-width:900px){
-  .nav__links{display:none;position:absolute;top:calc(100% + .5rem);left:0;right:0;flex-direction:column;gap:.2rem;
+  .nav__links{display:none;position:absolute;top:calc(100% + .5rem);left:0;right:0;flex-direction:column;
+    align-items:stretch;gap:.2rem;
     background:rgba(247,245,242,.98);border:1px solid var(--line);border-radius:14px;padding:.55rem;backdrop-filter:blur(16px)}
   .nav__links.is-open{display:flex}
   .nav__toggle{display:flex}
-  .nav .btn--sm{display:none}
-  .intro__disc{right:-40vw;width:110vw}
-  .dots{display:none}
-  .panel__copy{align-items:flex-start;padding-top:clamp(6rem,16vh,9rem)}
-  .panel__inner{max-width:100%}
-  .panel__scrim{background:linear-gradient(180deg, rgba(247,245,242,.97) 0%, rgba(247,245,242,.93) 34%, rgba(247,245,242,.45) 56%, rgba(247,245,242,0) 76%)}
-  .panel img{object-position:70% center}
+  /* the CTA rides inside the drawer rather than disappearing on small screens */
+  .nav__cta{margin:.35rem 0 0}
+  .nav__cta .btn{width:100%}
+  .intro__plate{width:min(100%,300px)}
 }
 
-@media(prefers-reduced-motion:reduce){*{transition-duration:.01ms !important}}
-.rm .rail-track{height:auto !important}
-.rm .rail-stage{position:static;height:auto}
-.rm .strip{display:block;width:100%}
-.rm .panel{width:100%;height:auto;padding-block:clamp(2.5rem,6vw,4.5rem);border-bottom:1px solid var(--line)}
-.rm .panel img{position:relative;inset:auto;height:auto;aspect-ratio:16/9;border-radius:16px;margin-bottom:1.75rem}
-.rm .panel__scrim,.rm .dots,.rm .hint{display:none}
-.rm .panel__copy{position:static;display:block;padding-inline:var(--pad);max-width:1240px;margin-inline:auto}
-.rm .panel__inner{opacity:1 !important;transform:none !important;max-width:100%}
+/* the spec strip loses its dividers once it has to wrap */
+@media(max-width:620px){
+  .intro__spec{display:grid;gap:.55rem;padding-top:.9rem}
+  .intro__spec li+li{margin-left:0;padding-left:0;border-left:0}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *{transition-duration:.01ms !important}
+  [data-rise],.intro__t2{animation:none !important;opacity:1 !important;transform:none !important;clip-path:none !important}
+  [data-reveal]{opacity:1 !important;transform:none !important}
+  .intro__current::after,.intro__scroll i::after{animation:none !important;opacity:0}
+  .circuit__frame:hover img{transform:none}
+  html{scroll-behavior:auto !important}
+}
 </style>
 </head>
 <body>
@@ -214,96 +318,131 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
     <li><a href="#services">Services</a></li>
     <li><a href="#why">Why us</a></li>
     <li><a href="#book">Contact</a></li>
+    <li class="nav__cta"><a class="btn btn--primary btn--sm" href="#book">Book an appointment</a></li>
   </ul>
-  <a class="btn btn--primary btn--sm" href="#book">Book an appointment</a>
 </header>
 
 <main id="top">
 
 <section class="intro">
-  <div class="intro__disc" aria-hidden="true"></div>
-  <div class="wrap intro__inner">
-    <span class="eyebrow">Vonk Elektra &middot; Nijmegen</span>
-    <h1>Your Electrical Partner for <span class="spark">Comfortable</span> Living and Working</h1>
-    <p class="intro__lede">Total peace of mind at home or at your workplace. You shouldn't have to wonder whether things are working properly — when we carry out work for you, we do it right.</p>
-    <div class="intro__actions">
-      <a class="btn btn--primary" href="#book">Book an appointment</a>
-      <a class="btn btn--ghost" href="#overview">See what we do</a>
+  <div class="intro__sheet" aria-hidden="true"></div>
+
+  <div class="intro__grid">
+    <div class="intro__copy">
+      <p class="intro__index" data-rise>Vonk Elektra &middot; Nijmegen &amp; surrounding area</p>
+
+      <h1 class="intro__title">
+        <span class="intro__t1" data-rise style="--d:80ms">Your electrical partner for</span>
+        <span class="intro__t2">comfortable</span>
+        <span class="intro__t3" data-rise style="--d:340ms">living and working</span>
+      </h1>
+
+      <p class="intro__lede" data-rise style="--d:440ms">Total peace of mind at home or at your workplace. You shouldn't have to wonder whether things are working properly — when we carry out work for you, we do it right.</p>
+
+      <div class="intro__actions" data-rise style="--d:520ms">
+        <a class="btn btn--primary" href="#book">Book an appointment</a>
+        <a class="btn btn--ghost" href="#overview">See what we do</a>
+      </div>
+
+      <ul class="intro__spec" data-rise style="--d:600ms">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg> Skilled &amp; experienced</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg> Reliable &amp; transparent</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m4 12 5 5L20 6"/></svg> Evenings &amp; weekends</li>
+      </ul>
     </div>
-    <ul class="intro__proof">
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> Skilled &amp; experienced electricians</li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> Reliable &amp; transparent</li>
-      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg> Evenings &amp; weekends for faults</li>
-    </ul>
+
+    <div class="intro__plate" data-rise style="--d:260ms">
+      <span class="intro__block" aria-hidden="true"></span>
+      <div class="intro__card">
+        <span class="intro__current" aria-hidden="true"></span>
+        <img src="assets/img/logo-mark.png" alt="" width="1198" height="1209" fetchpriority="high">
+        <div class="intro__foot"><span>Vonk Elektra</span> <b>Let's vonk</b></div>
+      </div>
+    </div>
   </div>
+
+  <a class="intro__scroll" href="#overview"><i aria-hidden="true"></i>Scroll</a>
 </section>
 
-<!-- ============ HORIZONTAL SECTIONS ============ -->
-<section class="rail-track" id="overview" aria-label="What Vonk Elektra does">
-  <div class="rail-stage">
-    <div class="strip" id="strip">
-
-      <article class="panel">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_211614_526c064a-8682-4b53-aebb-ab4894524961.png"
-             alt="A large angled array of black solar panels beside a slim white home battery on a warm off-white set.">
-        <div class="panel__scrim" aria-hidden="true"></div>
-        <div class="panel__copy"><div class="panel__inner">
-          <span class="panel__num">01 — Solar &amp; storage</span>
-          <h2>Make your own power. And <span class="spark">keep</span> it.</h2>
-          <p>Solar panels and home batteries advised, supplied and installed as one system — so the power you generate is still yours in the evening.</p>
-          <ul class="panel__tags"><li>Solar panels</li><li>Home batteries</li><li>Within 4 weeks</li></ul>
-        </div></div>
-      </article>
-
-      <article class="panel">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_212234_444f96cd-e07d-4125-adb9-ea3bbe540690.png"
-             alt="A wall-mounted air conditioning unit with ribbons of cool air, and a heat pump on the floor below.">
-        <div class="panel__scrim" aria-hidden="true"></div>
-        <div class="panel__copy"><div class="panel__inner">
-          <span class="panel__num">02 — Climate</span>
-          <h2>Cool in summer. Warm without the <span class="spark">gas bill</span>.</h2>
-          <p>Air conditioning that cools in summer and heats efficiently in winter, and heat pumps that cut what you burn on gas. Sized to your home, not to a catalogue.</p>
-          <ul class="panel__tags"><li>Air conditioning</li><li>Heat pumps</li><li>Year-round comfort</li></ul>
-        </div></div>
-      </article>
-
-      <article class="panel">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_212855_089a0052-39f8-4a08-bf1c-cc0cab76e11f.png"
-             alt="A white EV charging station with an orange status ring, cable plugged into a dark electric car.">
-        <div class="panel__scrim" aria-hidden="true"></div>
-        <div class="panel__copy"><div class="panel__inner">
-          <span class="panel__num">03 — Charging</span>
-          <h2>Plug in at home. Plug in at <span class="spark">work</span>.</h2>
-          <p>Charging stations for private homes and for businesses — including any fuse box upgrade, cabling and testing needed to do it safely.</p>
-          <ul class="panel__tags"><li>Home charging</li><li>Business charging</li><li>Fully tested</li></ul>
-        </div></div>
-      </article>
-
-      <article class="panel">
-        <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_213520_aa39a7f6-fd90-4c4e-b211-56171bd35bca.png"
-             alt="An open fuse box on a white wall with a tool case and step ladder below it.">
-        <div class="panel__scrim" aria-hidden="true"></div>
-        <div class="panel__copy"><div class="panel__inner">
-          <span class="panel__num">04 — Everything else</span>
-          <h2>And anything <span class="spark">in between</span>.</h2>
-          <p>Fuse boxes, cooker circuits, faults and maintenance. One team, one point of contact — including evenings and weekends when it can't wait.</p>
-          <div class="panel__actions"><a class="btn btn--primary" href="#book">Let's VONK together</a></div>
-        </div></div>
-      </article>
-
+<!-- ============ WHAT WE DO ============ -->
+<section class="section" id="overview" aria-labelledby="overview-title">
+  <div class="wrap">
+    <div class="section__head">
+      <span class="eyebrow">What we do</span>
+      <h2 id="overview-title">Four things that make a building work better</h2>
+      <p>Generate it, store it, stay comfortable in it, and keep the whole installation safe. We do all four — and everything in between.</p>
     </div>
 
-    <nav class="dots" id="dots" aria-label="Sections">
-      <button type="button" data-i="0" aria-label="Solar and storage"></button>
-      <button type="button" data-i="1" aria-label="Climate"></button>
-      <button type="button" data-i="2" aria-label="Charging"></button>
-      <button type="button" data-i="3" aria-label="Everything else"></button>
-    </nav>
+    <div class="circuits">
 
-    <div class="counter" aria-hidden="true"><b id="cNow">01</b> / 04</div>
-    <div class="hint" id="hint" aria-hidden="true">
-      <span>Scroll</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <article class="circuit">
+        <div class="circuit__copy" data-reveal>
+          <p class="circuit__index"><b>01</b> Solar &amp; storage</p>
+          <h3>Make your own power. And <span class="spark">keep</span> it.</h3>
+          <p class="circuit__body">Solar panels and home batteries advised, supplied and installed as one system — so the power you generate is still yours in the evening.</p>
+          <ul class="tags"><li>Solar panels</li><li>Home batteries</li><li>Within 4 weeks</li></ul>
+        </div>
+        <div class="circuit__plate" data-reveal style="--rd:120ms">
+          <div class="circuit__frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_211614_526c064a-8682-4b53-aebb-ab4894524961.png"
+                 alt="A large angled array of black solar panels beside a slim white home battery on a warm off-white set."
+                 loading="lazy" decoding="async">
+            <div class="circuit__foot"><span>Solar &amp; storage</span> <b>01 / 04</b></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="circuit">
+        <div class="circuit__copy" data-reveal>
+          <p class="circuit__index"><b>02</b> Climate</p>
+          <h3>Cool in summer. Warm without the <span class="spark">gas bill</span>.</h3>
+          <p class="circuit__body">Air conditioning that cools in summer and heats efficiently in winter, and heat pumps that cut what you burn on gas. Sized to your home, not to a catalogue.</p>
+          <ul class="tags"><li>Air conditioning</li><li>Heat pumps</li><li>Year-round comfort</li></ul>
+        </div>
+        <div class="circuit__plate" data-reveal style="--rd:120ms">
+          <div class="circuit__frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_212234_444f96cd-e07d-4125-adb9-ea3bbe540690.png"
+                 alt="A wall-mounted air conditioning unit with ribbons of cool air, and a heat pump on the floor below."
+                 loading="lazy" decoding="async">
+            <div class="circuit__foot"><span>Climate</span> <b>02 / 04</b></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="circuit">
+        <div class="circuit__copy" data-reveal>
+          <p class="circuit__index"><b>03</b> Charging</p>
+          <h3>Plug in at home. Plug in at <span class="spark">work</span>.</h3>
+          <p class="circuit__body">Charging stations for private homes and for businesses — including any fuse box upgrade, cabling and testing needed to do it safely.</p>
+          <ul class="tags"><li>Home charging</li><li>Business charging</li><li>Fully tested</li></ul>
+        </div>
+        <div class="circuit__plate" data-reveal style="--rd:120ms">
+          <div class="circuit__frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_212855_089a0052-39f8-4a08-bf1c-cc0cab76e11f.png"
+                 alt="A white EV charging station with an orange status ring, cable plugged into a dark electric car."
+                 loading="lazy" decoding="async">
+            <div class="circuit__foot"><span>Charging</span> <b>03 / 04</b></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="circuit">
+        <div class="circuit__copy" data-reveal>
+          <p class="circuit__index"><b>04</b> Everything else</p>
+          <h3>And anything <span class="spark">in between</span>.</h3>
+          <p class="circuit__body">Fuse boxes, cooker circuits, faults and maintenance. One team, one point of contact — including evenings and weekends when it can't wait.</p>
+          <div class="circuit__actions"><a class="btn btn--primary" href="#book">Let's VONK together</a></div>
+        </div>
+        <div class="circuit__plate" data-reveal style="--rd:120ms">
+          <div class="circuit__frame">
+            <img src="https://d8j0ntlcm91z4.cloudfront.net/user_3HE8QKPfXVXMaNnm0QeK2FN7TvL/hf_20260730_213520_aa39a7f6-fd90-4c4e-b211-56171bd35bca.png"
+                 alt="An open fuse box on a white wall with a tool case and step ladder below it."
+                 loading="lazy" decoding="async">
+            <div class="circuit__foot"><span>Everything else</span> <b>04 / 04</b></div>
+          </div>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -364,23 +503,23 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
       <div class="form-success" id="formSuccess" role="status"><strong>Thank you.</strong> Your request has been noted — we'll contact you to confirm a time.</div>
       <div class="field-row">
         <div class="field"><label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-name" name="name" type="text" autocomplete="name" required placeholder="Your full name"><span class="error">Please enter your name.</span></div>
+          <input id="f-name" name="name" type="text" autocomplete="name" required aria-describedby="e-name" placeholder="Your full name"><span class="error" id="e-name">Please enter your name.</span></div>
         <div class="field"><label for="f-phone">Phone <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-phone" name="phone" type="tel" autocomplete="tel" required placeholder="06 12 34 56 78"><span class="error">Please enter a phone number.</span></div>
+          <input id="f-phone" name="phone" type="tel" autocomplete="tel" required aria-describedby="e-phone" placeholder="06 12 34 56 78"><span class="error" id="e-phone">Please enter a phone number.</span></div>
       </div>
       <div class="field-row">
         <div class="field"><label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
-          <input id="f-email" name="email" type="email" autocomplete="email" required placeholder="you@example.com"><span class="error">Please enter a valid email address.</span></div>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email" placeholder="you@example.com"><span class="error" id="e-email">Please enter a valid email address.</span></div>
         <div class="field"><label for="f-post">Postcode</label>
           <input id="f-post" name="postcode" type="text" autocomplete="postal-code" placeholder="6511 AB"></div>
       </div>
       <div class="field"><label for="f-service">What do you need? <span class="req" aria-hidden="true">*</span></label>
-        <select id="f-service" name="service" required>
+        <select id="f-service" name="service" required aria-describedby="e-service">
           <option value="">Choose a service…</option>
           <option>Solar panels</option><option>Home battery</option><option>Air conditioning</option>
           <option>Heat pump</option><option>EV charging station</option><option>Fuse box replacement</option>
           <option>Fault repair (urgent)</option><option>Maintenance / odd jobs</option><option>Advice — not sure yet</option>
-        </select><span class="error">Please choose a service.</span></div>
+        </select><span class="error" id="e-service">Please choose a service.</span></div>
       <div class="field"><label for="f-msg">Tell us a bit more</label>
         <textarea id="f-msg" name="message" placeholder="What's the situation, and when suits you?"></textarea></div>
       <button class="btn btn--primary" type="submit" id="submitBtn" style="width:100%">Request your appointment</button>
@@ -435,9 +574,7 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
 
 <script>
 /* =========================================================
-   VONK ELEKTRA — horizontal sections
-   Vertical scroll drives horizontal travel. One screen of
-   scroll per service, with snap so it settles on one at a time.
+   VONK ELEKTRA
    ========================================================= */
 (function(){
   "use strict";
@@ -447,15 +584,53 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
   const nav = document.getElementById('nav');
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => {
-    const open = links.classList.toggle('is-open');
+  const setMenu = open => {
+    links.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  };
+  toggle.addEventListener('click', () => setMenu(!links.classList.contains('is-open')));
+  links.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  /* a drawer you can't dismiss is a trap: escape and any outside click close it */
+  addEventListener('keydown', e => {
+    if (e.key === 'Escape' && links.classList.contains('is-open')){ setMenu(false); toggle.focus(); }
   });
-  links.addEventListener('click', e => {
-    if (e.target.tagName === 'A'){ links.classList.remove('is-open'); toggle.setAttribute('aria-expanded','false'); }
+  addEventListener('pointerdown', e => {
+    if (links.classList.contains('is-open') && !nav.contains(e.target)) setMenu(false);
   });
   addEventListener('scroll', () => nav.classList.toggle('is-stuck', scrollY > 30), {passive:true});
+
+  /* which section the nav should be reporting */
+  const navLinks = [...links.querySelectorAll('a[href^="#"]:not(.btn)')];
+  const targets = navLinks.map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if (targets.length && 'IntersectionObserver' in window){
+    const seen = new Set();
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(en => en.isIntersecting ? seen.add(en.target) : seen.delete(en.target));
+      /* topmost section in the band wins, so neighbours don't fight over it */
+      const win = targets.find(t => seen.has(t));
+      navLinks.forEach((a,i) => {
+        if (win && targets[i] === win) a.setAttribute('aria-current','true');
+        else a.removeAttribute('aria-current');
+      });
+    }, {rootMargin:'-25% 0px -60% 0px'});
+    targets.forEach(t => spy.observe(t));
+  }
+
+  /* scroll reveal */
+  const reveals = [...document.querySelectorAll('[data-reveal]')];
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries, obs) => {
+      entries.forEach(en => {
+        if (!en.isIntersecting) return;
+        en.target.classList.add('is-in');
+        obs.unobserve(en.target);          // reveal is a one-time event
+      });
+    }, {rootMargin:'0px 0px -12% 0px', threshold:.12});
+    reveals.forEach(el => io.observe(el));
+  } else {
+    reveals.forEach(el => el.classList.add('is-in'));
+  }
 
   /* form */
   const form = document.getElementById('bookForm');
@@ -480,246 +655,24 @@ form{background:var(--card);border:1px solid var(--line);border-radius:18px;padd
     /* TODO: POST to your backend / form service here. */
     setTimeout(() => {
       ok.classList.add('is-on'); ok.scrollIntoView({block:'center'});
-      form.reset(); btn.disabled = false; btn.textContent = 'Request your appointment';
+      form.reset();
+      /* a reset field is no longer wrong — drop the red before they look again */
+      form.querySelectorAll('.is-invalid').forEach(f => f.classList.remove('is-invalid'));
+      form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
+      btn.disabled = false; btn.textContent = 'Request your appointment';
     }, 700);
   });
 
-  const track  = document.getElementById('overview');
-  const strip  = document.getElementById('strip');
-  const panels = [...document.querySelectorAll('.panel')];
-  const inners = [...document.querySelectorAll('.panel__inner')];
-  const imgs   = [...document.querySelectorAll('.panel img')];
-  const dots   = [...document.querySelectorAll('.dots button')];
-  const cNow   = document.getElementById('cNow');
-  const counterEl = document.querySelector('.counter');
-  const hint   = document.getElementById('hint');
-  const N = panels.length;
-
-  /* reduced motion: stack the sections vertically, no horizontal move */
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches){
-    document.documentElement.classList.add('rm');
-    return;
-  }
-
-  /* =========================================================
-     PLAYER — each service is a stop; moving between them is played
-
-     Same model as the deconstruction page. Every panel is a place you
-     can rest. The slide between two panels is NOT scrolled: once you
-     commit, wheel, touch and key input are swallowed and the strip
-     travels on its own clock at a constant, watchable speed. The page's
-     scroll position is animated underneath, so the scrollbar moves and
-     it still reads as scrolling — you just can't stall it or stop
-     between two panels.
-
-     Leaving is free: scroll up from the first panel or down from the
-     last and the page behaves completely normally.
-     ========================================================= */
-  const PANEL_VH  = 110;    // scroll length per panel
-  const PLAY_MS   = 1000;   // how long one slide takes
-  const COMMIT_PX = 90;     // scroll needed to commit to a slide
-  const RAMP      = 0.16;   // ease at each end; the middle is constant speed
-  const ARM_GAP   = 280;    // quiet time that separates one gesture from the next
-
-  track.style.height = (N * PANEL_VH) + 'svh';
-
-  const clamp = (n,a,b) => n < a ? a : n > b ? b : n;
-  let target = 0, current = 0, running = false, visible = true;
-  let play = null, intent = 0, intentDir = 0, intentTs = 0;
-
-  /* Arriving at a panel catches you there. The momentum that carried you in
-     does not count as a request to move on — you have to stop and scroll
-     again. Without this, the flick that brings you down from the hero sails
-     straight through the first panel before you have seen it. */
-  let armed = false, heldIdx = 0, lastInputTs = 0;
-
-  /* Constant speed through the middle with a short ramp at each end —
-     the most watchable shape when the viewer has no control over pace. */
-  function trap(k){
-    const c = 1 / (1 - RAMP);
-    if (k < RAMP) return c * (k * k) / (2 * RAMP);
-    if (k > 1 - RAMP){ const q = 1 - k; return 1 - c * (q * q) / (2 * RAMP); }
-    return c * (k - RAMP / 2);
-  }
-
-  const panelY = i => track.offsetTop + (track.offsetHeight - innerHeight) * (i / (N - 1));
-
-  function read(){
-    const r = track.getBoundingClientRect();
-    const span = track.offsetHeight - innerHeight;
-    target = span > 0 ? clamp(-r.top / span, 0, 1) : 0;
-    if (!running){ running = true; requestAnimationFrame(tick); }
-  }
-
-  function tick(){
-    /* 1:1 with scroll — while a slide is playing, scroll is ours anyway */
-    current = target;
-    const pos = current * (N - 1);
-    strip.style.transform = `translate3d(${(-pos * 100).toFixed(3)}vw,0,0)`;
-
-    for (let i = 0; i < N; i++){
-      const d = pos - i;
-      const near = clamp(1 - Math.abs(d), 0, 1);
-      inners[i].style.opacity = Math.pow(near, 1.6).toFixed(3);
-      inners[i].style.transform = `translate3d(${(d * 4).toFixed(2)}rem,0,0)`;
-      imgs[i].style.transform = `translate3d(${(d * -6).toFixed(2)}vw,0,0) scale(1.13)`;
+  /* clear a field's error as soon as it has something in it, rather than
+     making them submit again to find out whether they fixed it */
+  form.addEventListener('input', e => {
+    const field = e.target.closest('.field.is-invalid');
+    if (field && e.target.value.trim() !== ''){
+      field.classList.remove('is-invalid');
+      e.target.removeAttribute('aria-invalid');
     }
+  });
 
-    const idx = clamp(Math.round(pos), 0, N - 1);
-    dots.forEach((b,i) => b.classList.toggle('is-on', i === idx));
-    if (cNow.textContent !== String(idx + 1).padStart(2,'0'))
-      cNow.textContent = String(idx + 1).padStart(2,'0');
-    hint.style.opacity = idx >= N - 1 ? '0' : '1';
-
-    running = false;
-  }
-
-  function startPlay(from, to){
-    intent = 0;
-    armed = false;              // each slide needs its own fresh gesture
-    heldIdx = to;
-    const y0 = panelY(from), y1 = panelY(to);
-    let t0 = null;
-    play = {to};
-    requestAnimationFrame(function step(now){
-      if (!play) return;
-      if (t0 === null) t0 = now;
-      const k = clamp((now - t0) / PLAY_MS, 0, 1);
-      scrollTo({top: Math.round(y0 + (y1 - y0) * trap(k)), behavior:'instant'});
-      read();
-      if (k < 1) requestAnimationFrame(step);
-      else { play = null; scrollTo({top: Math.round(y1), behavior:'instant'}); read(); }
-    });
-  }
-
-  function flashHold(){
-    if (!counterEl) return;
-    counterEl.classList.remove('is-held');
-    void counterEl.offsetWidth;        // restart the animation
-    counterEl.classList.add('is-held');
-  }
-
-  /* which panel are we parked on, if any */
-  function at(){
-    const span = track.offsetHeight - innerHeight;
-    if (span <= 0) return null;
-    const pos = clamp((scrollY - track.offsetTop) / span, 0, 1) * (N - 1);
-    const i = Math.round(pos);
-    return Math.abs(pos - i) <= 0.03 ? clamp(i, 0, N - 1) : null;
-  }
-
-  /* accumulate intent so a stray nudge does nothing */
-  function pushIntent(delta, now){
-    if (now - intentTs > 400) intent = 0;
-    intentTs = now;
-    const d = delta > 0 ? 1 : -1;
-    if (d !== intentDir){ intentDir = d; intent = 0; }
-    intent += Math.abs(delta);
-    return intent >= COMMIT_PX;
-  }
-
-  /* returns true if the input should be swallowed */
-  function handleInput(delta){
-    /* Timestamp EVERY input, visible or not. The flick that carries you down
-       through the hero has to count as the same gesture, otherwise the first
-       event after the section appears looks brand new and arms it. */
-    const now = performance.now();
-    const quiet = now - lastInputTs;
-    lastInputTs = now;
-
-    if (!visible) return false;
-    if (play) return true;
-
-    if (!armed && quiet > ARM_GAP) armed = true;   // a genuinely new gesture
-
-    /* still riding the gesture that brought us here — catch and hold */
-    if (!armed){
-      if (delta > 0 && heldIdx < N - 1){
-        if (scrollY >= panelY(heldIdx) - 2){
-          scrollTo({top: Math.round(panelY(heldIdx)), behavior:'instant'});
-          read(); flashHold();
-          return true;
-        }
-        return false;                       // still on the way in
-      }
-      if (delta < 0 && heldIdx > 0){
-        if (scrollY <= panelY(heldIdx) + 2){
-          scrollTo({top: Math.round(panelY(heldIdx)), behavior:'instant'});
-          read(); flashHold();
-          return true;
-        }
-        return false;
-      }
-      return false;                          // at either end — free to leave
-    }
-
-    const i = at();
-    if (i === null){                       // stranded between panels
-      const span = track.offsetHeight - innerHeight;
-      const pos = clamp((scrollY - track.offsetTop) / span, 0, 1) * (N - 1);
-      startPlay(Math.round(pos), clamp(Math.round(pos), 0, N - 1));
-      return true;
-    }
-    heldIdx = i;
-    if (delta > 0){
-      if (i === N - 1){ intent = 0; return false; }   // past the last — let them go
-      if (pushIntent(delta, performance.now())) startPlay(i, i + 1);
-      return true;
-    }
-    if (delta < 0){
-      if (i === 0){ intent = 0; return false; }       // before the first — let them go
-      if (pushIntent(delta, performance.now())) startPlay(i, i - 1);
-      return true;
-    }
-    return false;
-  }
-
-  addEventListener('wheel', e => { if (handleInput(e.deltaY)) e.preventDefault(); }, {passive:false});
-
-  let touchY = null;
-  addEventListener('touchstart', e => { touchY = e.touches[0].clientY; }, {passive:true});
-  addEventListener('touchmove', e => {
-    if (touchY === null) return;
-    const y = e.touches[0].clientY, d = touchY - y;
-    touchY = y;
-    if (handleInput(d)) e.preventDefault();
-  }, {passive:false});
-  addEventListener('touchend', () => { touchY = null; intent = 0; }, {passive:true});
-
-  const KEYS = {ArrowDown:120, ArrowUp:-120, PageDown:600, PageUp:-600, ' ':600};
-  addEventListener('keydown', e => {
-    const d = KEYS[e.key];
-    if (d === undefined) return;
-    if (handleInput(d)) e.preventDefault();
-  }, {passive:false});
-
-  /* dots jump straight to a panel */
-  dots.forEach(b => b.addEventListener('click', () => {
-    if (play) return;
-    const to = +b.dataset.i, from = at();
-    if (from === null || from === to) scrollTo({top: Math.round(panelY(to)), behavior:'instant'});
-    else startPlay(from, to);
-  }));
-
-  new IntersectionObserver(en => {
-    const was = visible;
-    visible = en[0].isIntersecting;
-    if (!visible){ play = null; intent = 0; armed = false; }
-    if (visible){
-      if (!was){
-        /* entering the section: disarm, and hold at whichever panel we arrive on */
-        armed = false;
-        const span = track.offsetHeight - innerHeight;
-        const pos = span > 0 ? clamp((scrollY - track.offsetTop) / span, 0, 1) * (N - 1) : 0;
-        heldIdx = clamp(Math.round(pos), 0, N - 1);
-      }
-      read();
-    }
-  }, {threshold:0}).observe(track);
-
-  addEventListener('scroll', read, {passive:true});
-  addEventListener('resize', read);
-  read();
 })();
 </script>
 </body>
