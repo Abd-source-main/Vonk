@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Rubik:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{overflow-anchor:none;}
+  body{margin:0;background:#f7f5f2;color:#0e1012;font-family:'Rubik',sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:#A34E03;text-decoration:none;}
+  a:hover{color:#C25E04;}
+  section{scroll-margin-top:110px;}
+  @keyframes vonkCurrent{0%{background-position:-180% 0;}100%{background-position:180% 0;}}
+  @keyframes vonkPulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+  @keyframes vonkMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @keyframes vonkFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+  .vonk-marquee-track{display:flex;width:max-content;animation:vonkMarquee 30s linear infinite;}
+  .vonk-marquee:hover .vonk-marquee-track{animation-play-state:paused;}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Electrician","name":"Vonk Elektra","legalName":"Vonk Installatie & Onderhoud B.V.","image":"https://vonkelektra.nl/wp-content/uploads/2023/10/Logo-Vonk-Elektra.png","@id":"https://vonkelektra.nl","url":"https://vonkelektra.nl","telephone":"+31247851050","email":"info@vonkelektra.nl","priceRange":"€€","vatID":"NL865415171B01","address":{"@type":"PostalAddress","streetAddress":"De Kluijskamp 1273","postalCode":"6545 JK","addressLocality":"Nijmegen","addressCountry":"NL"},"areaServed":{"@type":"City","name":"Nijmegen"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"}],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Solar panel installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Home battery installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Air conditioning installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Electrical fault repair and maintenance"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"EV charging station installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Heat pump installation"}}]}
+</script>
+</helmet>
+
+<nav style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;padding:7px 7px 7px 16px;background:rgba(247,245,242,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(14,16,18,.11);border-radius:999px;box-shadow:0 8px 30px rgba(14,16,18,.08);max-width:calc(100vw - 24px);">
+  <a href="#top" style="display:flex;align-items:center;gap:10px;padding-right:8px;">
+    <img src="uploads/logo-mark.png" alt="Vonk Elektra" style="height:30px;width:auto;display:block;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.03em;color:#0e1012;">Vonk Elektra</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:2px;">
+    <a href="#top" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
+    <a href="About.dc.html" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
+    <a href="Services &amp; Portfolio.dc.html" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
+    <a href="Contact.dc.html" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Contact</a>
+  </div>
+  <a href="#book" style="display:inline-flex;align-items:center;gap:8px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:11px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Book an appointment</a>
+</nav>
+
+<main id="top" style="overflow-x:clip;">
+
+  <!-- HERO -->
+  <section style="position:relative;padding:150px 24px 40px;">
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(14,16,18,.06) 0 1px,transparent 1px 88px);-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);"></div>
+    <div style="position:relative;max-width:1180px;margin:0 auto;">
+      <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;">
+        <div>
+          <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:#A34E03;margin-bottom:22px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#E67206;display:inline-block;animation:vonkPulse 2s ease-in-out infinite;"></span>
+            Electrician · Nijmegen &amp; surroundings
+          </div>
+          <h1 style="font-family:'Outfit',sans-serif;font-weight:800;color:#0e1012;letter-spacing:-.045em;line-height:.98;margin:0 0 24px;">
+            <span style="display:block;font-size:76px;">Living &amp; working</span>
+            <span style="display:block;font-size:76px;">in <span style="color:#C25E04;">complete</span></span>
+            <span style="display:block;font-size:112px;letter-spacing:-.055em;">comfort.</span>
+          </h1>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:19px;line-height:1.6;color:#5b6469;max-width:520px;margin:0 0 32px;text-wrap:pretty;">
+            Total peace of mind — you should never have to wonder whether things are working properly. When we take on a job, we do it right. And when something fails, we're there fast: evenings and weekends included.
+          </p>
+          <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
+            <a href="#book" style="display:inline-flex;align-items:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 28px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.28);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;" style-hover="transform:translateY(-2px);background:#d1660a;box-shadow:0 18px 38px rgba(230,114,6,.4);">
+              Book an appointment
+              <span style="font-size:18px;line-height:1;">→</span>
+            </a>
+            <a href="tel:+31247851050" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#0e1012;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 26px;border-radius:12px;border:1px solid rgba(14,16,18,.28);transition:border-color .24s ease,background .24s ease,color .24s ease;" style-hover="border-color:#0e1012;background:#0e1012;color:#f7f5f2;">
+              Call 024 785 1050
+            </a>
+          </div>
+        </div>
+
+        <div style="position:relative;">
+          <div style="position:absolute;top:16px;left:16px;right:-16px;bottom:-16px;background:#E67206;border-radius:16px;"></div>
+          <div style="position:relative;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);">
+            <div style="height:2px;background:linear-gradient(90deg,transparent,#E57827,transparent);background-size:200% 100%;animation:vonkCurrent 3.5s linear infinite;"></div>
+            <div style="aspect-ratio:4/4.4;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);">
+              <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:12.5px;color:#5b6469;background:#ffffff;border:1px solid rgba(14,16,18,.11);padding:8px 14px;border-radius:8px;letter-spacing:-.01em;">[ photo: electrician at a distribution board ]</span>
+            </div>
+          </div>
+          <div style="position:absolute;bottom:26px;left:-26px;background:#ffffff;border:1px solid rgba(14,16,18,.11);border-radius:14px;padding:16px 20px;box-shadow:0 16px 40px rgba(14,16,18,.12);max-width:240px;">
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.04em;color:#0e1012;line-height:1;">24/7</div>
+            <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:13.5px;color:#5b6469;margin-top:6px;line-height:1.4;">Fast fault response, also evenings &amp; weekends</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPEC STRIP (moving slider) -->
+  <section style="max-width:1180px;margin:56px auto 0;padding:0 24px;">
+    <div class="vonk-marquee" style="position:relative;border-top:1px solid rgba(14,16,18,.11);border-bottom:1px solid rgba(14,16,18,.11);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);">
+      <div class="vonk-marquee-track">
+        <sc-for list = "{{ proofPoints }}" as="p" hint-placeholder-count="10">
+          <div style="padding:26px 40px;border-right:1px solid rgba(14,16,18,.11);flex:none;max-width:320px;">
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.02em;color:#0e1012;">{{ p.title }}</div>
+            <div style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14px;color:#5b6469;margin-top:6px;line-height:1.45;">{{ p.desc }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" style="max-width:1180px;margin:0 auto;padding:96px 24px 96px;">
+    <div style="display: none; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 20px">
+      <div data-om-label="what we do">
+        <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">What we do</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:52px;letter-spacing:-.045em;line-height:1;color:#0e1012;margin:0;max-width:640px;">Sustainable comfort, installed properly.</h2>
+      </div>
+      <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.55;color:#5b6469;max-width:340px;margin:0;">From solar to fault repair — one team for your home or business, from first advice to the final test.</p>
+    </div>
+
+    <!-- HERO: centered button, heavy brand gradient, scrambled floating cards → full walkthrough on Services page -->
+    <div style="position: relative; min-height: 86vh; display: flex; align-items: center; justify-content: center; padding: 90px 24px;">
+      <sc-for list = "{{ heroCards }}" as="c" hint-placeholder-count="8">
+        <div style = "{{ c.style }}">
+          <div style = "{{ c.rotStyle }}">
+            <div style="position:relative;height:100%;width:100%;border-radius:14px;overflow:hidden;border:1px solid rgba(14,16,18,.1);box-shadow:0 24px 54px rgba(14,16,18,.18);background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);">
+              <sc-if value="{{ c.url }}" hint-placeholder-val="{{ false }}">
+                <img src="{{ c.url }}" alt="" loading="lazy" onError="{{ c.onImgError }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+              </sc-if>
+              <div style="{{ c.labelStyle }}" style-hover="{{ c.labelHover }}">{{ c.name }}</div>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+      
+      <div style="position:relative;z-index:3;text-align:center;">
+        <div style="font-family: 'Outfit',sans-serif; font-weight: 600; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: #E67206; margin-bottom: 22px">What we do</div>
+        <a href="Services &amp; Portfolio.dc.html#svc-list" style="display:inline-flex;align-items:center;gap:13px;background:#0e1012;color:#f7f5f2;font-family:'Outfit',sans-serif;font-weight:700;font-size:23px;letter-spacing:-.02em;padding:22px 46px;border-radius:999px;box-shadow:0 26px 64px rgba(14,16,18,.4);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease;" style-hover="transform:translateY(-3px);box-shadow:0 34px 80px rgba(14,16,18,.5);">Our services <span style="font-size:22px;">→</span></a>
+      </div>
+    </div>
+  </section><div style="height:70px;overflow:hidden;background:#f7f5f2;display:flex;align-items:center;">
+    <div style="width: 120%; margin-left: -10%; height: 2px; transform: rotate(3.3deg); background: repeating-linear-gradient(90deg,#0e1012 0 38px,transparent 38px 46px,#E67206 46px 60px,transparent 60px 74px); opacity: .5; overflow: visible"></div>
+  </div>
+
+  <!-- WHY VONK -->
+  <section id="why" style="background:#efece7;border-top:1px solid rgba(14,16,18,.11);border-bottom:1px solid rgba(14,16,18,.11);">
+    <div style="max-width:1180px;margin:0 auto;padding:88px 24px;display:grid;grid-template-columns:.9fr 1.1fr;gap:64px;align-items:center;">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:16px;">Why Vonk Elektra</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:46px;letter-spacing:-.045em;line-height:1.02;color:#0e1012;margin:0 0 20px;">We do it right, so you don't have to think about it.</h2>
+        <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:17px;line-height:1.6;color:#5b6469;margin:0 0 28px;max-width:460px;">Personal service and real craftsmanship. We listen before we propose, we're clear about price, and we're there quickly when something goes wrong — for homes and businesses across Nijmegen and the surrounding area.</p>
+        <a href="#book" style="display:inline-flex;align-items:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 28px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.28);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;" style-hover="transform:translateY(-2px);background:#d1660a;box-shadow:0 18px 38px rgba(230,114,6,.4);">Book an appointment <span style="font-size:18px;">→</span></a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;background:#ffffff;border:1px solid rgba(14,16,18,.11);border-radius:16px;overflow:hidden;">
+        <div style="padding:30px;border-right:1px solid rgba(14,16,18,.11);border-bottom:1px solid rgba(14,16,18,.11);">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.04em;color:#0e1012;line-height:1;">100%</div>
+          <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:14.5px;color:#5b6469;margin-top:8px;">Work done to code &amp; tested before we leave</div>
+        </div>
+        <div style="padding:30px;border-bottom:1px solid rgba(14,16,18,.11);">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.04em;color:#0e1012;line-height:1;">4 wks</div>
+          <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:14.5px;color:#5b6469;margin-top:8px;">From approval to solar on your roof</div>
+        </div>
+        <div style="padding:30px;border-right:1px solid rgba(14,16,18,.11);">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.04em;color:#0e1012;line-height:1;">7/7</div>
+          <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:14.5px;color:#5b6469;margin-top:8px;">Fault response, evenings &amp; weekends</div>
+        </div>
+        <div style="padding:30px;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.04em;color:#0e1012;line-height:1;">1-op-1</div>
+          <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:14.5px;color:#5b6469;margin-top:8px;">Personal contact, advice that fits you</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WIRE DIVIDER -->
+  <div style="height:70px;overflow:hidden;background:#f7f5f2;display:flex;align-items:center;">
+    <div style="width: 120%; margin-left: -10%; height: 2px; transform: rotate(-3.2deg); background: repeating-linear-gradient(90deg,#0e1012 0 38px,transparent 38px 46px,#E67206 46px 60px,transparent 60px 74px); opacity: .5"></div>
+  </div>
+
+  <!-- BOOKING -->
+  <section id="book" style="max-width:1180px;margin:0 auto;padding:20px 24px 100px;">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:16px;">Book an appointment</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:52px;letter-spacing:-.05em;line-height:.98;color:#0e1012;margin:0 0 20px;">Request a free, no-obligation quote.</h2>
+        <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:17px;line-height:1.6;color:#5b6469;margin:0 0 34px;max-width:440px;">Tell us what you need and we'll get back to you with honest advice and a clear price. Prefer to talk? Call us directly — we're happy to help.</p>
+
+        <div style="border-top:1px solid rgba(14,16,18,.11);">
+          <a href="tel:+31247851050" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;border-bottom:1px solid rgba(14,16,18,.11);text-decoration:none;transition:padding .24s ease;" style-hover="padding-left:14px;padding-right:0;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:#5b6469;">Call</span>
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0e1012;transition:color .24s ease;" style-hover="color:#A34E03;">024 785 1050</span>
+          </a>
+          <a href="tel:+31639691798" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;border-bottom:1px solid rgba(14,16,18,.11);text-decoration:none;transition:padding .24s ease;" style-hover="padding-left:14px;padding-right:0;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:#5b6469;">Mobile</span>
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0e1012;transition:color .24s ease;" style-hover="color:#A34E03;">06 39 69 17 98</span>
+          </a>
+          <a href="mailto:info@vonkelektra.nl" style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 4px;border-bottom:1px solid rgba(14,16,18,.11);text-decoration:none;transition:padding .24s ease;" style-hover="padding-left:14px;padding-right:0;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.03em;text-transform:uppercase;color:#5b6469;">Email</span>
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;color:#0e1012;transition:color .24s ease;" style-hover="color:#A34E03;">info@vonkelektra.nl</span>
+          </a>
+        </div>
+      </div>
+
+      <div style="position:relative;">
+        <div style="position:absolute;top:14px;left:14px;right:-14px;bottom:-14px;background:#E67206;border-radius:16px;"></div>
+        <div style="position:relative;background:#ffffff;border:1px solid rgba(14,16,18,.11);border-radius:16px;overflow:hidden;">
+          <div style="height:2px;background:linear-gradient(90deg,transparent,#E57827,transparent);background-size:200% 100%;animation:vonkCurrent 3.5s linear infinite;"></div>
+          <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:56px 40px;text-align:center;">
+              <div style="width:56px;height:56px;border-radius:50%;background:#E67206;margin:0 auto 22px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:28px;">✓</div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;letter-spacing:-.03em;color:#0e1012;margin:0 0 12px;">Thank you — request received.</h3>
+              <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.6;color:#5b6469;margin:0;">We'll get back to you shortly with advice and a clear quote. For urgent faults, call us directly on 024 785 1050.</p>
+            </div>
+          </sc-if>
+          <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submit }}" style="padding:34px 34px 38px;display:grid;gap:16px;">
+              <div style="display:grid;gap:7px;">
+                <label style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:-.01em;color:#0e1012;">Name</label>
+                <input required="" value="{{ form.name }}" onChange="{{ updName }}" placeholder="Your name" style="font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;background:#f7f5f2;border:1px solid rgba(14,16,18,.14);border-radius:10px;padding:13px 15px;outline:none;">
+              </div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+                <div style="display:grid;gap:7px;">
+                  <label style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:-.01em;color:#0e1012;">Email</label>
+                  <input required="" type="email" value="{{ form.email }}" onChange="{{ updEmail }}" placeholder="you@email.com" style="font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;background:#f7f5f2;border:1px solid rgba(14,16,18,.14);border-radius:10px;padding:13px 15px;outline:none;">
+                </div>
+                <div style="display:grid;gap:7px;">
+                  <label style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:-.01em;color:#0e1012;">Phone</label>
+                  <input value="{{ form.phone }}" onChange="{{ updPhone }}" placeholder="06 ..." style="font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;background:#f7f5f2;border:1px solid rgba(14,16,18,.14);border-radius:10px;padding:13px 15px;outline:none;">
+                </div>
+              </div>
+              <div style="display:grid;gap:7px;">
+                <label style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:-.01em;color:#0e1012;">What can we help with?</label>
+                <select value="{{ form.service }}" onChange="{{ updService }}" style="font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;background:#f7f5f2;border:1px solid rgba(14,16,18,.14);border-radius:10px;padding:13px 15px;outline:none;">
+                  <option value="Solar panels">Solar panels</option>
+                  <option value="Home battery">Home battery</option>
+                  <option value="Air conditioning">Air conditioning</option>
+                  <option value="Fault repair / maintenance">Fault repair / maintenance</option>
+                  <option value="EV / home charging">EV / home charging</option>
+                  <option value="Heat pump">Heat pump</option>
+                  <option value="Electrical installation">Electrical installation</option>
+                  <option value="Sustainability advice">Sustainability advice</option>
+                  <option value="Something else">Something else</option>
+                </select>
+              </div>
+              <div style="display:grid;gap:7px;">
+                <label style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:-.01em;color:#0e1012;">Message</label>
+                <textarea value="{{ form.message }}" onChange="{{ updMessage }}" rows="3" placeholder="Tell us a little about the job or the fault" style="font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;background:#f7f5f2;border:1px solid rgba(14,16,18,.14);border-radius:10px;padding:13px 15px;outline:none;resize:vertical;"></textarea>
+              </div>
+              <button type="submit" style="margin-top:4px;display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 26px;border-radius:12px;border:none;cursor:pointer;box-shadow:0 12px 28px rgba(230,114,6,.28);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;" style-hover="transform:translateY(-2px);background:#d1660a;box-shadow:0 18px 38px rgba(230,114,6,.4);">Send my request <span style="font-size:18px;">→</span></button>
+              <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:12.5px;color:#5b6469;margin:2px 0 0;text-align:center;">No obligation. We usually respond the same working day.</p>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer id="contact" style="background:#0e1012;color:#f7f5f2;">
+    <div style="max-width:1180px;margin:0 auto;padding:66px 24px 40px;">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+        <div>
+          <img src="uploads/logo-full.png" alt="Vonk Elektra" style="height:74px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:20px;">
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:15px;line-height:1.6;color:rgba(247,245,242,.62);margin:0;max-width:280px;">Your electrical partner for comfortable living and working in Nijmegen and the surrounding area.</p>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">Address</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.7;color:rgba(247,245,242,.82);">De Kluijskamp 1273<br>6545 JK Nijmegen</div>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">Contact</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
+            <a href="tel:+31247851050" style="color:rgba(247,245,242,.82);display:block;">024 785 1050</a>
+            <a href="tel:+31639691798" style="color:rgba(247,245,242,.82);display:block;">06 39 69 17 98</a>
+            <a href="mailto:info@vonkelektra.nl" style="color:rgba(247,245,242,.82);display:block;">info@vonkelektra.nl</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">Services</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Solar panels</a>
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Home batteries</a>
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Air conditioning</a>
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Fault repair</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:48px;padding-top:24px;border-top:1px solid rgba(247,245,242,.12);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'Rubik',sans-serif;font-size:13px;color:rgba(247,245,242,.48);">
+        <span>Vonk Installatie &amp; Onderhoud B.V. · KvK 90693655 · BTW NL865415171B01</span>
+        <span>© Vonk Elektra 2026</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;floatPace&quot;: {&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:1,&quot;min&quot;:0.4,&quot;max&quot;:2.2,&quot;step&quot;:0.1,&quot;unit&quot;:&quot;×&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Motion&quot;,&quot;label&quot;:&quot;Float speed&quot;},
+  &quot;floatCurve&quot;: {&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;Gentle&quot;,&quot;options&quot;:[&quot;Gentle&quot;,&quot;Linear&quot;,&quot;Springy&quot;,&quot;Snappy&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Motion&quot;,&quot;label&quot;:&quot;Motion curve&quot;}
+}">
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.colEl = null;
+    this.introEl = null;
+    this.setCol = (el)=>{ this.colEl = el; };
+    this.setIntro = (el)=>{ this.introEl = el; };
+    this._introP = -1;
+    this.REF = 320;
+    this._active = 0;
+    this.onScroll = this.onScroll.bind(this);
+    this.services = [
+      { group:0, name:"Solar panels", title:"Free energy from your own roof.",
+        desc:"A durable investment that pays back: lower bills, less dependence on the grid, and a more valuable home. We handle the full purchase and installation, with advice built around your roof and your usage.",
+        features:["Tailored system design & advice","Full supply and installation","On your roof within 4 weeks"],
+        img:"[ photo: solar panels on a Dutch roof ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:0, name:"Home batteries", title:"Store what you generate.",
+        desc:"Keep your daytime solar for the evening, become more self-sufficient, and buffer against changing tariffs. We size the battery to your household and your panels so it earns its place.",
+        features:["Sized to your real usage","Works with existing panels","Smart charge & discharge"],
+        img:"[ photo: wall-mounted home battery ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:0, name:"EV charging station", title:"Charge at home, effortlessly.",
+        desc:"Charging points for home and business, installed safely and fully to regulation. Where needed we upgrade your meter cabinet, then place, connect and test the charger on the spot you choose.",
+        features:["Home & business chargers","Meter-cabinet upgrades","Placed, connected & tested"],
+        img:"[ photo: EV charger on a house wall ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:0, name:"Air conditioning", title:"Comfortable all year, no gas bill.",
+        desc:"A modern air conditioner doesn't just cool in summer — it heats efficiently in winter and cuts your gas use. We listen to what you need and fit the solution that actually suits your space.",
+        features:["Cooling + efficient heating","Lower gas consumption","Advice through installation"],
+        img:"[ photo: indoor AC unit being mounted ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:0, name:"Heat pump", title:"Efficient heat, less gas.",
+        desc:"Efficient, low-gas heating for your home — sized and installed to suit it. A practical step toward comfort that costs less to run and leans on cleaner energy.",
+        features:["Sized to your home","Lower running costs","Cleaner, efficient heat"],
+        img:"[ photo: outdoor heat-pump unit ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:1, name:"Fuse box replacement", title:"A safe, up-to-code fuse box.",
+        desc:"A modern distribution board keeps your home safe and ready for today's demands — including 3-phase connections and dedicated cooking groups. We replace and test it properly.",
+        features:["3-phase connections","Dedicated cooking groups","Tested before we leave"],
+        img:"[ photo: new distribution board ]", ctaLabel:"Request a quote", ctaHref:"#book" },
+      { group:1, name:"Fault repair", title:"Not working? We're there fast.",
+        desc:"When a fault appears you want it fixed quickly and correctly — evenings and weekends included when it can't wait. We keep your installation safe, up to code, and reliable.",
+        features:["Fast, honest response","Evenings & weekends","Safe, up-to-code work"],
+        img:"[ photo: tracing a fault in a fuse box ]", ctaLabel:"Call 06 39 69 17 98", ctaHref:"tel:+31639691798" },
+      { group:1, name:"Maintenance & odd jobs", title:"Kept safe, kept reliable.",
+        desc:"Keeping your installation safe and reliable, plus the smaller electrical jobs around the house and workplace. One trusted team you can call again and again.",
+        features:["Preventive checks","The smaller jobs too","One team you can trust"],
+        img:"[ photo: electrician on a maintenance visit ]", ctaLabel:"Request a quote", ctaHref:"#book" }
+    ];
+    const pp = [
+      { title:"Skilled & experienced", desc:"Qualified electricians who've seen the job before." },
+      { title:"Reliable & transparent", desc:"Clear quotes, no surprises — we tell you what fits." },
+      { title:"Competitive prices", desc:"Fair rates for craftsmanship that lasts." },
+      { title:"We listen first", desc:"We propose what actually fits you — not the biggest job." },
+      { title:"Fast when it matters", desc:"Fault response evenings and weekends." }
+    ];
+    this.proofPoints = pp.concat(pp).map((p,i)=>Object.assign({ key:i }, p));
+    this.state = { sent:false, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
+  }
+  componentDidMount(){
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    window.addEventListener("resize", this.onScroll);
+    this._settle = setTimeout(()=>this.onScroll(), 120);
+  }
+  componentWillUnmount(){
+    if(this._settle) clearTimeout(this._settle);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+  }
+  onScroll(){
+    if(this._pending) return;
+    this._pending = true;
+    requestAnimationFrame(()=>{
+      this._pending = false;
+      this._run();
+    });
+  }
+  _run(){
+    this.applyIntro();
+    const col = this.colEl;
+    if(!col) return;
+    const items = col.querySelectorAll('[data-svc-item]');
+    if(!items.length) return;
+    let best = 0, bestD = Infinity;
+    for(let i=0;i<items.length;i++){
+      const r = items[i].getBoundingClientRect();
+      const c = r.top + r.height/2;
+      const d = Math.abs(c - this.REF);
+      if(d < bestD){ bestD = d; best = i; }
+    }
+    if(best !== this._active){ this._active = best; this.apply(best); }
+  }
+  applyIntro(){
+    const el = this.introEl;
+    if(!el) return;
+    const spacer = el.querySelector('[data-intro-spacer]');
+    const cards = el.querySelectorAll('[data-intro-card]');
+    if(!spacer || !cards.length) return;
+    const clamp = (x)=>Math.max(0, Math.min(1, x));
+    const ss = (x)=>{ x = clamp(x); return x * x * (3 - 2 * x); };
+    const scrolled = 110 - spacer.getBoundingClientRect().top;
+    const collapseDist = spacer.offsetHeight * 0.72;
+    const p = clamp(scrolled / collapseDist);
+    const e = ss(p / 0.72);
+    const SPREAD = 132, ROT = 3.2;
+    cards.forEach((card)=>{
+      const i = +card.getAttribute('data-idx');
+      card.style.transform = "translateX(" + (i * SPREAD * (1 - e)).toFixed(1) + "px) rotate(" + (i * ROT * (1 - e)).toFixed(2) + "deg)";
+      card.style.opacity = i === 0 ? "1" : Math.max(0, 1 - e * 1.9).toFixed(3);
+      card.style.zIndex = String(20 - i);
+    });
+    const copy = el.querySelector('[data-intro-copy]');
+    const nav = el.querySelector('[data-intro-nav]');
+    const block = el.querySelector('[data-intro-block]');
+    const fan = el.querySelector('[data-intro-fan-wrap]');
+    if(copy) copy.style.opacity = (1 - ss(p / 0.42)).toFixed(3);
+    if(nav){ const o = ss((p - 0.5) / 0.4); nav.style.opacity = o.toFixed(3); nav.style.pointerEvents = o > 0.5 ? "auto" : "none"; }
+    if(block) block.style.opacity = ss((p - 0.45) / 0.5).toFixed(3);
+    if(fan) fan.style.opacity = (1 - ss((p - 0.84) / 0.16)).toFixed(3);
+  }
+  apply(active){
+    const col = this.colEl;
+    if(!col) return;
+    col.querySelectorAll('[data-svc-item]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); const inner = el.firstElementChild; if(inner) inner.style.opacity = (i===active ? "1" : "0.34"); });
+    const grid = col.parentElement;
+    if(!grid) return;
+    grid.querySelectorAll('[data-svc-img]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); el.style.opacity = (i===active ? "1" : "0"); el.style.zIndex = (i===active ? "3" : "2"); });
+    grid.querySelectorAll('[data-svc-nav]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); el.style.opacity = (i===active ? "1" : "0.5"); const dot = el.firstElementChild, name = el.lastElementChild; if(dot){ dot.style.width = (i===active ? "24px" : "8px"); dot.style.background = (i===active ? "#E67206" : "rgba(14,16,18,.3)"); } if(name){ name.style.fontWeight = (i===active ? "700" : "500"); } });
+  }
+  jump(i){
+    const col = this.colEl;
+    if(!col) return;
+    const items = col.querySelectorAll('[data-svc-item]');
+    if(!items[i]) return;
+    const r = items[i].getBoundingClientRect();
+    const target = r.top + window.scrollY + r.height/2 - this.REF;
+    window.scrollTo({ top: Math.round(target), behavior:"smooth" });
+  }
+  upd(k){ return (e)=>{ const v = e.target.value; this.setState(s=>({ form: { ...s.form, [k]: v } })); }; }
+  renderVals(){
+    const active = 0, n = this.services.length;
+    const imgFor = {
+      0:"https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=60",
+      1:"https://images.unsplash.com/photo-1780445392417-68b9dccc45f2?auto=format&fit=crop&w=900&q=60",
+      2:"https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?auto=format&fit=crop&w=900&q=60",
+      3:"https://images.unsplash.com/photo-1726614846573-c1ac2e6161d1?auto=format&fit=crop&w=900&q=60",
+      4:"",
+      5:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=60",
+      6:"https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=60",
+      7:""
+    };
+    const onImgError = (e)=>{ e.target.style.display="none"; };
+    const heroLayout = [
+      { top:"6%",  left:"5%",  w:"210px", h:"150px", rot:-9, dur:7.5, delay:0 },
+      { top:"12%", left:"73%", w:"200px", h:"150px", rot:8,  dur:8.5, delay:.6 },
+      { top:"44%", left:"1%",  w:"190px", h:"140px", rot:6,  dur:9,   delay:1.1 },
+      { top:"40%", left:"80%", w:"210px", h:"150px", rot:-7, dur:7.8, delay:.3 },
+      { top:"70%", left:"11%", w:"200px", h:"145px", rot:10, dur:8.2, delay:.9 },
+      { top:"66%", left:"70%", w:"195px", h:"145px", rot:-11,dur:9.4, delay:1.4 },
+      { top:"4%",  left:"40%", w:"175px", h:"128px", rot:-4, dur:8.8, delay:1.7 },
+      { top:"80%", left:"44%", w:"185px", h:"132px", rot:7,  dur:7.2, delay:.4 }
+    ];
+    const heroCards = this.services.map((s,i)=>{
+      const L = heroLayout[i] || heroLayout[0];
+      const pace = this.props.floatPace ?? 1;
+      const curveMap = { Gentle:"ease-in-out", Linear:"linear", Springy:"cubic-bezier(.5,-0.35,.5,1.4)", Snappy:"cubic-bezier(.22,1,.36,1)" };
+      const timing = curveMap[this.props.floatCurve ?? "Gentle"] || "ease-in-out";
+      return { key:i, url: imgFor[i] || "", onImgError, name: s.name,
+        style:{ position:"absolute", top:L.top, left:L.left, width:L.w, height:L.h, zIndex:"1", opacity:".9",
+          animation:"vonkFloat " + (L.dur / pace).toFixed(2) + "s " + timing + " infinite", animationDelay: L.delay + "s", willChange:"transform" },
+        rotStyle:{ width:"100%", height:"100%", transform:"rotate(" + L.rot + "deg)" },
+        labelStyle:{ position:"absolute", inset:"0", display:"flex", alignItems:"flex-end", padding:"12px 14px",
+          background:"linear-gradient(to top,rgba(14,16,18,0),rgba(14,16,18,0))", color:"rgba(255,255,255,0)",
+          fontFamily:"'Outfit',sans-serif", fontWeight:700, fontSize:"15px", letterSpacing:"-.02em", lineHeight:"1.1",
+          transition:"background .25s ease,color .25s ease", cursor:"default" },
+        labelHover:"background:linear-gradient(to top,rgba(14,16,18,.82),rgba(14,16,18,.04));color:#ffffff;"
+      };
+    });
+    const introLabels = ["[ photo: our team on site ]","[ photo: solar panels on a roof ]","[ photo: home battery unit ]","[ photo: EV charger install ]","[ photo: fuse box work ]"];
+    const introImages = introLabels.map((label,i)=>({ key:i, idx:i, label, style:{
+      position:"absolute", top:0, left:0, width:"300px", height:"420px", transformOrigin:"bottom center",
+      transform:"translateX(" + (i*132) + "px)", opacity: i===0 ? 1 : 1, zIndex: 20 - i, willChange:"transform,opacity"
+    }}));
+    const serviceImages = this.services.map((s,i)=>({ key:i, idx:i, label:s.img, style:{
+      position:"absolute", inset:0,
+      opacity: i===active ? 1 : 0, zIndex: i===active ? 3 : 2,
+      transition:"opacity .5s ease", willChange:"opacity"
+    }}));
+    const slugs = ["solar-panels","home-batteries","ev-charging","air-conditioning","heat-pump","fuse-box","fault-repair","maintenance"];
+    const serviceItems = this.services.map((s,i)=>({
+      key:i, idx:i, no: String(i+1).padStart(2,"0"), name:s.name, title:s.title, desc:s.desc, features:s.features, ctaHref:s.ctaHref, ctaLabel:s.ctaLabel,
+      detailHref: "Services & Portfolio.dc.html#" + (slugs[i] || ""),
+      blockStyle:{ minHeight:"58vh", display:"flex", alignItems:"center", boxSizing:"border-box", padding:"14px 0" },
+      innerStyle:{ width:"100%", opacity: i===active ? 1 : 0.34, transition:"opacity .4s ease" }
+    }));
+    const mkRow = (s,i)=>({ key:i, idx:i, name:s.name, onClick:()=>this.jump(i),
+      rowStyle:{ display:"flex", alignItems:"center", gap:"12px", padding:"7px 0", cursor:"pointer", opacity: i===active ? 1 : 0.5, transition:"opacity .3s" },
+      dotStyle:{ width: i===active ? "24px" : "8px", height:"3px", borderRadius:"2px", background: i===active ? "#E67206" : "rgba(14,16,18,.3)", transition:"all .35s", display:"inline-block", flex:"none" },
+      nameStyle:{ fontFamily:"'Outfit',sans-serif", fontWeight: i===active ? 700 : 500, fontSize:"17px", letterSpacing:"-.02em", color:"#0e1012", transition:"all .3s" }
+    });
+    const rows = this.services.map(mkRow);
+    const navG1 = rows.filter((r,i)=>this.services[i].group===0);
+    const navG2 = rows.filter((r,i)=>this.services[i].group===1);
+    return {
+      sent: this.state.sent,
+      notSent: !this.state.sent,
+      form: this.state.form,
+      updName: this.upd('name'),
+      updEmail: this.upd('email'),
+      updPhone: this.upd('phone'),
+      updService: this.upd('service'),
+      updMessage: this.upd('message'),
+      submit: (e)=>{ e.preventDefault(); this.setState({ sent: true }); },
+      colRef: this.setCol,
+      introRef: this.setIntro,
+      proofPoints: this.proofPoints,
+      heroCards,
+      introImages, serviceImages, serviceItems, navG1, navG2
+    };
+  }
+}
+</script>
+</body>
+</html>

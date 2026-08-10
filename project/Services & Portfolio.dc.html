@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Rubik:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:#f7f5f2;color:#0e1012;font-family:'Rubik',sans-serif;-webkit-font-smoothing:antialiased;}
+  a{color:#A34E03;text-decoration:none;}
+  a:hover{color:#C25E04;}
+  section{scroll-margin-top:110px;}
+  [id]{scroll-margin-top:110px;}
+  @keyframes vonkCurrent{0%{background-position:-180% 0;}100%{background-position:180% 0;}}
+  @keyframes vonkPulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+  @keyframes vonkMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+  @keyframes vonkFloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-16px);}}
+  .vonk-marquee-track{display:flex;width:max-content;animation:vonkMarquee 26s linear infinite;}
+  .vonk-marquee:hover .vonk-marquee-track{animation-play-state:paused;}
+</style>
+</helmet>
+
+<nav style="position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 60; display: flex; align-items: center; gap: 6px; padding: 7px 7px 7px 16px; background: rgba(247,245,242,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(14,16,18,.11); border-radius: 999px; box-shadow: 0 8px 30px rgba(14,16,18,.08); max-width: calc(100vw - 24px)">
+  <a href="Vonk Elektra Homepage.dc.html#top" style="display:flex;align-items:center;gap:10px;padding-right:8px;">
+    <img src="uploads/logo-mark.png" alt="Vonk Elektra" style="height:30px;width:auto;display:block;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;letter-spacing:-.03em;color:#0e1012;">Vonk Elektra</span>
+  </a>
+  <div style="display:flex;align-items:center;gap:2px;">
+    <a href="Vonk Elektra Homepage.dc.html#top" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
+    <a href="About.dc.html" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
+    <a href="#services" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
+    <a href="Contact.dc.html" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Contact</a>
+  </div>
+  <a href="Vonk Elektra Homepage.dc.html#book" style="display:inline-flex;align-items:center;gap:8px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:11px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Book an appointment</a>
+</nav>
+
+<main id="top" style="overflow-x: clip">
+
+  <!-- PAGE HERO -->
+  <section style="position:relative;padding:150px 24px 56px;">
+    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(14,16,18,.06) 0 1px,transparent 1px 88px);-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);"></div>
+    <div style="position:relative;max-width:1180px;margin:0 auto;">
+      <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:#A34E03;margin-bottom:22px;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#E67206;display:inline-block;animation:vonkPulse 2s ease-in-out infinite;"></span>
+        Services &amp; portfolio
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:800;color:#0e1012;letter-spacing:-.05em;line-height:.98;margin:0 0 22px;font-size:78px;max-width:900px;">Every service, and the work behind it.</h1>
+      <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:19px;line-height:1.6;color:#5b6469;max-width:560px;margin:0 0 34px;text-wrap:pretty;">A closer look at what we install and repair — how each job runs from first advice to the final test — alongside a selection of recent work across Nijmegen and the surrounding area.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <a href="#solar-panels" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Solar panels</a>
+        <a href="#home-batteries" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Home batteries</a>
+        <a href="#ev-charging" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">EV charging</a>
+        <a href="#air-conditioning" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Air conditioning</a>
+        <a href="#heat-pump" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Heat pump</a>
+        <a href="#fuse-box" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Fuse box</a>
+        <a href="#fault-repair" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Fault repair</a>
+        <a href="#maintenance" style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:9px 16px;font-family:'Outfit',sans-serif;font-weight:500;font-size:14px;color:#0e1012;">Maintenance</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS STRIP (moving slider) -->
+  <section style="max-width:1180px;margin:0 auto;padding:0 24px;">
+    <div class="vonk-marquee" style="position:relative;border-top:1px solid rgba(14,16,18,.11);border-bottom:1px solid rgba(14,16,18,.11);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);">
+      <div class="vonk-marquee-track">
+        <sc-for list="{{ marqueeStats }}" as="st" hint-placeholder-count="10">
+          <div style="display:flex;align-items:center;gap:16px;padding:26px 40px;border-right:1px solid rgba(14,16,18,.11);flex:none;">
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.04em;color:#0e1012;line-height:1;flex:none;">{{ st.v }}</div>
+            <div style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14px;color:#5b6469;line-height:1.4;max-width:180px;">{{ st.k }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICE WALKTHROUGH — matches homepage component -->
+  <section id="services" style="max-width:1180px;margin:0 auto;padding:96px 24px 96px;">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:20px;">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">What we do</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:52px;letter-spacing:-.045em;line-height:1;color:#0e1012;margin:0;max-width:640px;">Every service, and the work behind it.</h2>
+      </div>
+      <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.55;color:#5b6469;max-width:340px;margin:0;">From solar to fault repair — one team for your home or business, from first advice to the final test.</p>
+    </div>
+
+    <!-- MERGED: intro collapse → sticky services walkthrough -->
+    <div id="svc-list" ref="{{ introRef }}" style="display:grid;grid-template-columns:250px 320px 1fr;gap:48px;align-items:start;margin-top:44px;">
+
+      <!-- COL 1: intro headline (fades out) → nav (fades in) -->
+      <div style="position:sticky;top:110px;align-self:start;height:420px;">
+        <div data-intro-copy="" style="position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);">
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">Our work</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.045em;line-height:1.04;color:#0e1012;margin-bottom:16px;">From the roof to the fuse box.</div>
+          <div style="font-family:'Rubik',sans-serif;font-weight:300;font-size:15px;line-height:1.58;color:#5b6469;">One team across your whole home — generating power, storing it, keeping you comfortable and putting it right when something fails.</div>
+          <div style="margin-top:24px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.03em;color:#5b6469;">Scroll ↓</div>
+        </div>
+        <div data-intro-nav="" style="position:absolute;top:50%;left:0;width:100%;transform:translateY(-50%);opacity:0;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#A34E03;margin-bottom:12px;">Sustainable comfort</div>
+          <div style="margin-bottom:22px;">
+            <sc-for list="{{ navG1 }}" as="row" hint-placeholder-count="5">
+              <div data-svc-nav="" data-idx="{{ row.idx }}" style="{{ row.rowStyle }}" onClick="{{ row.onClick }}">
+                <span style="{{ row.dotStyle }}"></span>
+                <span style="{{ row.nameStyle }}">{{ row.name }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#A34E03;margin-bottom:12px;">Electrical work &amp; service</div>
+          <div>
+            <sc-for list="{{ navG2 }}" as="row" hint-placeholder-count="3">
+              <div data-svc-nav="" data-idx="{{ row.idx }}" style="{{ row.rowStyle }}" onClick="{{ row.onClick }}">
+                <span style="{{ row.dotStyle }}"></span>
+                <span style="{{ row.nameStyle }}">{{ row.name }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+
+      <!-- COL 2: sticky image — fan cards collapse into the single service image -->
+      <div style="position:sticky;top:110px;align-self:start;height:420px;">
+        <div data-intro-block="" style="position:absolute;top:14px;left:14px;right:-14px;bottom:-14px;background:#E67206;border-radius:16px;z-index:0;opacity:0;"></div>
+        <sc-for list="{{ serviceImages }}" as="img" hint-placeholder-count="8">
+          <div data-svc-img="" data-idx="{{ img.idx }}" style="{{ img.style }}">
+            <div style="height:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);box-shadow:0 20px 50px rgba(14,16,18,.13);display:flex;flex-direction:column;">
+              <div style="height:2px;background:linear-gradient(90deg,transparent,#E57827,transparent);background-size:200% 100%;animation:vonkCurrent 3.5s linear infinite;flex:none;"></div>
+              <div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);">
+                <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;color:#5b6469;background:#ffffff;border:1px solid rgba(14,16,18,.11);padding:7px 12px;border-radius:8px;text-align:center;">{{ img.label }}</span>
+                <sc-if value="{{ img.url }}" hint-placeholder-val="{{ false }}">
+                  <img src="{{ img.url }}" alt="{{ img.label }}" loading="lazy" onError="{{ img.onImgError }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                </sc-if>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+        <div data-intro-fan-wrap="" style="position:absolute;inset:0;z-index:6;">
+          <sc-for list="{{ introImages }}" as="img" hint-placeholder-count="5">
+            <div data-intro-card="" data-idx="{{ img.idx }}" style="{{ img.style }}">
+              <div style="height:100%;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);box-shadow:0 20px 50px rgba(14,16,18,.14);display:flex;flex-direction:column;">
+                <div style="height:2px;background:linear-gradient(90deg,transparent,#E57827,transparent);background-size:200% 100%;animation:vonkCurrent 3.5s linear infinite;flex:none;"></div>
+                <div style="flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);">
+                  <span style="font-family:'IBM Plex Mono',ui-monospace,monospace;font-size:11.5px;color:#5b6469;background:#ffffff;border:1px solid rgba(14,16,18,.11);padding:7px 12px;border-radius:8px;text-align:center;">{{ img.label }}</span>
+                  <sc-if value="{{ img.url }}" hint-placeholder-val="{{ false }}">
+                    <img src="{{ img.url }}" alt="{{ img.label }}" loading="lazy" onError="{{ img.onImgError }}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                  </sc-if>
+                </div>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- COL 3: intro scroll budget + scrolling descriptions -->
+      <div ref="{{ colRef }}">
+        <div data-intro-spacer="" style="height:130vh;"></div>
+        <sc-for list="{{ serviceItems }}" as="s" hint-placeholder-count="8">
+          <div data-svc-item="" data-idx="{{ s.idx }}" id="{{ s.id }}" style="{{ s.blockStyle }}">
+            <div style="{{ s.innerStyle }}">
+              <div style="display:inline-flex;align-items:center;border:1px solid rgba(14,16,18,.22);border-radius:999px;padding:6px 14px;font-family:'Outfit',sans-serif;font-weight:500;font-size:12.5px;letter-spacing:.01em;color:#0e1012;margin-bottom:18px;">{{ s.name }}</div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.035em;line-height:1.04;color:#0e1012;margin:0 0 16px;">{{ s.title }}</h3>
+              <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.6;color:#5b6469;margin:0 0 20px;max-width:440px;">{{ s.desc }}</p>
+              <ul style="list-style:none;margin:0 0 24px;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:9px 22px;">
+                <sc-for list="{{ s.features }}" as="f" hint-placeholder-count="4">
+                  <li style="display:flex;gap:10px;align-items:baseline;font-family:'Rubik',sans-serif;font-size:15px;color:#0e1012;"><span style="width:6px;height:6px;background:#E67206;border-radius:50%;flex:none;transform:translateY(-2px);"></span>{{ f }}</li>
+                </sc-for>
+              </ul>
+              <a href="{{ s.ctaHref }}" style="display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:15.5px;color:#A34E03;">{{ s.ctaLabel }} <span style="font-size:17px;">→</span></a>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section style="background:#efece7;border-top:1px solid rgba(14,16,18,.11);border-bottom:1px solid rgba(14,16,18,.11);margin-top:40px;">
+    <div style="max-width:1180px;margin:0 auto;padding:80px 24px;">
+      <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">How we work</div>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:44px;letter-spacing:-.045em;line-height:1;color:#0e1012;margin:0 0 40px;max-width:620px;">Four steps, every job.</h2>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:24px;">
+        <div style="border-top:2px solid #E67206;padding-top:20px;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#A34E03;margin-bottom:12px;">01</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#0e1012;margin-bottom:8px;">We listen</div>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14.5px;line-height:1.55;color:#5b6469;margin:0;">You tell us the goal or the problem. We ask the right questions before proposing anything.</p>
+        </div>
+        <div style="border-top:2px solid rgba(14,16,18,.18);padding-top:20px;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#A34E03;margin-bottom:12px;">02</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#0e1012;margin-bottom:8px;">Clear quote</div>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14.5px;line-height:1.55;color:#5b6469;margin:0;">A transparent price for what actually fits you — no upsell, no surprises later.</p>
+        </div>
+        <div style="border-top:2px solid rgba(14,16,18,.18);padding-top:20px;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#A34E03;margin-bottom:12px;">03</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#0e1012;margin-bottom:8px;">We install</div>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14.5px;line-height:1.55;color:#5b6469;margin:0;">Skilled, tidy work by one team who treat your home or business with respect.</p>
+        </div>
+        <div style="border-top:2px solid rgba(14,16,18,.18);padding-top:20px;">
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;color:#A34E03;margin-bottom:12px;">04</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:19px;letter-spacing:-.02em;color:#0e1012;margin-bottom:8px;">Tested &amp; handed over</div>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14.5px;line-height:1.55;color:#5b6469;margin:0;">Everything checked, to code, and explained — so you can stop thinking about it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <section style="max-width:1180px;margin:40px auto 0;padding:0 24px 96px;">
+    <div style="position:relative;background:#0e1012;border-radius:20px;overflow:hidden;padding:64px 56px;">
+      <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(247,245,242,.06) 0 1px,transparent 1px 74px);"></div>
+      <div style="position:relative;display:flex;justify-content:space-between;align-items:center;gap:40px;flex-wrap:wrap;">
+        <div>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:40px;letter-spacing:-.045em;line-height:1.02;color:#f7f5f2;margin:0 0 12px;max-width:520px;">Have a project in mind?</h2>
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:17px;line-height:1.6;color:rgba(247,245,242,.7);margin:0;max-width:460px;">Tell us what you need and we'll come back with honest advice and a clear, no-obligation quote.</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <a href="Vonk Elektra Homepage.dc.html#book" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.3);">Book an appointment <span style="font-size:18px;">→</span></a>
+          <a href="tel:+31247851050" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:#f7f5f2;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;border:1px solid rgba(247,245,242,.28);">Call 024 785 1050</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:#0e1012;color:#f7f5f2;">
+    <div style="max-width:1180px;margin:0 auto;padding:66px 24px 40px;">
+      <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
+        <div>
+          <img src="uploads/logo-full.png" alt="Vonk Elektra" style="height:74px;width:auto;display:block;filter:brightness(0) invert(1);margin-bottom:20px;">
+          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:15px;line-height:1.6;color:rgba(247,245,242,.62);margin:0;max-width:280px;">Your electrical partner for comfortable living and working in Nijmegen and the surrounding area.</p>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">Address</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.7;color:rgba(247,245,242,.82);">De Kluijskamp 1273<br>6545 JK Nijmegen</div>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">Contact</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
+            <a href="tel:+31247851050" style="color:rgba(247,245,242,.82);display:block;">024 785 1050</a>
+            <a href="tel:+31639691798" style="color:rgba(247,245,242,.82);display:block;">06 39 69 17 98</a>
+            <a href="mailto:info@vonkelektra.nl" style="color:rgba(247,245,242,.82);display:block;">info@vonkelektra.nl</a>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">More</div>
+          <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
+            <a href="Vonk Elektra Homepage.dc.html#top" style="color:rgba(247,245,242,.82);display:block;">Home</a>
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Services</a>
+            <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Our work</a>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:48px;padding-top:24px;border-top:1px solid rgba(247,245,242,.12);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:'Rubik',sans-serif;font-size:13px;color:rgba(247,245,242,.48);">
+        <span>Vonk Installatie &amp; Onderhoud B.V. · KvK 90693655 · BTW NL865415171B01</span>
+        <span>© Vonk Elektra 2026</span>
+      </div>
+    </div>
+  </footer>
+
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  constructor(props){
+    super(props);
+    this.colEl = null; this.introEl = null;
+    this.setCol = (el)=>{ this.colEl = el; };
+    this.setIntro = (el)=>{ this.introEl = el; };
+    this.REF = 320; this._active = 0;
+    this.onScroll = this.onScroll.bind(this);
+  }
+  componentDidMount(){
+    window.addEventListener("scroll", this.onScroll, { passive:true });
+    window.addEventListener("resize", this.onScroll);
+    this._settle = setTimeout(()=>this.onScroll(), 120);
+  }
+  componentWillUnmount(){
+    if(this._settle) clearTimeout(this._settle);
+    window.removeEventListener("scroll", this.onScroll);
+    window.removeEventListener("resize", this.onScroll);
+  }
+  onScroll(){
+    if(this._pending) return;
+    this._pending = true;
+    requestAnimationFrame(()=>{ this._pending = false; this._run(); });
+  }
+  _run(){
+    this.applyIntro();
+    const col = this.colEl;
+    if(!col) return;
+    const items = col.querySelectorAll('[data-svc-item]');
+    if(!items.length) return;
+    let best = 0, bestD = Infinity;
+    for(let i=0;i<items.length;i++){
+      const r = items[i].getBoundingClientRect();
+      const c = r.top + r.height/2;
+      const d = Math.abs(c - this.REF);
+      if(d < bestD){ bestD = d; best = i; }
+    }
+    if(best !== this._active){ this._active = best; this.apply(best); }
+  }
+  applyIntro(){
+    const el = this.introEl;
+    if(!el) return;
+    const spacer = el.querySelector('[data-intro-spacer]');
+    const cards = el.querySelectorAll('[data-intro-card]');
+    if(!spacer || !cards.length) return;
+    const clamp = (x)=>Math.max(0, Math.min(1, x));
+    const ss = (x)=>{ x = clamp(x); return x * x * (3 - 2 * x); };
+    const scrolled = 110 - spacer.getBoundingClientRect().top;
+    const collapseDist = spacer.offsetHeight * 0.72;
+    const p = clamp(scrolled / collapseDist);
+    const e = ss(p / 0.72);
+    const SPREAD = 132, ROT = 3.2;
+    cards.forEach((card)=>{
+      const i = +card.getAttribute('data-idx');
+      card.style.transform = "translateX(" + (i * SPREAD * (1 - e)).toFixed(1) + "px) rotate(" + (i * ROT * (1 - e)).toFixed(2) + "deg)";
+      card.style.opacity = i === 0 ? "1" : Math.max(0, 1 - e * 1.9).toFixed(3);
+      card.style.zIndex = String(20 - i);
+    });
+    const copy = el.querySelector('[data-intro-copy]');
+    const nav = el.querySelector('[data-intro-nav]');
+    const block = el.querySelector('[data-intro-block]');
+    const fan = el.querySelector('[data-intro-fan-wrap]');
+    if(copy) copy.style.opacity = (1 - ss(p / 0.42)).toFixed(3);
+    if(nav){ const o = ss((p - 0.5) / 0.4); nav.style.opacity = o.toFixed(3); nav.style.pointerEvents = o > 0.5 ? "auto" : "none"; }
+    if(block) block.style.opacity = ss((p - 0.45) / 0.5).toFixed(3);
+    if(fan) fan.style.opacity = (1 - ss((p - 0.84) / 0.16)).toFixed(3);
+  }
+  apply(active){
+    const col = this.colEl;
+    if(!col) return;
+    col.querySelectorAll('[data-svc-item]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); const inner = el.firstElementChild; if(inner) inner.style.opacity = (i===active ? "1" : "0.34"); });
+    const grid = col.parentElement;
+    if(!grid) return;
+    grid.querySelectorAll('[data-svc-img]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); el.style.opacity = (i===active ? "1" : "0"); el.style.zIndex = (i===active ? "3" : "2"); });
+    grid.querySelectorAll('[data-svc-nav]').forEach((el)=>{ const i = +el.getAttribute('data-idx'); el.style.opacity = (i===active ? "1" : "0.5"); const dot = el.firstElementChild, name = el.lastElementChild; if(dot){ dot.style.width = (i===active ? "24px" : "8px"); dot.style.background = (i===active ? "#E67206" : "rgba(14,16,18,.3)"); } if(name){ name.style.fontWeight = (i===active ? "700" : "500"); } });
+  }
+  jump(i){
+    const col = this.colEl;
+    if(!col) return;
+    const items = col.querySelectorAll('[data-svc-item]');
+    if(!items[i]) return;
+    const r = items[i].getBoundingClientRect();
+    const target = r.top + window.scrollY + r.height/2 - this.REF;
+    window.scrollTo({ top: Math.round(target), behavior:"smooth" });
+  }
+  renderVals(){
+    const raw = [
+      { id:"solar-panels", group:"Sustainable comfort", name:"Solar panels", tagline:"Free energy from your own roof.",
+        desc:"A durable investment that pays back: lower bills, less dependence on the grid, and a more valuable home. We design the system around your roof and usage, then handle the full supply and installation with one team.",
+        includes:["Independent system design","Full supply & installation","Panels, inverter & mounting","Handover and monitoring setup"],
+        img:"[ photo: solar panels on a Dutch roof ]", ctaLabel:"Request a free quote",
+        stats:[{v:"4 wks",k:"Approval to install"},{v:"25 yr",k:"Typical panel warranty"},{v:"1 team",k:"Advice to handover"}] },
+      { id:"home-batteries", group:"Sustainable comfort", name:"Home batteries", tagline:"Store what you generate.",
+        desc:"Keep your daytime solar for the evening, become more self-sufficient, and buffer against changing tariffs. We size the battery to your household and your panels so it earns its place from day one.",
+        includes:["Sized to your usage","Works with existing panels","Smart charge & discharge","Safe install & testing"],
+        img:"[ photo: wall-mounted home battery ]", ctaLabel:"Request a free quote",
+        stats:[{v:"+30%",k:"Self-use of solar"},{v:"App",k:"Live monitoring"},{v:"1 day",k:"Typical install"}] },
+      { id:"ev-charging", group:"Sustainable comfort", name:"EV charging station", tagline:"Charge at home, effortlessly.",
+        desc:"Charging points for home and business, installed safely and fully to regulation. Where needed we upgrade the meter cabinet, then place, connect and test the charger on the spot you choose.",
+        includes:["Home & business chargers","Meter-cabinet upgrades","Load-balancing options","Placed, connected & tested"],
+        img:"[ photo: EV charger on a house wall ]", ctaLabel:"Request a free quote",
+        stats:[{v:"11 kW",k:"Typical home charger"},{v:"Code",k:"Fully to regulation"},{v:"½ day",k:"Typical install"}] },
+      { id:"air-conditioning", group:"Sustainable comfort", name:"Air conditioning", tagline:"Comfortable all year, no gas bill.",
+        desc:"A modern air conditioner doesn't just cool in summer — it heats efficiently in winter and cuts your gas use. We listen to what you need and fit the solution that actually suits your space.",
+        includes:["Cooling & efficient heating","Quiet indoor units","Lower gas consumption","Advice through installation"],
+        img:"[ photo: indoor AC unit being mounted ]", ctaLabel:"Request a free quote",
+        stats:[{v:"A+++",k:"Efficient units"},{v:"2-in-1",k:"Cool & heat"},{v:"1 day",k:"Typical install"}] },
+      { id:"heat-pump", group:"Sustainable comfort", name:"Heat pump", tagline:"Efficient heat, less gas.",
+        desc:"Efficient, low-gas heating for your home — sized and installed to suit it. A practical step toward comfort that costs less to run and leans on cleaner energy.",
+        includes:["Sized to your home","Lower running costs","Cleaner, efficient heat","Full install & testing"],
+        img:"[ photo: outdoor heat-pump unit ]", ctaLabel:"Request a free quote",
+        stats:[{v:"−gas",k:"Lower gas use"},{v:"Quiet",k:"Low-noise units"},{v:"1 team",k:"Advice to handover"}] },
+      { id:"fuse-box", group:"Electrical work & service", name:"Fuse box replacement", tagline:"A safe, up-to-code fuse box.",
+        desc:"A modern distribution board keeps your home safe and ready for today's demands — including 3-phase connections and dedicated cooking groups. We replace and test it properly, then explain what changed.",
+        includes:["3-phase connections","Dedicated cooking groups","Earth-leakage protection","Tested before we leave"],
+        img:"[ photo: new distribution board ]", ctaLabel:"Request a free quote",
+        stats:[{v:"Code",k:"Fully to regulation"},{v:"Tested",k:"Before handover"},{v:"1 day",k:"Typical job"}] },
+      { id:"fault-repair", group:"Electrical work & service", name:"Fault repair", tagline:"Not working? We're there fast.",
+        desc:"When a fault appears you want it fixed quickly and correctly — evenings and weekends included when it can't wait. We trace the problem, put it right, and keep your installation safe and reliable.",
+        includes:["Fast, honest response","Evenings & weekends","Safe, up-to-code work","Clear about the cause"],
+        img:"[ photo: tracing a fault in a fuse box ]", ctaLabel:"Call 06 39 69 17 98",
+        stats:[{v:"7/7",k:"Response window"},{v:"Fast",k:"When it can't wait"},{v:"Safe",k:"Up-to-code fix"}] },
+      { id:"maintenance", group:"Electrical work & service", name:"Maintenance & odd jobs", tagline:"Kept safe, kept reliable.",
+        desc:"Keeping your installation safe and reliable, plus the smaller electrical jobs around the house and workplace. One trusted team you can call again and again.",
+        includes:["Preventive checks","The smaller jobs too","Extra points & lighting","One team you can trust"],
+        img:"[ photo: electrician on a maintenance visit ]", ctaLabel:"Request a free quote",
+        stats:[{v:"1 call",k:"Trusted contact"},{v:"Safe",k:"Preventive checks"},{v:"Flexible",k:"Big or small"}] }
+    ];
+    const imgFor = {
+      "solar-panels":     "https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=900&q=60",
+      "home-batteries":   "https://images.unsplash.com/photo-1780445392417-68b9dccc45f2?auto=format&fit=crop&w=900&q=60",
+      "ev-charging":      "https://images.unsplash.com/photo-1593941707874-ef25b8b4a92b?auto=format&fit=crop&w=900&q=60",
+      "air-conditioning": "https://images.unsplash.com/photo-1726614846573-c1ac2e6161d1?auto=format&fit=crop&w=900&q=60",
+      "fuse-box":         "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=900&q=60",
+      "fault-repair":     "https://images.unsplash.com/photo-1621905251918-48416bd8575a?auto=format&fit=crop&w=900&q=60"
+    };
+    const onImgError = (e)=>{ e.target.style.display="none"; };
+    const active = 0;
+    const introImages = raw.slice(0,5).map((s,i)=>({ key:i, idx:i, label:s.img, url: imgFor[s.id] || "", onImgError, style:{
+      position:"absolute", top:0, left:0, width:"300px", height:"420px", transformOrigin:"bottom center",
+      transform:"translateX(" + (i*132) + "px)", opacity:1, zIndex: 20 - i, willChange:"transform,opacity"
+    }}));
+    const serviceImages = raw.map((s,i)=>({ key:i, idx:i, label:s.img, url: imgFor[s.id] || "", onImgError, style:{
+      position:"absolute", inset:0,
+      opacity: i===active ? 1 : 0, zIndex: i===active ? 3 : 2,
+      transition:"opacity .5s ease", willChange:"opacity"
+    }}));
+    const serviceItems = raw.map((s,i)=>({
+      key:i, idx:i, id:s.id, no:String(i+1).padStart(2,"0"), name:s.name, title:s.tagline, desc:s.desc, features:s.includes,
+      ctaLabel:s.ctaLabel, ctaHref: s.id==="fault-repair" ? "tel:+31639691798" : "Contact.dc.html",
+      blockStyle:{ minHeight:"58vh", display:"flex", alignItems:"center", boxSizing:"border-box", padding:"14px 0" },
+      innerStyle:{ width:"100%", opacity: i===active ? 1 : 0.34, transition:"opacity .4s ease" }
+    }));
+    const groupOf = (s)=> s.group.indexOf("Electrical")===0 ? 1 : 0;
+    const mkRow = (s,i)=>({ key:i, idx:i, name:s.name, onClick:()=>this.jump(i),
+      rowStyle:{ display:"flex", alignItems:"center", gap:"12px", padding:"7px 0", cursor:"pointer", opacity: i===active ? 1 : 0.5, transition:"opacity .3s" },
+      dotStyle:{ width: i===active ? "24px" : "8px", height:"3px", borderRadius:"2px", background: i===active ? "#E67206" : "rgba(14,16,18,.3)", transition:"all .35s", display:"inline-block", flex:"none" },
+      nameStyle:{ fontFamily:"'Outfit',sans-serif", fontWeight: i===active ? 700 : 500, fontSize:"17px", letterSpacing:"-.02em", color:"#0e1012", transition:"all .3s" }
+    });
+    const rows = raw.map(mkRow);
+    const navG1 = rows.filter((r,i)=>groupOf(raw[i])===0);
+    const navG2 = rows.filter((r,i)=>groupOf(raw[i])===1);
+    const baseStats = [
+      { v:"8", k:"Core services, one team" },
+      { v:"4 wks", k:"From approval to solar on the roof" },
+      { v:"7/7", k:"Fault response, evenings & weekends" },
+      { v:"100%", k:"Tested & to code before we leave" },
+      { v:"1-op-1", k:"Personal contact, advice that fits" }
+    ];
+    const marqueeStats = baseStats.concat(baseStats).map((st,i)=>Object.assign({ key:i }, st));
+    return { marqueeStats, introImages, serviceImages, serviceItems, navG1, navG2, colRef: this.setCol, introRef: this.setIntro };
+  }
+}
+</script>
+</body>
+</html>
