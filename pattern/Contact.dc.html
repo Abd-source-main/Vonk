@@ -15,6 +15,16 @@
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:#f7f5f2;color:#0e1012;font-family:'Rubik',sans-serif;-webkit-font-smoothing:antialiased;}
+  /* ---------- scrollbar ---------- */
+  /* Firefox */
+  html{scrollbar-width:thin;scrollbar-color:rgba(14,16,18,.30) #efece7;}
+  /* WebKit / Blink */
+  ::-webkit-scrollbar{width:13px;height:13px;}
+  ::-webkit-scrollbar-track{background:#efece7;border-left:1px solid rgba(14,16,18,.08);}
+  ::-webkit-scrollbar-thumb{background:rgba(14,16,18,.30);border-radius:99px;border:3.5px solid #efece7;background-clip:padding-box;}
+  ::-webkit-scrollbar-thumb:hover{background:rgba(14,16,18,.46);}
+  ::-webkit-scrollbar-thumb:active{background:#E67206;}
+  ::-webkit-scrollbar-corner{background:#efece7;}
   a{color:#A34E03;text-decoration:none;}
   a:hover{color:#C25E04;}
   section{scroll-margin-top:110px;}
