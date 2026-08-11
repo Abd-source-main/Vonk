@@ -114,6 +114,13 @@
     .r-foot{grid-template-columns:1fr!important;}
     .r-quad{grid-template-columns:1fr!important;}
   }
+  .vonk-review{position:relative;display:flex;flex-direction:column;margin:0;padding:26px 24px 24px;background:#ffffff;border:1px solid rgba(14,16,18,.11);border-radius:16px;transition:box-shadow .3s ease,border-color .3s ease,transform .3s cubic-bezier(.22,1,.36,1);}
+  .vonk-review:hover{border-color:rgba(230,114,6,.45);box-shadow:0 18px 40px rgba(14,16,18,.10);transform:translateY(-3px);}
+  .vonk-review-stars{font-size:14px;letter-spacing:.14em;color:#E67206;line-height:1;}
+  .vonk-review-quote{font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.6;color:#0e1012;margin:16px 0 0;quotes:none;flex:1;}
+  .vonk-review-cap{display:flex;flex-direction:column;gap:3px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(14,16,18,.11);}
+  .vonk-review-name{font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;letter-spacing:-.01em;color:#0e1012;}
+  .vonk-review-meta{font-family:'Rubik',sans-serif;font-weight:300;font-size:13.5px;color:#5b6469;}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Electrician","name":"Vonk Elektra","legalName":"Vonk Installatie & Onderhoud B.V.","image":"https://vonkelektra.nl/wp-content/uploads/2023/10/Logo-Vonk-Elektra.png","@id":"https://vonkelektra.nl","url":"https://vonkelektra.nl","telephone":"+31247851050","email":"info@vonkelektra.nl","priceRange":"€€","vatID":"NL865415171B01","address":{"@type":"PostalAddress","streetAddress":"De Kluijskamp 1273","postalCode":"6545 JK","addressLocality":"Nijmegen","addressCountry":"NL"},"areaServed":{"@type":"City","name":"Nijmegen"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"}],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Solar panel installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Home battery installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Air conditioning installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Electrical fault repair and maintenance"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"EV charging station installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Heat pump installation"}}]}
@@ -289,6 +296,33 @@
       <line x1="0" y1="98%" x2="100%" y2="2%" stroke="#E67206" strokeWidth="2" strokeDasharray="14 60" strokeDashoffset="-46"></line>
     </svg>
   </div>
+
+  <!-- REVIEWS -->
+  <!-- ⚠ PLACEHOLDER COPY — the quotes and names below are illustrative, not real
+       customer reviews. Replace with genuine, attributable reviews before this
+       goes live. See the `rv` array in the component script. -->
+  <section id="reviews" style="max-width:1180px;margin:0 auto;padding:clamp(46px,6.5vw,78px) 24px clamp(10px,2vw,24px);">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;margin-bottom:32px;">
+      <div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">What customers say</div>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(29px,4.4vw,46px);letter-spacing:-.045em;line-height:1.02;color:#0e1012;margin:0;max-width:600px;">Work that speaks for itself.</h2>
+      </div>
+      <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.55;color:#5b6469;max-width:340px;margin:0;">Every job finished, tested and explained — here's how that lands with the people we work for.</p>
+    </div>
+
+    <div class="r-quad" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+      <sc-for list = "{{ reviews }}" as="rv" hint-placeholder-count="3">
+        <figure class="vonk-review">
+          <div class="vonk-review-stars" role="img" aria-label="{{ rv.ratingLabel }}">{{ rv.stars }}</div>
+          <blockquote class="vonk-review-quote">{{ rv.quote }}</blockquote>
+          <figcaption class="vonk-review-cap">
+            <span class="vonk-review-name">{{ rv.name }}</span>
+            <span class="vonk-review-meta">{{ rv.meta }}</span>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+  </section>
 
   <!-- BOOKING -->
   <section id="book" style="max-width:1180px;margin:0 auto;padding:20px 24px 100px;">
@@ -469,6 +503,18 @@ class Component extends DCLogic {
       { title:"Fast when it matters", desc:"Fault response evenings and weekends." }
     ];
     this.proofPoints = pp.concat(pp).map((p,i)=>Object.assign({ key:i }, p));
+    // PLACEHOLDER REVIEWS — representative copy for layout only.
+    // These are NOT real customer reviews. Replace with genuine, attributable
+    // reviews (e.g. exported from Google Business Profile) before publishing.
+    const rv = [
+      { quote:"They talked us through the options before quoting anything, and the price we agreed was the price we paid. Panels were on the roof inside a month.",
+        name:"Placeholder — J. de Vries", meta:"Solar panels · Nijmegen" },
+      { quote:"Fuse box tripped on a Saturday evening and someone actually picked up. Fault traced and fixed the same night, and they showed me what had gone wrong.",
+        name:"Placeholder — M. Hendriks", meta:"Fault repair · Nijmegen-Oost" },
+      { quote:"Tidy work, everything tested before they left, and they explained the new setup properly instead of just handing over a manual.",
+        name:"Placeholder — S. Bakker", meta:"EV charging · Lent" }
+    ];
+    this.reviews = rv.map((r,i)=>Object.assign({ key:i, stars:"★★★★★", ratingLabel:"Rated 5 out of 5" }, r));
     this.state = { sent:false, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
   }
   componentDidMount(){
@@ -660,6 +706,7 @@ class Component extends DCLogic {
       introRef: this.setIntro,
       stageRef: this.setStage,
       proofPoints: this.proofPoints,
+      reviews: this.reviews,
       svcTiles,
       ctaTile,
       introImages, serviceImages, serviceItems, navG1, navG2
