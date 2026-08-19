@@ -131,6 +131,15 @@
     .vonk-slider-nav{bottom:28px;gap:12px;}
     .vonk-slider-btn{width:52px;height:52px;}
     .vonk-slider-dots{bottom:22px;}
+    /* At 393×600 a 16:9 photo is cropped to a 36.6% window, so where that window sits decides
+       what survives. Figma pushes each image left to keep its subject in frame; these are that
+       crop, converted from each fill's imageTransform (tx / (1 - 0.3656)). Slide 01 is the one
+       Figma left uncropped, so it keeps the 50% default. Desktop and tablet are centred FILL
+       in Figma too, which is why this lives in the phone tier only. */
+    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:72.09% center;}
+    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:68.55% center;}
+    .vonk-slide:nth-child(4) .vonk-slide-img{object-position:65.76% center;}
+    .vonk-slide:nth-child(5) .vonk-slide-img{object-position:82.76% center;}
   }
   @media (prefers-reduced-motion:reduce){
     .vonk-slide{transition:none;}
