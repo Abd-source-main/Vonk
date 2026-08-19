@@ -166,6 +166,16 @@
      on the phone). Both place it at 226% of the frame width, centred, so one rule covers
      every size; the 6% stroke is baked into the SVG exactly as the Figma copies have it. */
   .r-hero-pattern{position:absolute;inset:0;background:url("uploads/hero-pattern.svg") center / 226% auto no-repeat;pointer-events:none;}
+  /* Brand orb. Figma sizes it per frame — 822px at 1440, 531 at 768, 227 at 393 — but the
+     inline style is the desktop value, so on a phone an 822px orb floods the whole screen
+     instead of sitting in the corner. Blur scales with the orb (desktop is 120/822) so the
+     falloff stays in proportion and it still reads as a contained orb. */
+  @media (max-width:1000px){
+    .r-hero-orb{left:-266px!important;top:-265px!important;width:531px!important;height:531px!important;filter:blur(78px)!important;}
+  }
+  @media (max-width:560px){
+    .r-hero-orb{left:-64px!important;top:-48px!important;width:227px!important;height:227px!important;filter:blur(33px)!important;}
+  }
   /* hero wire art — bleeds past the hero and crosses the proof strip, as in the design.
      Every offset is a fraction of --w so the whole composition scales as one piece. */
   /* z-index 0 keeps the wire above the hero backdrop but *under* every piece of text it
@@ -181,6 +191,12 @@
      on the other at any width. Desktop keeps the Figma frame's own placement. */
   @media (max-width:1000px){
     .r-wire-l{bottom:calc(-1 * (117px + var(--w) * .0922));}
+  }
+  /* Phone: the wire shrinks with the viewport until the plug reads as a smudge, so scale it
+     up 25%. The drop coefficient is scaled by the same 1.25 (.0922 -> .1153) because it is
+     21.1% of the artwork height — keeping the head centred on the strip as it grows. */
+  @media (max-width:560px){
+    .r-wire-l{width:calc(var(--w) * .6805);bottom:calc(-1 * (117px + var(--w) * .1153));}
   }
   /* iPad range only: between roughly 500 and 950px the small wire's cable clips the corner of
      the secondary "Call" button (worst case 49px of overlap at 768). Drop it clear — phones
@@ -209,8 +225,8 @@
   }
   @media (max-width:900px){
     .r-nav{padding:6px 8px 6px 11px!important;gap:3px!important;}
-    .r-nav-mark{height:32px!important;}
-    .r-nav-word{height:32px!important;}
+    .r-nav-mark{height:42px!important;}
+    .r-nav-word{height:42px!important;}
     .r-nav-link{font-size:13px!important;padding:8px 9px!important;}
     .r-nav-contact{font-size:13px!important;padding:8px 14px!important;}
   }
@@ -225,14 +241,14 @@
   }
   @media (max-width:560px){
     .r-nav{padding:5px 6px 5px 8px!important;gap:2px!important;max-width:calc(100vw - 14px)!important;}
-    .r-nav-mark{height:27px!important;}
-    .r-nav-word{height:27px!important;}
+    .r-nav-mark{height:34px!important;}
+    .r-nav-word{height:34px!important;}
     .r-nav-link{font-size:12px!important;padding:7px 6px!important;}
     .r-nav-contact{font-size:12px!important;padding:7px 11px!important;box-shadow:none!important;}
   }
   @media (max-width:400px){
-    .r-nav-mark{height:24px!important;}
-    .r-nav-word{height:24px!important;}
+    .r-nav-mark{height:29px!important;}
+    .r-nav-word{height:29px!important;}
     .r-nav-link{font-size:11.5px!important;padding:6px 4px!important;}
     .r-nav-contact{font-size:11.5px!important;padding:6px 9px!important;}
   }
@@ -251,6 +267,16 @@
   .vonk-review-cap{display:flex;flex-direction:column;gap:3px;margin-top:22px;padding-top:18px;border-top:1px solid rgba(14,16,18,.11);}
   .vonk-review-name{font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;letter-spacing:-.01em;color:#0e1012;}
   .vonk-review-meta{font-family:'Rubik',sans-serif;font-weight:300;font-size:13.5px;color:#5b6469;}
+  /* Nav lockup on short viewports. The full pill is 69px tall — a big bite out of a landscape
+     phone — so trim it there rather than pushing the hero down. Declared last on purpose: the
+     width tiers above also use !important, so source order decides the winner. */
+  @media (min-height:561px) and (max-height:820px){
+    .r-nav-mark,.r-nav-word{height:44px!important;}
+  }
+  @media (max-height:560px){
+    .r-nav{padding:6px 8px 6px 11px!important;}
+    .r-nav-mark,.r-nav-word{height:34px!important;}
+  }
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Electrician","name":"Vonk Elektra","legalName":"Vonk Installatie & Onderhoud B.V.","image":"https://vonkelektra.nl/wp-content/uploads/2023/10/Logo-Vonk-Elektra.png","@id":"https://vonkelektra.nl","url":"https://vonkelektra.nl","telephone":"+31247851050","email":"info@vonkelektra.nl","priceRange":"€€","vatID":"NL865415171B01","address":{"@type":"PostalAddress","streetAddress":"De Kluijskamp 1273","postalCode":"6545 JK","addressLocality":"Nijmegen","addressCountry":"NL"},"areaServed":{"@type":"City","name":"Nijmegen"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"18:00"}],"makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Solar panel installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Home battery installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Air conditioning installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Electrical fault repair and maintenance"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"EV charging station installation"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Heat pump installation"}}]}
@@ -258,9 +284,9 @@
 </helmet>
 
 <nav class="r-nav" style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;padding:7px 7px 7px 16px;background:rgba(247,245,242,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(14,16,18,.11);border-radius:999px;box-shadow:0 8px 30px rgba(14,16,18,.08);max-width:calc(100vw - 24px);">
-  <a href="#top" style="display:flex;align-items:center;gap:9px;padding-right:8px;">
-    <img src="uploads/logo-mark.png" class="r-nav-mark" alt="" style="height:40px;width:auto;display:block;flex:none;">
-    <img src="uploads/logo-full.png" class="r-nav-word" alt="Vonk Elektra" style="height:40px;width:auto;display:block;flex:none;">
+  <a href="#top" style="display:flex;align-items:center;gap:4px;padding-right:8px;">
+    <img src="uploads/logo-mark.png" class="r-nav-mark" alt="" style="height:54px;width:auto;display:block;flex:none;">
+    <img src="uploads/logo-full.png" class="r-nav-word" alt="Vonk Elektra" style="height:54px;width:auto;display:block;flex:none;">
   </a>
   <div class="r-nav-links" style="display:flex;align-items:center;gap:2px;">
     <a href="#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
@@ -273,8 +299,8 @@
 <main id="top" style="overflow-x:clip;">
 
   <!-- HERO -->
-  <section class="r-hero" style="position:relative;padding:clamp(100px,7.64vw,110px) 24px clamp(58px,6.8vw,97px);">
-    <div aria-hidden="true" style="position:absolute;left:-327px;top:-327px;width:822px;height:822px;border-radius:50%;background:rgba(230,114,6,.16);filter:blur(120px);pointer-events:none;"></div>
+  <section class="r-hero" style="position:relative;padding:clamp(112px,8.6vw,124px) 24px clamp(58px,6.8vw,97px);">
+    <div class="r-hero-orb" aria-hidden="true" style="position:absolute;left:-327px;top:-327px;width:822px;height:822px;border-radius:50%;background:rgba(230,114,6,.16);filter:blur(120px);pointer-events:none;"></div>
     <div class="r-hero-pattern" aria-hidden="true"></div>
     <div class="r-hero-stack" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,2.4vw,34px);">
 
@@ -389,8 +415,9 @@
 
     </div>
   </section>
-<!-- WIRE DIVIDER — spans corner to corner, so the low end lands exactly on the band below -->
-  <div class="r-wire" style="height:70px;background:#f7f5f2;">
+<!-- WIRE DIVIDER — spans corner to corner, so the low end lands exactly on the band below.
+     Sits on the band's own colour so the divider reads as part of the card beneath it. -->
+  <div class="r-wire" style="height:70px;background:#efece7;">
     <svg width="100%" height="70" aria-hidden="true" style="display:block;opacity:.5;">
       <line x1="0" y1="2%" x2="100%" y2="98%" stroke="#0e1012" strokeWidth="2" strokeDasharray="38 36"></line>
       <line x1="0" y1="2%" x2="100%" y2="98%" stroke="#E67206" strokeWidth="2" strokeDasharray="14 60" strokeDashoffset="-46"></line>
