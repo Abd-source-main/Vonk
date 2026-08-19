@@ -33,6 +33,17 @@
   @keyframes vonkMarquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
   .vonk-marquee-track{display:flex;width:max-content;animation:vonkMarquee 30s linear infinite;}
   .vonk-marquee:hover .vonk-marquee-track{animation-play-state:paused;}
+  /* Proof text turns brand orange exactly where the left hero wire runs under it — Figma's
+     "wirehead collision" treatment. A second copy of the track, painted orange and masked to
+     the wire artwork, sits over the black one; the mask box is aligned to the live wire rect
+     in initWireTint(). Nothing per-frame: both tracks share one animation. */
+  .vonk-proof-t{color:#0e1012;}
+  .vonk-proof-d{color:#5b6469;}
+  .vonk-marquee-lit{position:absolute;inset:0;pointer-events:none;
+    -webkit-mask-image:url("uploads/hero-wire-left.svg");mask-image:url("uploads/hero-wire-left.svg");
+    -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;}
+  .vonk-marquee-lit .vonk-proof-t,
+  .vonk-marquee-lit .vonk-proof-d{color:#E67206;}
   .vonk-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:188px;gap:14px;}
   .vonk-svc-card{position:relative;display:block;height:100%;width:100%;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);box-shadow:0 10px 26px rgba(14,16,18,.08);transition:box-shadow .3s ease;}
   .vonk-svc-card:hover{box-shadow:0 24px 52px rgba(14,16,18,.20);}
@@ -68,6 +79,115 @@
     .vonk-svc-grid{grid-template-columns:1fr;grid-auto-rows:152px;}
     .vonk-svc-grid>*:first-child{grid-column:auto!important;}
     .vonk-svc-grid>*:first-child .vonk-svc-tag{display:none;}
+  }
+  /* ——— WHAT WE DO — full-bleed slider, mirroring the Figma homepage ———
+     Figma frames: desktop 1440×720 slide, tablet 768×561, phone 393×600. --inset keeps the
+     slide copy on the same left edge as the 1180 container, then goes flat on small screens. */
+  .vonk-svc-sec{background:#fbfaf8;padding-top:84px;}
+  .vonk-svc-head{max-width:1180px;margin:0 auto;padding:0 24px 44px;display:flex;justify-content:space-between;align-items:flex-end;gap:28px;flex-wrap:wrap;}
+  .vonk-svc-h2{font-family:'Outfit',sans-serif;font-weight:800;font-size:52px;letter-spacing:-.045em;line-height:1.02;color:#0e1012;margin:0;max-width:640px;}
+  .vonk-svc-count{display:flex;align-items:baseline;gap:8px;flex:none;}
+  .vonk-slider{position:relative;--inset:max(24px,calc((100% - 1180px) / 2 + 24px));}
+  .vonk-slider-view{position:relative;width:100%;aspect-ratio:2 / 1;overflow:hidden;background:#fbfaf8;}
+  /* visibility rides the same transition, so the outgoing slide stays painted while it fades */
+  .vonk-slide{position:absolute;inset:0;transition:opacity .55s cubic-bezier(.22,1,.36,1),visibility .55s;}
+  .vonk-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  .vonk-slide-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(251,250,248,.96) 0%,rgba(251,250,248,.8) 32.8%,rgba(251,250,248,.22) 49.3%,rgba(251,250,248,0) 75.5%);}
+  .vonk-slide-scrim2{position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,250,248,.9) 0%,rgba(251,250,248,0) 17%,rgba(251,250,248,0) 60%,rgba(251,250,248,.55) 100%);}
+  .vonk-slide-body{position:absolute;left:var(--inset);right:var(--inset);bottom:96px;display:flex;flex-direction:column;align-items:flex-start;gap:20px;max-width:560px;}
+  .vonk-slide-kicker{display:flex;align-items:center;gap:12px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:#E67206;}
+  .vonk-slide-tick{width:28px;height:3px;background:#E67206;display:inline-block;flex:none;}
+  .vonk-slide-title{font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(30px,4.44vw,64px);line-height:.98;letter-spacing:-.04em;color:#0e1012;margin:0;}
+  .vonk-slide-desc{font-family:'Rubik',sans-serif;font-weight:300;font-size:19px;line-height:1.5;color:#525961;margin:0;max-width:468px;}
+  .vonk-slide-cta{display:inline-flex;align-items:center;gap:10px;background:#F28C26;color:#0e1012;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;letter-spacing:.01em;padding:14px 22px 14px 26px;border-radius:100px;transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;}
+  .vonk-slide-cta:hover{color:#0e1012;background:#E67206;transform:translateY(-2px);box-shadow:0 14px 30px rgba(230,114,6,.34);}
+  /* z-index clears the active slide, which sits at 2 — without it the controls are buried */
+  .vonk-slider-nav{position:absolute;right:var(--inset);bottom:64px;display:flex;gap:16px;z-index:3;}
+  .vonk-slider-btn{width:56px;height:56px;border-radius:100px;display:flex;align-items:center;justify-content:center;font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;line-height:1;cursor:pointer;padding:0;transition:transform .24s cubic-bezier(.22,1,.36,1),background .24s ease,border-color .24s ease;}
+  .vonk-slider-prev{background:rgba(251,250,248,.55);border:1px solid rgba(14,16,18,.22);color:#0e1012;}
+  .vonk-slider-prev:hover{background:#fbfaf8;border-color:rgba(14,16,18,.5);transform:translateY(-2px);}
+  .vonk-slider-next{background:#E67206;border:1px solid #E67206;color:#ffffff;}
+  .vonk-slider-next:hover{background:#d1660a;transform:translateY(-2px);}
+  .vonk-slider-dots{position:absolute;left:var(--inset);bottom:36px;display:flex;align-items:center;gap:10px;z-index:3;}
+  @media (max-width:1000px){
+    .vonk-svc-sec{padding-top:64px;}
+    .vonk-svc-head{padding-bottom:32px;}
+    .vonk-svc-h2{font-size:34px;}
+    .vonk-slider{--inset:48px;}
+    .vonk-slider-view{aspect-ratio:768 / 561;}
+    .vonk-slide-body{bottom:56px;max-width:600px;}
+    .vonk-slide-desc{font-size:17px;max-width:460px;}
+    .vonk-slider-nav{bottom:40px;}
+    .vonk-slider-dots{bottom:28px;}
+  }
+  @media (max-width:560px){
+    .vonk-svc-sec{padding-top:48px;}
+    .vonk-svc-head{padding-bottom:24px;}
+    .vonk-svc-h2{font-size:27px;}
+    .vonk-slider{--inset:20px;}
+    .vonk-slider-view{aspect-ratio:393 / 600;}
+    .vonk-slide-body{bottom:36px;max-width:none;}
+    .vonk-slide-desc{font-size:15px;max-width:none;}
+    .vonk-slider-nav{bottom:28px;gap:12px;}
+    .vonk-slider-btn{width:52px;height:52px;}
+    .vonk-slider-dots{bottom:22px;}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .vonk-slide{transition:none;}
+  }
+  /* ——— HEIGHT TIERS ———
+     Everything above is tuned to viewport *width*, straight off the Figma frames. On a short
+     viewport — a phone in landscape, or a laptop window dragged short — that leaves a hero
+     taller than the screen and a slide taller than the screen. These two tiers pull the hero
+     and the slide back down; they key off height only, so nothing changes on a normal
+     portrait phone, tablet, or full-height desktop. */
+  @media (min-height:561px) and (max-height:820px){
+    .r-hero{padding-top:max(98px,10vh)!important;padding-bottom:clamp(40px,6vh,72px)!important;}
+    .r-hero-logo img{height:min(clamp(96px,15.3vw,220px),24vh)!important;}
+    .r-hero h1{font-size:min(clamp(34px,5.3vw,76px),9.5vh)!important;}
+    .r-hero-stack{gap:min(clamp(20px,2.4vw,34px),3.4vh)!important;}
+    .vonk-slider-view{max-height:82vh;}
+  }
+  @media (max-height:560px){
+    .r-hero{padding-top:max(78px,15vh)!important;padding-bottom:clamp(24px,4vh,44px)!important;}
+    .r-hero-logo img{height:min(clamp(96px,15.3vw,220px),20vh)!important;}
+    .r-hero h1{font-size:min(clamp(34px,5.3vw,76px),8.6vh)!important;}
+    .r-hero p{font-size:16px!important;}
+    .r-hero-stack{gap:min(clamp(20px,2.4vw,34px),3vh)!important;}
+    .r-hero a[href="#book"],.r-hero a[href^="tel:"]{padding:12px 22px!important;font-size:15px!important;}
+    .vonk-slider-view{max-height:82vh;}
+    .vonk-slide-title{font-size:min(clamp(30px,4.44vw,64px),9vh)!important;}
+    .vonk-slide-desc{font-size:14px!important;}
+    .vonk-slide-body{bottom:26px!important;gap:12px!important;}
+    .vonk-slider-nav{bottom:20px!important;}
+    .vonk-slider-dots{bottom:12px!important;}
+  }
+  /* hero lattice — the pattern drawn in Figma ("88px rules" on the tablet hero, "Frame 13"
+     on the phone). Both place it at 226% of the frame width, centred, so one rule covers
+     every size; the 6% stroke is baked into the SVG exactly as the Figma copies have it. */
+  .r-hero-pattern{position:absolute;inset:0;background:url("uploads/hero-pattern.svg") center / 226% auto no-repeat;pointer-events:none;}
+  /* hero wire art — bleeds past the hero and crosses the proof strip, as in the design.
+     Every offset is a fraction of --w so the whole composition scales as one piece. */
+  /* z-index 0 keeps the wire above the hero backdrop but *under* every piece of text it
+     crosses — the orange masked copy above is what shows where they meet */
+  .r-hero-wires{position:absolute;left:0;right:0;bottom:0;height:0;z-index:0;pointer-events:none;--w:min(100vw,1600px);}
+  .r-hero-wires img{position:absolute;display:block;max-width:none;}
+  .r-wire-l{left:0;width:calc(var(--w) * .5444);bottom:calc(var(--w) * -.1653);}
+  .r-wire-r{right:0;width:calc(var(--w) * .3007);bottom:calc(var(--w) * -.0014);}
+  /* Tablet and phone: the wire shrinks with the viewport, so the plug head ends up above the
+     proof strip and only the cable tip grazes it. Drop it far enough that the head lands on
+     the strip like it does at desktop. The strip's centre sits a constant 117px below the
+     hero, and the plug's centre is 21.1% of the artwork up from its base, so this puts one
+     on the other at any width. Desktop keeps the Figma frame's own placement. */
+  @media (max-width:1000px){
+    .r-wire-l{bottom:calc(-1 * (117px + var(--w) * .0922));}
+  }
+  /* iPad range only: between roughly 500 and 950px the small wire's cable clips the corner of
+     the secondary "Call" button (worst case 49px of overlap at 768). Drop it clear — phones
+     at or below 480px never collide, so they keep their placement, and even at the widest
+     point this still stops well short of the proof strip. */
+  @media (min-width:481px) and (max-width:1000px){
+    .r-wire-r{bottom:calc(var(--w) * -.0014 - 58px);}
   }
   /* ——— RESPONSIVE ——— desktop layout is untouched above these breakpoints */
   img,svg{max-width:100%;}
@@ -153,48 +273,44 @@
 <main id="top" style="overflow-x:clip;">
 
   <!-- HERO -->
-  <section style="position:relative;padding:clamp(126px,15vw,150px) 24px 40px;">
-    <div style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(14,16,18,.06) 0 1px,transparent 1px 88px);-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);"></div>
-    <div style="position:relative;max-width:1180px;margin:0 auto;">
-      <div class="r-split" style="display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;">
-        <div>
-          <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:#A34E03;margin-bottom:22px;">
-            <span style="width:8px;height:8px;border-radius:50%;background:#E67206;display:inline-block;animation:vonkPulse 2s ease-in-out infinite;"></span>
-            Electrician · Nijmegen &amp; surroundings
-          </div>
-          <h1 style="font-family:'Outfit',sans-serif;font-weight:800;color:#0e1012;letter-spacing:-.045em;line-height:.98;margin:0 0 24px;">
-            <span style="display:block;font-size:clamp(38px,7.1vw,76px);">Living &amp; working</span>
-            <span style="display:block;font-size:clamp(38px,7.1vw,76px);">in <span style="color:#C25E04;">complete</span></span>
-            <span style="display:block;font-size:clamp(52px,10.5vw,112px);letter-spacing:-.055em;">comfort.</span>
-          </h1>
-          <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:19px;line-height:1.6;color:#5b6469;max-width:520px;margin:0 0 32px;text-wrap:pretty;">
-            Total peace of mind — you should never have to wonder whether things are working properly. When we take on a job, we do it right. And when something fails, we're there fast: evenings and weekends included.
-          </p>
-          <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:center;">
-            <a href="#book" style="display:inline-flex;align-items:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 28px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.28);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;" style-hover="transform:translateY(-2px);background:#d1660a;box-shadow:0 18px 38px rgba(230,114,6,.4);">
-              Book an appointment
-              <span style="font-size:18px;line-height:1;">→</span>
-            </a>
-            <a href="tel:+31247851050" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#0e1012;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 26px;border-radius:12px;border:1px solid rgba(14,16,18,.28);transition:border-color .24s ease,background .24s ease,color .24s ease;" style-hover="border-color:#0e1012;background:#0e1012;color:#f7f5f2;">
-              Call 024 785 1050
-            </a>
-          </div>
-        </div>
+  <section class="r-hero" style="position:relative;padding:clamp(100px,7.64vw,110px) 24px clamp(58px,6.8vw,97px);">
+    <div aria-hidden="true" style="position:absolute;left:-327px;top:-327px;width:822px;height:822px;border-radius:50%;background:rgba(230,114,6,.16);filter:blur(120px);pointer-events:none;"></div>
+    <div class="r-hero-pattern" aria-hidden="true"></div>
+    <div class="r-hero-stack" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,2.4vw,34px);">
 
-        <div style="position:relative;">
-          <div style="position:absolute;top:16px;left:16px;right:-16px;bottom:-16px;background:#E67206;border-radius:16px;"></div>
-          <div style="position:relative;background:#ffffff;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);">
-            <div style="height:2px;background:linear-gradient(90deg,transparent,#E57827,transparent);background-size:200% 100%;animation:vonkCurrent 3.5s linear infinite;"></div>
-            <div style="position:relative;aspect-ratio:4/4.4;background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);">
-              <img src="uploads/elektricien2.jpg" alt="Electrician working on a distribution board" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;">
-            </div>
-          </div>
-          <div style="position:absolute;bottom:26px;left:-26px;background:#ffffff;border:1px solid rgba(14,16,18,.11);border-radius:14px;padding:16px 20px;box-shadow:0 16px 40px rgba(14,16,18,.12);max-width:240px;">
-            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:30px;letter-spacing:-.04em;color:#0e1012;line-height:1;">24/7</div>
-            <div style="font-family:'Rubik',sans-serif;font-weight:400;font-size:13.5px;color:#5b6469;margin-top:6px;line-height:1.4;">Fast fault response, also evenings &amp; weekends</div>
-          </div>
-        </div>
+      <div class="r-hero-logo" style="display:flex;align-items:center;justify-content:center;gap:clamp(14px,2.1vw,30px);">
+        <img src="uploads/logo-mark.png" alt="" style="height:clamp(96px,15.3vw,220px);width:auto;display:block;flex:none;">
+        <img src="uploads/logo-full.png" alt="Vonk Elektra" style="height:clamp(96px,15.3vw,220px);width:auto;display:block;flex:none;">
       </div>
+
+      <div style="display:inline-flex;align-items:center;gap:9px;font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.02em;text-transform:uppercase;color:#A34E03;">
+        <span style="width:8px;height:8px;border-radius:50%;background:#E67206;display:inline-block;animation:vonkPulse 2s ease-in-out infinite;"></span>
+        Electrician · Nijmegen &amp; surroundings
+      </div>
+
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(34px,5.3vw,76px);line-height:.98;letter-spacing:-.045em;color:#0e1012;max-width:940px;margin:0;">
+        Living &amp; working in complete <span style="color:#E67206;">comfort.</span>
+      </h1>
+
+      <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:19px;line-height:1.6;color:#5b6469;max-width:640px;margin:0;text-wrap:pretty;">
+        Total peace of mind — you should never have to wonder whether things are working properly. When we take on a job, we do it right. And when something fails, we're there fast: evenings and weekends included.
+      </p>
+
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:14px;">
+        <a href="#book" style="display:inline-flex;align-items:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.30);transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,background .24s ease;" style-hover="transform:translateY(-2px);background:#d1660a;box-shadow:0 18px 38px rgba(230,114,6,.4);">
+          Book an appointment
+          <span style="font-size:18px;line-height:1;">→</span>
+        </a>
+        <a href="tel:+31247851050" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#0e1012;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;border:1px solid rgba(14,16,18,.28);transition:border-color .24s ease,background .24s ease,color .24s ease;" style-hover="border-color:#0e1012;background:#0e1012;color:#f7f5f2;">
+          Call 024 785 1050
+        </a>
+      </div>
+
+    </div>
+
+    <div class="r-hero-wires" aria-hidden="true">
+      <img class="r-wire-l" src="uploads/hero-wire-left.svg" alt="">
+      <img class="r-wire-r" src="uploads/hero-wire-right.png" alt="">
     </div>
   </section>
 
@@ -204,58 +320,76 @@
       <div class="vonk-marquee-track">
         <sc-for list = "{{ proofPoints }}" as="p" hint-placeholder-count="10">
           <div style="padding:26px 40px;border-right:1px solid rgba(14,16,18,.11);flex:none;max-width:320px;">
-            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.02em;color:#0e1012;">{{ p.title }}</div>
-            <div style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14px;color:#5b6469;margin-top:6px;line-height:1.45;">{{ p.desc }}</div>
+            <div class="vonk-proof-t" style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.02em;">{{ p.title }}</div>
+            <div class="vonk-proof-d" style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14px;margin-top:6px;line-height:1.45;">{{ p.desc }}</div>
           </div>
         </sc-for>
+      </div>
+      <!-- Same track again, in brand orange, masked to the wire silhouette: only the glyph
+           pixels the cable actually passes under come through. Decorative — hidden from AT. -->
+      <div class="vonk-marquee-lit" aria-hidden="true">
+        <div class="vonk-marquee-track">
+          <sc-for list = "{{ proofPoints }}" as="p" hint-placeholder-count="10">
+            <div style="padding:26px 40px;border-right:1px solid transparent;flex:none;max-width:320px;">
+              <div class="vonk-proof-t" style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.02em;">{{ p.title }}</div>
+              <div class="vonk-proof-d" style="font-family:'Rubik',sans-serif;font-weight:300;font-size:14px;margin-top:6px;line-height:1.45;">{{ p.desc }}</div>
+            </div>
+          </sc-for>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services" style="max-width:1180px;margin:0 auto;padding:clamp(58px,8vw,96px) 24px clamp(54px,7.4vw,88px);">
+  <!-- SERVICES — full-bleed slider (Figma: Services / Slider area) -->
+  <section id="services" class="vonk-svc-sec">
     <div ref="{{ stageRef }}" data-svc-stage="">
-      <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; flex-wrap: wrap; margin-bottom: 32px">
+
+      <div class="vonk-svc-head">
         <div data-om-label="what we do">
-          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#A34E03;margin-bottom:14px;">What we do</div>
-          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(30px,5.2vw,52px);letter-spacing:-.045em;line-height:1;color:#0e1012;margin:0;max-width:640px;">Sustainable comfort, installed properly.</h2>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:#E67206;margin-bottom:14px;">What we do</div>
+          <h2 class="vonk-svc-h2">Sustainable comfort, installed properly.</h2>
         </div>
-        <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:16px;line-height:1.55;color:#5b6469;max-width:340px;margin:0;">From solar to fault repair — one team for your home or business, from first advice to the final test.</p>
+        <div class="vonk-svc-count">
+          <span style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;letter-spacing:-.02em;color:#0e1012;">{{ slideNo }}</span>
+          <span style="font-family:'Rubik',sans-serif;font-weight:300;font-size:18px;color:#8c8f94;">/ 05</span>
+        </div>
       </div>
 
-      <!-- TILE WALL — every service visible at once, revealed in a scroll-driven stagger -->
-      <div class="vonk-svc-grid">
-        <sc-for list = "{{ svcTiles }}" as="t" hint-placeholder-count="8">
-          <div data-svc-tile="" data-idx="{{ t.idx }}" style = "{{ t.style }}">
-            <a href="{{ t.href }}" class="vonk-svc-card">
-              <sc-if value="{{ t.url }}" hint-placeholder-val="{{ true }}">
-                <img class="vonk-svc-img" src="{{ t.url }}" alt="{{ t.name }}" loading="lazy" onError="{{ t.onImgError }}">
-              </sc-if>
-              <div class="vonk-svc-veil"></div>
-              <div class="vonk-svc-body">
-                <div style="min-width:0;">
-                  <div class="vonk-svc-meta">
-                    <span class="vonk-svc-rule"></span>
-                    <span class="vonk-svc-no">{{ t.no }}</span>
-                  </div>
-                  <div class="vonk-svc-name">{{ t.name }}</div>
-                  <div class="vonk-svc-tag">{{ t.tag }}</div>
-                </div>
-                <span class="vonk-svc-go">→</span>
+      <div class="vonk-slider">
+        <div class="vonk-slider-view">
+          <sc-for list = "{{ slides }}" as="s" hint-placeholder-count="5">
+            <div class="vonk-slide" style = "{{ s.style }}" aria-hidden="{{ s.hidden }}">
+              <img class="vonk-slide-img" src="{{ s.img }}" srcset="{{ s.srcset }}" sizes="100vw" alt="{{ s.alt }}" loading="{{ s.loading }}">
+              <div class="vonk-slide-scrim"></div>
+              <div class="vonk-slide-scrim2"></div>
+              <div class="vonk-slide-body">
+                <div class="vonk-slide-kicker"><span class="vonk-slide-tick"></span>{{ s.kicker }}</div>
+                <h3 class="vonk-slide-title">{{ s.title }}</h3>
+                <p class="vonk-slide-desc">{{ s.desc }}</p>
+                <a href="{{ s.href }}" class="vonk-slide-cta" tabindex="{{ s.tabIndex }}">
+                  Learn more
+                  <span style="font-size:16px;line-height:1;">→</span>
+                </a>
               </div>
-            </a>
-          </div>
-        </sc-for>
+            </div>
+          </sc-for>
+        </div>
 
-        <div data-svc-tile="" style = "{{ ctaTile }}">
-          <a href="Services &amp; Portfolio.dc.html#svc-list" class="vonk-svc-cta">
-            <span class="vonk-svc-cta-label">All services</span>
-            <span class="vonk-svc-cta-title">Learn more<span class="vonk-svc-cta-arrow">→</span></span>
-          </a>
+        <div class="vonk-slider-dots">
+          <sc-for list = "{{ slideDots }}" as="d" hint-placeholder-count="5">
+            <button type="button" onClick="{{ d.onClick }}" aria-label="{{ d.label }}" style = "{{ d.style }}"></button>
+          </sc-for>
+        </div>
+
+        <div class="vonk-slider-nav">
+          <button type="button" class="vonk-slider-btn vonk-slider-prev" onClick="{{ prevSlide }}" aria-label="Previous service">‹</button>
+          <button type="button" class="vonk-slider-btn vonk-slider-next" onClick="{{ nextSlide }}" aria-label="Next service">→</button>
         </div>
       </div>
+
     </div>
-  </section><!-- WIRE DIVIDER — spans corner to corner, so the low end lands exactly on the band below -->
+  </section>
+<!-- WIRE DIVIDER — spans corner to corner, so the low end lands exactly on the band below -->
   <div class="r-wire" style="height:70px;background:#f7f5f2;">
     <svg width="100%" height="70" aria-hidden="true" style="display:block;opacity:.5;">
       <line x1="0" y1="2%" x2="100%" y2="98%" stroke="#0e1012" strokeWidth="2" strokeDasharray="38 36"></line>
@@ -519,13 +653,95 @@ class Component extends DCLogic {
         name:"Placeholder — S. Bakker", meta:"EV charging · Lent" }
     ];
     this.reviews = rv.map((r,i)=>Object.assign({ key:i, stars:"★★★★★", ratingLabel:"Rated 5 out of 5" }, r));
-    this.state = { sent:false, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
+    // WHAT WE DO slider — five slides, mirroring the Figma homepage. Each one links
+    // through to its own service on the Services & Portfolio page.
+    this.slides = [
+      { file:"slide-01-solar", kicker:"01  ·  Sustainable solutions", title:"Solar panels & home batteries",
+        desc:"Rooftop solar that turns daylight into lower energy bills, paired with a home battery that stores what you don't use for the evening. Most systems installed within four weeks of approval.",
+        alt:"Solar panels installed on a roof", slug:"solar-panels" },
+      { file:"slide-02-airco", kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
+        desc:"Modern air conditioning and heat pumps that cool in summer and heat efficiently in winter — cutting your gas use while keeping every room comfortable.",
+        alt:"Air conditioning unit mounted on a wall", slug:"air-conditioning" },
+      { file:"slide-03-charging", kicker:"03  ·  Sustainable solutions", title:"Charging stations",
+        desc:"Safe EV charging at home or at work. We fit your wallbox, upgrade the electrical panel where needed, and test everything before handover.",
+        alt:"Electric vehicle charging point", slug:"ev-charging" },
+      { file:"slide-04-fusebox", kicker:"04  ·  Electrical services", title:"Fuse box replacement",
+        desc:"A safe, modern fuse box that meets today's standards — ready for the extra load of solar, a charger and an all-electric home.",
+        alt:"Newly installed distribution board", slug:"fuse-box" },
+      { file:"slide-05-fault", kicker:"05  ·  Electrical services", title:"Fault repair & maintenance",
+        desc:"Fast fault-finding when something fails, plus routine maintenance and the odd jobs that keep your home running safely — one team, one call.",
+        alt:"Electrician tracing a fault in a fuse box", slug:"fault-repair" }
+    ];
+    this.goSlide = (i)=>{ const n = this.slides.length; this.setState({ slide: ((i % n) + n) % n }); };
+    this.state = { sent:false, slide:0, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
   }
   componentDidMount(){
     window.addEventListener("scroll", this.onScroll, { passive:true });
     window.addEventListener("resize", this.onScroll);
     this.onScroll();
     this._settle = setTimeout(()=>this.onScroll(), 120);
+    this.initWireTint();
+    this.initSliderAuto();
+  }
+  // The What we do slider advances on its own, but holds whenever someone is actually reading
+  // it: pointer over it, keyboard focus inside it, scrolled out of view, or a reduced-motion
+  // preference. Picking a slide by hand also buys a full dwell before the next automatic move.
+  initSliderAuto(){
+    const root = document.querySelector(".vonk-slider");
+    if(!root) return;
+    const DWELL = 6000;
+    const reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    let timer = 0, onScreen = false, hovered = false, focused = false;
+
+    const stop = ()=>{ if(timer){ clearInterval(timer); timer = 0; } };
+    const start = ()=>{
+      stop();
+      if(!onScreen || hovered || focused || (reduce && reduce.matches)) return;
+      timer = setInterval(()=>this.goSlide(this.state.slide + 1), DWELL);
+    };
+    this._slideStop = stop;
+    this._slideStart = start;
+
+    root.addEventListener("mouseenter", ()=>{ hovered = true; start(); });
+    root.addEventListener("mouseleave", ()=>{ hovered = false; start(); });
+    root.addEventListener("focusin", ()=>{ focused = true; start(); });
+    root.addEventListener("focusout", ()=>{ focused = false; start(); });
+    root.addEventListener("click", start);
+
+    if(typeof IntersectionObserver === "function"){
+      this._slideIO = new IntersectionObserver((es)=>{ onScreen = es[0].isIntersecting; start(); }, { threshold:0.25 });
+      this._slideIO.observe(root);
+    } else {
+      onScreen = true; start();
+    }
+    if(reduce && reduce.addEventListener) reduce.addEventListener("change", start);
+    this._slideReduce = reduce;
+  }
+  // The orange copy of the proof strip is masked with the wire artwork, so the tint lands on
+  // exactly the glyph pixels the cable runs under. All this has to do is line the mask box up
+  // with where the wire actually sits — layout only, so it runs on load and on resize, never
+  // per frame. The offset is stable under scroll because both boxes move together.
+  initWireTint(){
+    const wire = document.querySelector(".r-wire-l");
+    const lit = document.querySelector(".vonk-marquee-lit");
+    const strip = document.querySelector(".vonk-marquee");
+    if(!wire || !lit || !strip) return;
+
+    const sync = ()=>{
+      const w = wire.getBoundingClientRect(), s = strip.getBoundingClientRect();
+      if(!w.width || !w.height || !s.width) return;
+      const size = Math.round(w.width) + "px " + Math.round(w.height) + "px";
+      const pos = Math.round(w.left - s.left) + "px " + Math.round(w.top - s.top) + "px";
+      lit.style.webkitMaskSize = lit.style.maskSize = size;
+      lit.style.webkitMaskPosition = lit.style.maskPosition = pos;
+    };
+
+    this._wireSync = sync;
+    if(wire.complete) sync(); else wire.addEventListener("load", sync, { once:true });
+    window.addEventListener("resize", sync);
+    // fonts landing late can still move the strip after first paint
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(sync).catch(()=>{});
+    this._wireSettle = setTimeout(sync, 400);
   }
   componentDidUpdate(){
     // a re-render restores the inline start values, so re-apply the scroll state at once
@@ -535,6 +751,8 @@ class Component extends DCLogic {
     if(this._settle) clearTimeout(this._settle);
     window.removeEventListener("scroll", this.onScroll);
     window.removeEventListener("resize", this.onScroll);
+    if(this._wireSettle) clearTimeout(this._wireSettle);
+    if(this._wireSync) window.removeEventListener("resize", this._wireSync);
   }
   onScroll(){
     if(this._pending) return;
@@ -640,6 +858,27 @@ class Component extends DCLogic {
   renderVals(){
     const active = 0;
     const slugs = ["solar-panels","home-batteries","ev-charging","air-conditioning","heat-pump","fuse-box","fault-repair","maintenance"];
+    // ——— WHAT WE DO slider ———
+    const cur = this.state.slide;
+    const slides = this.slides.map((s,i)=>({
+      key:i, idx:i, kicker:s.kicker, title:s.title, desc:s.desc, alt:s.alt,
+      img: "uploads/" + s.file + ".jpg",
+      srcset: "uploads/" + s.file + "-1200.jpg 1200w, uploads/" + s.file + ".jpg 2048w",
+      loading: i === 0 ? "eager" : "lazy",
+      href: "Services & Portfolio.dc.html#" + s.slug,
+      hidden: i === cur ? "false" : "true",
+      tabIndex: i === cur ? 0 : -1,
+      style: { opacity: i === cur ? 1 : 0, visibility: i === cur ? "visible" : "hidden", zIndex: i === cur ? 2 : 1 }
+    }));
+    const slideDots = this.slides.map((s,i)=>({
+      key:i, idx:i, onClick: ()=>this.goSlide(i), label: "Show " + s.title,
+      style: { width: i === cur ? "34px" : "10px", height:"4px", borderRadius:"100px", flex:"none",
+        background: i === cur ? "#E67206" : "rgba(14,16,18,.22)", border:"0", padding:0, cursor:"pointer",
+        transition:"width .35s cubic-bezier(.22,1,.36,1),background .35s ease" }
+    }));
+    const slideNo = String(cur + 1).padStart(2,"0");
+    const prevSlide = ()=>this.goSlide(cur - 1);
+    const nextSlide = ()=>this.goSlide(cur + 1);
     const imgFor = {
       0:"uploads/Huis-zonnepanelen-scaled.jpg",
       1:"https://images.unsplash.com/photo-1780445392417-68b9dccc45f2?auto=format&fit=crop&w=900&q=60",
@@ -711,6 +950,7 @@ class Component extends DCLogic {
       stageRef: this.setStage,
       proofPoints: this.proofPoints,
       reviews: this.reviews,
+      slides, slideDots, slideNo, prevSlide, nextSlide,
       svcTiles,
       ctaTile,
       introImages, serviceImages, serviceItems, navG1, navG2

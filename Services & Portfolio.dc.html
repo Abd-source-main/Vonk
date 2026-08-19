@@ -387,7 +387,26 @@ class Component extends DCLogic {
       const h = (location.hash || "").slice(1);
       if(!h || !this.colEl) return;
       const el = this.colEl.querySelector('[id="' + h + '"]');
-      if(el) this.setState({ open: +el.getAttribute("data-idx") });
+      if(!el) return;
+      this.setState({ open: +el.getAttribute("data-idx") });
+      // The list is rendered client-side, so on a fresh load the browser's own jump to the
+      // fragment fired before this element existed — land on the service ourselves.
+      // (matches the 110px scroll-margin the CSS gives every [id])
+      const jump = ()=>{
+        const top = el.getBoundingClientRect().top + window.scrollY - 110;
+        window.scrollTo({ top: Math.max(0, Math.round(top)), behavior:"auto" });
+      };
+      requestAnimationFrame(jump);
+      // Opened in a background tab, rAF never runs and the jump is lost — retry once the
+      // tab is actually shown, but only if nothing has scrolled in the meantime.
+      if(document.visibilityState === "hidden"){
+        const onShow = ()=>{
+          if(document.visibilityState !== "visible") return;
+          document.removeEventListener("visibilitychange", onShow);
+          if(window.scrollY === 0) requestAnimationFrame(jump);
+        };
+        document.addEventListener("visibilitychange", onShow);
+      }
     };
   }
   componentDidMount(){
