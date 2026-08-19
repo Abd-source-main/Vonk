@@ -162,10 +162,10 @@
     .vonk-slider-nav{bottom:20px!important;}
     .vonk-slider-dots{bottom:12px!important;}
   }
-  /* hero lattice — the pattern drawn in Figma ("88px rules" on the tablet hero, "Frame 13"
-     on the phone). Both place it at 226% of the frame width, centred, so one rule covers
-     every size; the 6% stroke is baked into the SVG exactly as the Figma copies have it. */
-  .r-hero-pattern{position:absolute;inset:0;background:url("uploads/hero-pattern.svg") center / 226% auto no-repeat;pointer-events:none;}
+  /* Hero backdrop is the original 88px vertical rules — one fixed pitch at every size, so it
+     reads the same on a phone as on a desktop. (It replaced the Figma diagonal lattice, whose
+     226%-of-viewport sizing made its cells range from ~50px on a phone to ~187px at 1440.
+     That artwork is still in uploads/hero-pattern.svg if it's ever wanted back.) */
   /* Brand orb. Figma sizes it per frame — 822px at 1440, 531 at 768, 227 at 393 — but the
      inline style is the desktop value, so on a phone an 822px orb floods the whole screen
      instead of sitting in the corner. Blur scales with the orb (desktop is 120/822) so the
@@ -301,7 +301,7 @@
   <!-- HERO -->
   <section class="r-hero" style="position:relative;padding:clamp(112px,8.6vw,124px) 24px clamp(58px,6.8vw,97px);">
     <div class="r-hero-orb" aria-hidden="true" style="position:absolute;left:-327px;top:-327px;width:822px;height:822px;border-radius:50%;background:rgba(230,114,6,.16);filter:blur(120px);pointer-events:none;"></div>
-    <div class="r-hero-pattern" aria-hidden="true"></div>
+    <div class="r-hero-rules" aria-hidden="true" style="position:absolute;inset:0;background-image:repeating-linear-gradient(90deg,rgba(14,16,18,.06) 0 1px,transparent 1px 88px);-webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);pointer-events:none;"></div>
     <div class="r-hero-stack" style="position:relative;z-index:1;max-width:1180px;margin:0 auto;display:flex;flex-direction:column;align-items:center;text-align:center;gap:clamp(20px,2.4vw,34px);">
 
       <div class="r-hero-logo" style="display:flex;align-items:center;justify-content:center;gap:clamp(14px,2.1vw,30px);">
