@@ -1,0 +1,43 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://vonkelektra.nl/contact/#webpage",
+      "url": "https://vonkelektra.nl/contact/",
+      "name": "Contact — elektricien Nijmegen | Vonk Elektra",
+      "description": "Bel 024 785 1050 of vraag online een gratis offerte aan. Vonk Elektra, De Kluijskamp 1273 in Nijmegen. Bij storingen ook 's avonds en in het weekend bereikbaar.",
+      "inLanguage": "nl-NL",
+      "isPartOf": { "@id": "https://vonkelektra.nl/#website" },
+      "about": { "@id": "https://vonkelektra.nl/#business" },
+      "breadcrumb": { "@id": "https://vonkelektra.nl/contact/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://vonkelektra.nl/contact/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vonkelektra.nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Contact", "item": "https://vonkelektra.nl/contact/" }
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://vonkelektra.nl/over-ons/#webpage",
+      "url": "https://vonkelektra.nl/over-ons/",
+      "name": "Over Vonk Elektra — jouw elektricien in Nijmegen",
+      "description": "Eén vast team voor elektra, zonnepanelen, warmtepompen en storingen in Nijmegen. Wij luisteren eerst, zijn duidelijk over de prijs en leveren werk dat getest en uitgelegd is.",
+      "inLanguage": "nl-NL",
+      "isPartOf": { "@id": "https://vonkelektra.nl/#website" },
+      "about": { "@id": "https://vonkelektra.nl/#business" },
+      "breadcrumb": { "@id": "https://vonkelektra.nl/over-ons/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://vonkelektra.nl/over-ons/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vonkelektra.nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Over ons", "item": "https://vonkelektra.nl/over-ons/" }
+      ]
+    }
+  ]
+}

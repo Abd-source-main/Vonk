@@ -1,0 +1,95 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Electrician",
+      "@id": "https://vonkelektra.nl/#business",
+      "name": "Vonk Elektra",
+      "legalName": "Vonk Installatie & Onderhoud B.V.",
+      "alternateName": "Vonk Installatie & Onderhoud",
+      "url": "https://vonkelektra.nl/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://vonkelektra.nl/#logo",
+        "url": "https://vonkelektra.nl/img/logo-vonk-elektra.png",
+        "caption": "Vonk Elektra"
+      },
+      "image": { "@id": "https://vonkelektra.nl/#logo" },
+      "description": "Vonk Elektra is een elektricien en duurzame-energie-installateur in Nijmegen. Wij verzorgen elektrotechniek, zonnepanelen, thuisbatterijen, laadpalen, airconditioning en warmtepompen voor woningen en bedrijven in Nijmegen en omgeving.",
+      "slogan": "Wonen en werken in comfort.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "De Kluijskamp 1273",
+        "postalCode": "6545 JK",
+        "addressLocality": "Nijmegen",
+        "addressRegion": "Gelderland",
+        "addressCountry": "NL"
+      },
+      "telephone": "+31247851050",
+      "email": "info@vonkelektra.nl",
+      "vatID": "NL865415171B01",
+      "taxID": "NL865415171B01",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "name": "KvK",
+          "value": "90693655"
+        }
+      ],
+      "priceRange": "€€",
+      "currenciesAccepted": "EUR",
+      "knowsLanguage": ["nl", "en"],
+      "areaServed": [
+        { "@type": "City", "name": "Nijmegen" },
+        { "@type": "City", "name": "Beuningen" },
+        { "@type": "City", "name": "Wijchen" },
+        { "@type": "City", "name": "Malden" },
+        { "@type": "City", "name": "Groesbeek" },
+        { "@type": "City", "name": "Elst" },
+        { "@type": "City", "name": "Arnhem" },
+        {
+          "@type": "GeoCircle",
+          "geoMidpoint": {
+            "@type": "GeoCoordinates",
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "De Kluijskamp 1273",
+              "postalCode": "6545 JK",
+              "addressLocality": "Nijmegen",
+              "addressCountry": "NL"
+            }
+          },
+          "geoRadius": "30000"
+        }
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "customer service",
+          "telephone": "+31247851050",
+          "email": "info@vonkelektra.nl",
+          "areaServed": "NL",
+          "availableLanguage": ["nl", "en"]
+        },
+        {
+          "@type": "ContactPoint",
+          "contactType": "emergency",
+          "name": "Storingsdienst",
+          "telephone": "+31639691798",
+          "areaServed": "NL",
+          "availableLanguage": ["nl", "en"]
+        }
+      ],
+      "hasOfferCatalog": { "@id": "https://vonkelektra.nl/diensten/#catalog" },
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://vonkelektra.nl/#website",
+      "url": "https://vonkelektra.nl/",
+      "name": "Vonk Elektra",
+      "inLanguage": "nl-NL",
+      "publisher": { "@id": "https://vonkelektra.nl/#business" }
+    }
+  ]
+}

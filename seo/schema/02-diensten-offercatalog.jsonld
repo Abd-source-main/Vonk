@@ -1,0 +1,112 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://vonkelektra.nl/diensten/#webpage",
+      "url": "https://vonkelektra.nl/diensten/",
+      "name": "Diensten — elektricien & duurzame installaties in Nijmegen",
+      "inLanguage": "nl-NL",
+      "isPartOf": { "@id": "https://vonkelektra.nl/#website" },
+      "about": { "@id": "https://vonkelektra.nl/#business" },
+      "breadcrumb": { "@id": "https://vonkelektra.nl/diensten/#breadcrumb" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://vonkelektra.nl/diensten/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vonkelektra.nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Diensten", "item": "https://vonkelektra.nl/diensten/" }
+      ]
+    },
+    {
+      "@type": "OfferCatalog",
+      "@id": "https://vonkelektra.nl/diensten/#catalog",
+      "name": "Diensten van Vonk Elektra",
+      "inLanguage": "nl-NL",
+      "provider": { "@id": "https://vonkelektra.nl/#business" },
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#service",
+            "name": "Zonnepanelen laten installeren",
+            "serviceType": "Installatie van zonnepanelen",
+            "url": "https://vonkelektra.nl/diensten/zonnepanelen/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/thuisbatterij/#service",
+            "name": "Thuisbatterij installeren",
+            "serviceType": "Installatie van thuisbatterijen",
+            "url": "https://vonkelektra.nl/diensten/thuisbatterij/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/laadpaal/#service",
+            "name": "Laadpaal installeren",
+            "serviceType": "Installatie van laadpalen en laadstations",
+            "url": "https://vonkelektra.nl/diensten/laadpaal/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/airconditioning/#service",
+            "name": "Airconditioning installeren",
+            "serviceType": "Installatie en onderhoud van airconditioning",
+            "url": "https://vonkelektra.nl/diensten/airconditioning/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/warmtepomp/#service",
+            "name": "Warmtepomp laten installeren",
+            "serviceType": "Installatie van warmtepompen",
+            "url": "https://vonkelektra.nl/diensten/warmtepomp/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/meterkast-vervangen/#service",
+            "name": "Meterkast vervangen",
+            "serviceType": "Vervangen en uitbreiden van de meterkast",
+            "url": "https://vonkelektra.nl/diensten/meterkast-vervangen/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/storingsdienst/#service",
+            "name": "Storingsdienst elektra",
+            "serviceType": "Storingsdienst en storingsoplossing elektra",
+            "url": "https://vonkelektra.nl/diensten/storingsdienst/"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "@id": "https://vonkelektra.nl/diensten/onderhoud/#service",
+            "name": "Onderhoud & elektraklussen",
+            "serviceType": "Preventief onderhoud en kleine elektraklussen",
+            "url": "https://vonkelektra.nl/diensten/onderhoud/"
+          }
+        }
+      ]
+    }
+  ]
+}

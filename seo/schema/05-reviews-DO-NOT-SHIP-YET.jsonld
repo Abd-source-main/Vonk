@@ -1,0 +1,23 @@
+{
+  "_WARNING": "DO NOT PUBLISH THIS FILE UNTIL EVERY FIELD BELOW IS A REAL, ATTRIBUTABLE CUSTOMER REVIEW. The reviews currently on the site are marked in the source as placeholder copy ('PLACEHOLDER REVIEWS - representative copy for layout only. These are NOT real customer reviews.'). Marking up invented reviews violates Google's structured data policy (manual action risk) and, for a Dutch business, is a misleading commercial practice under the Wet oneerlijke handelspraktijken, enforceable by the ACM. Collect genuine reviews first, then fill this in and delete this warning key.",
+
+  "@context": "https://schema.org",
+  "@type": "Electrician",
+  "@id": "https://vonkelektra.nl/#business",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "REAL_AVERAGE",
+    "reviewCount": "REAL_COUNT",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "REAL_CUSTOMER_NAME" },
+      "datePublished": "YYYY-MM-DD",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "REAL_REVIEW_TEXT_AS_THE_CUSTOMER_WROTE_IT"
+    }
+  ]
+}

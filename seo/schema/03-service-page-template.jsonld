@@ -1,0 +1,100 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#webpage",
+      "url": "https://vonkelektra.nl/diensten/zonnepanelen/",
+      "name": "Zonnepanelen laten installeren in Nijmegen | Vonk Elektra",
+      "description": "Zonnepanelen laten installeren in Nijmegen en omgeving. Advies op maat, levering en montage door eigen monteurs, binnen 4 weken op je dak. Vraag een gratis offerte aan.",
+      "inLanguage": "nl-NL",
+      "isPartOf": { "@id": "https://vonkelektra.nl/#website" },
+      "breadcrumb": { "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#breadcrumb" },
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "url": "https://vonkelektra.nl/img/zonnepanelen-nijmegen.jpg"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://vonkelektra.nl/" },
+        { "@type": "ListItem", "position": 2, "name": "Diensten", "item": "https://vonkelektra.nl/diensten/" },
+        { "@type": "ListItem", "position": 3, "name": "Zonnepanelen", "item": "https://vonkelektra.nl/diensten/zonnepanelen/" }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#service",
+      "name": "Zonnepanelen laten installeren",
+      "serviceType": "Installatie van zonnepanelen",
+      "url": "https://vonkelektra.nl/diensten/zonnepanelen/",
+      "description": "Volledige verzorging van zonnepanelen: advies afgestemd op je dak en je verbruik, levering, montage en oplevering. Binnen vier weken na akkoord liggen de panelen op je dak.",
+      "provider": { "@id": "https://vonkelektra.nl/#business" },
+      "areaServed": [
+        { "@type": "City", "name": "Nijmegen" },
+        { "@type": "City", "name": "Beuningen" },
+        { "@type": "City", "name": "Wijchen" },
+        { "@type": "City", "name": "Malden" }
+      ],
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Particulieren en bedrijven"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Zonnepanelen",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Systeemontwerp en advies op maat" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Levering en volledige installatie" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Oplevering, test en uitleg" } }
+        ]
+      },
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "EUR",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "EUR",
+          "valueAddedTaxIncluded": true
+        },
+        "areaServed": { "@type": "City", "name": "Nijmegen" },
+        "seller": { "@id": "https://vonkelektra.nl/#business" }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#faq",
+      "inLanguage": "nl-NL",
+      "isPartOf": { "@id": "https://vonkelektra.nl/diensten/zonnepanelen/#webpage" },
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Hoe lang duurt het voordat de zonnepanelen op mijn dak liggen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Na akkoord op de offerte liggen de panelen doorgaans binnen vier weken op je dak. De montage zelf is meestal in één dag klaar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Werken jullie ook in de omgeving van Nijmegen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Ja. We werken in Nijmegen en de omliggende gemeenten, waaronder Beuningen, Wijchen, Malden, Groesbeek en Elst."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Kan ik zonnepanelen combineren met een thuisbatterij?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Dat kan. Een thuisbatterij slaat de stroom op die je overdag opwekt, zodat je die 's avonds gebruikt. We stemmen de capaciteit af op je werkelijke verbruik en op een bestaande installatie."
+          }
+        }
+      ]
+    }
+  ]
+}

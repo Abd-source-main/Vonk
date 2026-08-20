@@ -1,0 +1,11 @@
+# https://vonkelektra.nl/robots.txt
+# Vonk Installatie & Onderhoud B.V.
+
+User-agent: *
+Allow: /
+
+# No crawlable value, and they leak form state into the index
+Disallow: /*?service=
+Disallow: /bedankt/
+
+Sitemap: https://vonkelektra.nl/sitemap.xml
