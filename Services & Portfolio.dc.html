@@ -73,14 +73,14 @@
     .r-nav{padding:5px 6px 5px 8px!important;gap:2px!important;max-width:calc(100vw - 14px)!important;}
     .r-nav-mark{height:34px!important;}
     .r-nav-word{height:34px!important;}
-    .r-nav-link{font-size:12px!important;padding:7px 6px!important;}
-    .r-nav-contact{font-size:12px!important;padding:7px 11px!important;box-shadow:none!important;}
+    .r-nav-link{font-size:13.5px!important;padding:7px 7px!important;}
+    .r-nav-contact{font-size:13.5px!important;padding:8px 13px!important;box-shadow:none!important;}
   }
   @media (max-width:400px){
     .r-nav-mark{height:29px!important;}
     .r-nav-word{height:29px!important;}
-    .r-nav-link{font-size:11.5px!important;padding:6px 4px!important;}
-    .r-nav-contact{font-size:11.5px!important;padding:6px 9px!important;}
+    .r-nav-link{font-size:13.5px!important;padding:6px 5px!important;}
+    .r-nav-contact{font-size:13.5px!important;padding:7px 11px!important;}
   }
   @media (max-width:740px){
     /* the floating pill becomes a full-width bar so the links always have room */
@@ -115,15 +115,35 @@
     .r-acc-no{font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.08em;color:#A34E03;flex:none;}
     .r-acc-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;letter-spacing:-.025em;line-height:1.15;color:#0e1012;flex:1 1 auto;}
     .r-acc-sign{font-family:'Outfit',sans-serif;font-weight:600;font-size:23px;line-height:1;color:#E67206;flex:none;width:22px;text-align:center;}
-    .r-acc-body{display:none;padding:0 0 26px;}
-    .r-acc-body.r-acc-open{display:block;}
+    /* Opening a service glides rather than snapping. display:none can't be transitioned, so
+       the panel stays in flow and animates max-height + padding; the cap only has to exceed
+       the tallest panel, and the curve matches the rest of the site's easing. */
+    .r-acc-body{display:block;overflow:hidden;max-height:0;opacity:0;padding:0;visibility:hidden;
+      transition:max-height .46s cubic-bezier(.22,1,.36,1),padding .46s cubic-bezier(.22,1,.36,1),opacity .3s ease,visibility .46s;}
+    .r-acc-body.r-acc-open{max-height:1600px;opacity:1;padding:0 0 26px;visibility:visible;}
+    .r-acc-body .r-acc-img{transform:translateY(10px);transition:transform .5s cubic-bezier(.22,1,.36,1) .04s;}
+    .r-acc-body.r-acc-open .r-acc-img{transform:none;}
+    .r-acc-name{transition:color .28s ease;}
+    .r-acc-sign{transition:transform .38s cubic-bezier(.22,1,.36,1);}
+    .r-acc-head[aria-expanded="true"] .r-acc-name{color:#A34E03;}
+    .r-acc-head[aria-expanded="true"] .r-acc-sign{transform:rotate(180deg);}
+    .r-acc-head:focus-visible{outline:2px solid #E67206;outline-offset:3px;border-radius:8px;}
     .r-acc-chip{display:none!important;}
-    .r-acc-img{display:block;width:100%;height:184px;object-fit:cover;border-radius:14px;border:1px solid rgba(14,16,18,.11);margin-bottom:18px;}
+    /* The service artwork is 768x1376 portrait, so a short landscape box slices it: at 184px
+       only 31% of the frame survived and the subject was cut. 250px shows ~42%, and pulling
+       the crop to 40% centres it on the subject, which sits high in these compositions. */
+    .r-acc-img{display:block;width:100%;height:250px;object-fit:cover;object-position:center 40%;border-radius:14px;border:1px solid rgba(14,16,18,.11);margin-bottom:18px;}
   }
   /* Nav lockup on short viewports — matches the homepage so the bar keeps one size across
      pages. Declared last on purpose: the width tiers above also use !important. */
   @media (min-height:561px) and (max-height:820px){
     .r-nav-mark,.r-nav-word{height:44px!important;}
+  }
+  /* The accordion still opens and closes for anyone who asks for less motion — it just does
+     it instantly instead of gliding. visibility stays in the transition list so the panel is
+     still removed from the tab order when closed. */
+  @media (prefers-reduced-motion:reduce){
+    .r-acc-body,.r-acc-body .r-acc-img,.r-acc-name,.r-acc-sign{transition:none!important;}
   }
   @media (max-height:560px){
     .r-nav{padding:6px 8px 6px 11px!important;}
@@ -267,7 +287,7 @@
         <sc-for list="{{ serviceItems }}" as="s" hint-placeholder-count="8">
           <div data-svc-item="" data-idx="{{ s.idx }}" id="{{ s.id }}" style="{{ s.blockStyle }}">
             <div style="{{ s.innerStyle }}">
-              <div class="r-acc-head" onClick="{{ s.toggle }}">
+              <div class="r-acc-head" role="button" tabindex="0" aria-expanded="{{ s.expanded }}" onClick="{{ s.toggle }}" onKeyDown="{{ s.keyToggle }}">
                 <span class="r-acc-no">{{ s.no }}</span>
                 <span class="r-acc-name">{{ s.name }}</span>
                 <span class="r-acc-sign">{{ s.sign }}</span>
@@ -347,8 +367,8 @@
       <div class="r-foot" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
         <div>
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-            <img src="uploads/logo-mark-dark.png" alt="" style="height:74px;width:auto;display:block;flex:none;">
-            <img src="uploads/logo-full-dark.png" alt="Vonk Elektra" style="height:74px;width:auto;display:block;flex:none;">
+            <img src="uploads/logo-mark-dark.png" loading="lazy" decoding="async" alt="" style="height:74px;width:auto;display:block;flex:none;">
+            <img src="uploads/logo-full-dark.png" loading="lazy" decoding="async" alt="Vonk Elektra" style="height:74px;width:auto;display:block;flex:none;">
           </div>
           <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:15px;line-height:1.6;color:rgba(247,245,242,.62);margin:0;max-width:280px;">Your electrical partner for comfortable living and working in Nijmegen and the surrounding area.</p>
         </div>
@@ -546,15 +566,18 @@ class Component extends DCLogic {
         img:"[ photo: electrician on a maintenance visit ]", ctaLabel:"Request a free quote",
         stats:[{v:"1 call",k:"Trusted contact"},{v:"Safe",k:"Preventive checks"},{v:"Flexible",k:"Big or small"}] }
     ];
+    // One artwork per service, used at every breakpoint. These are the "mobile_*" sources,
+    // re-encoded to JPEG (they carry a fully opaque alpha channel, so nothing is lost) —
+    // 364KB for the set instead of 11MB of PNG.
     const imgFor = {
-      "solar-panels":     "uploads/5-1.png",
-      "home-batteries":   "https://images.unsplash.com/photo-1780445392417-68b9dccc45f2?auto=format&fit=crop&w=900&q=60",
-      "ev-charging":      "uploads/out.jpg",
-      "air-conditioning": "uploads/Screenshot_2026-08-08_235630_2026-08-08_20_58_06.936542.webp",
-      "heat-pump":        "uploads/images.jpeg",
-      "fuse-box":         "uploads/1-1.png",
-      "fault-repair":     "uploads/4-1.png",
-      "maintenance":      "uploads/van.jpg"
+      "solar-panels":     "uploads/svc-solar-panels.jpg",
+      "home-batteries":   "uploads/svc-home-batteries.jpg",
+      "ev-charging":      "uploads/svc-ev-charging.jpg",
+      "air-conditioning": "uploads/svc-air-conditioning.jpg",
+      "heat-pump":        "uploads/svc-heat-pump.jpg",
+      "fuse-box":         "uploads/svc-fuse-box.jpg",
+      "fault-repair":     "uploads/svc-fault-repair.jpg",
+      "maintenance":      "uploads/svc-maintenance.jpg"
     };
     const onImgError = (e)=>{ e.target.style.display="none"; };
     const active = 0;
@@ -572,8 +595,16 @@ class Component extends DCLogic {
       ctaLabel:s.ctaLabel, ctaHref: s.id==="fault-repair" ? "tel:+31639691798" : "Contact.dc.html",
       img: imgFor[s.id] || "", onImgError,
       sign: this.state.open===i ? "−" : "+",
+      expanded: this.state.open===i ? "true" : "false",
       bodyCls: "r-acc-body" + (this.state.open===i ? " r-acc-open" : ""),
       toggle: ()=>this.setState(st=>({ open: st.open===i ? -1 : i })),
+      // the head is a div, so Enter/Space have to be wired up by hand to match a real button
+      keyToggle: (e)=>{
+        if(e.key === "Enter" || e.key === " " || e.key === "Spacebar"){
+          e.preventDefault();
+          this.setState(st=>({ open: st.open===i ? -1 : i }));
+        }
+      },
       blockStyle:{ display:"flex", alignItems:"center", boxSizing:"border-box", padding:"22px 0" },
       innerStyle:{ width:"100%", opacity: i===active ? 1 : 0.34, transition:"opacity .4s ease" }
     }));
