@@ -20,6 +20,11 @@ Everything else is sound: only four items in the nav, contact styled as the CTA,
 
 ## Recommended hierarchy
 
+This is the Dutch tree, and the Dutch tree is the site: Dutch is the default locale and is
+served from the root, with no chooser and no redirect in front of the homepage. English mirrors
+the same shape one level down at `/en/…` (`/en/services/`, `/en/about/`, …). See `I18N.md` for
+the pairings and the hreflang rules.
+
 ```
 Home (/)
 ├── Diensten (/diensten/)
@@ -112,7 +117,11 @@ graph TD
 - **Trailing slash:** always present. 301 the non-slash form.
 - **Case:** lowercase only. 301 any mixed-case request.
 - **Words:** Dutch, hyphen-separated. `meterkast-vervangen`, never `meterkast_vervangen` or `meterkastVervangen`.
-- **No extensions.** `.dc.html` is a prototype artefact and must not ship.
+- **No extensions.** The `.dc.html` prototype artefact is already gone; the remaining step is
+  dropping `.html` in favour of the directory URLs above.
+- **Locale prefix on the secondary language only.** Dutch has no prefix because it is the
+  default and lives at the root; English is prefixed `/en/`. Never add a `/nl/` prefix — it
+  would put the primary market one redirect further from every link it earns.
 
 ### Redirect map from the prototype filenames
 
@@ -124,6 +133,17 @@ If any prototype URL was ever shared or crawled, redirect it. If they never went
 | `/Services%20&%20Portfolio.dc.html` | `/diensten/` | 301 |
 | `/About.dc.html` | `/over-ons/` | 301 |
 | `/Contact.dc.html` | `/contact/` | 301 |
+| `/nl/*` (the short-lived two-folder layout) | `/*` | 301 |
+| `/diensten.html` | `/diensten/` | 301 |
+| `/over-ons.html` | `/over-ons/` | 301 |
+| `/contact.html` | `/contact/` | 301 |
+| `/en/services.html` | `/en/services/` | 301 |
+| `/en/about.html` | `/en/about/` | 301 |
+| `/en/contact.html` | `/en/contact/` | 301 |
+
+The `.dc.html` and `/nl/` rows are written out in `seo/redirects/`; the `.html` → directory rows
+belong to the not-yet-done move described above and are listed here so the two passes are not
+forgotten separately.
 
 Note the split: the old page was services *and* portfolio. Send it to `/diensten/` — the commercial half — and link `/projecten/` prominently from there.
 
@@ -225,7 +245,8 @@ Under the current structure there are no orphans, because there are only four pa
 - [ ] `/projecten/` linked from the header and from every service page
 - [ ] `/privacybeleid/` and `/algemene-voorwaarden/` linked from the footer on every page
 - [ ] Every project detail page linked from `/projecten/` and from its service page
-- [ ] No link points at a `.dc.html` file
+- [x] No link points at a `.dc.html` file — extension dropped, `verify-i18n.py` enforces it
+- [ ] No link points at `/nl/`, which no longer exists
 - [ ] Every internal link is relative or absolute-with-https — never mixed
 
 ---

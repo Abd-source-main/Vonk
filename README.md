@@ -2,24 +2,32 @@
 
 > **Structure changed — read this before the section below.**
 >
-> The four prototypes that used to sit at the repo root have been split into two
-> complete, independently editable locale routes. The old filenames no longer exist:
+> The four prototypes that used to sit at the repo root have been split into two complete,
+> independently editable locale routes, and **Dutch is now the default locale served from the
+> site root**. There is no language chooser and no root redirect. The old filenames are gone:
 >
-> | Was | Now |
-> |-----|-----|
-> | `Vonk Elektra Homepage.dc.html` | `nl/index.dc.html` · `en/index.dc.html` |
-> | `Services & Portfolio.dc.html` | `nl/diensten.dc.html` · `en/services.dc.html` |
-> | `About.dc.html` | `nl/over-ons.dc.html` · `en/about.dc.html` |
-> | `Contact.dc.html` | `nl/contact.dc.html` · `en/contact.dc.html` |
+> | Was | Now (Dutch, at the root) | Now (English) |
+> |-----|--------------------------|---------------|
+> | `Vonk Elektra Homepage.dc.html` | `index.html` | `en/index.html` |
+> | `Services & Portfolio.dc.html` | `diensten.html` | `en/services.html` |
+> | `About.dc.html` | `over-ons.html` | `en/about.html` |
+> | `Contact.dc.html` | `contact.html` | `en/contact.html` |
+> | — | `privacybeleid.html` | `en/privacy.html` |
+> | — | `algemene-voorwaarden.html` | `en/terms.html` |
 >
-> Dutch is the primary locale. `index.html` at the root is a language chooser.
-> `support.js` and `uploads/` stay at the root and are shared by both routes, which is
-> why the pages reference them as `../support.js` and `../uploads/`.
+> The `.dc.html` extension has been dropped, and the short-lived `nl/` folder no longer exists
+> (`seo/redirects/` 301s both). `support.js` and `uploads/` stay at the root and are shared:
+> Dutch pages reference them as `support.js` and `uploads/`, English pages as `../support.js`
+> and `../uploads/`.
 >
-> **Start with `seo/I18N.md`** — it explains the split, the editing rules, and the one
-> command (`python seo/verify-i18n.py`) that catches the hreflang mistakes which
-> otherwise fail silently in production. `seo/SEO-AUDIT.md` lists what is still
-> outstanding before launch; the reviews and service photos are still placeholders.
+> Every page carries a language switch in the nav — a globe icon plus the target language code,
+> `.r-nav-lang` — pointing at its own equivalent page in the other locale, never at the
+> homepage. The two legal pages use a worded footer link instead, since they have no nav.
+>
+> **Start with `seo/I18N.md`** — it explains the split, the editing rules, and the one command
+> (`python seo/verify-i18n.py`) that catches the hreflang and broken-link mistakes which
+> otherwise fail silently in production. `seo/SEO-AUDIT.md` lists what is still outstanding
+> before launch; the reviews and service photos are still placeholders.
 
 ---
 
@@ -29,7 +37,7 @@ A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported t
 
 ## What you should do — IMPORTANT
 
-**Read `nl/index.dc.html` in full** (formerly `project/Vonk Elektra Homepage.dc.html`). The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+**Read `index.html` in full** — the Dutch homepage at the repo root (formerly `project/Vonk Elektra Homepage.dc.html`). The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
 
 **If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
 

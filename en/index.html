@@ -11,38 +11,48 @@
   <!-- ================= SEO / head · EN =================
        This file is the EN route. Its text is hard-coded in English and is edited
        independently of the other locale — there is no runtime translation.
-       Sibling: /nl/index.dc.html
+       Sibling: / (default route)
        Rationale: seo/SEO-AUDIT.md · seo/COPY-AND-META.md · seo/I18N.md
        ================================================== -->
   <title>Electrician in Nijmegen | Vonk Elektra</title>
   <meta name="description" content="Electrician in Nijmegen for solar panels, heat pumps, EV charging, air conditioning and fault repair. Clear pricing, our own engineers, evenings and weekends too.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://vonkelektra.nl/en/index.dc.html">
+  <link rel="canonical" href="https://vonkelektra.nl/en/">
 
   <!-- hreflang: reciprocal, self-referencing, x-default on the Dutch route -->
-  <link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/index.dc.html">
-  <link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/index.dc.html">
-  <link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/index.dc.html">
+  <link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/">
+  <link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/">
+  <link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Vonk Elektra">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Electrician in Nijmegen | Vonk Elektra">
   <meta property="og:description" content="Electrician in Nijmegen for solar panels, heat pumps, EV charging, air conditioning and fault repair. Clear pricing, our own engineers, evenings and weekends too.">
-  <meta property="og:url" content="https://vonkelektra.nl/en/index.dc.html">
+  <meta property="og:url" content="https://vonkelektra.nl/en/">
   <meta property="og:image" content="https://vonkelektra.nl/img/og-vonk-elektra.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    /* Language switch, sized to survive the nav's nowrap layout. */
-    .r-nav-lang{display:inline-flex;align-items:center;justify-content:center;
+    /* Language switch: globe + locale code, sized to survive the nav's nowrap layout.
+       The code is the label below 430px the globe carries alone; the title/aria-label
+       is written in the language you are switching TO, which is the convention that
+       lets a visitor who cannot read the current page still recognise the way out. */
+    .r-nav-lang{display:inline-flex;align-items:center;justify-content:center;gap:6px;
       font-family:'Outfit',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.04em;
-      color:#5b6469;padding:9px 10px;border-radius:999px;border:1px solid rgba(14,16,18,.16);
-      margin-left:5px;flex:none;transition:color .2s ease,border-color .2s ease;}
-    .r-nav-lang:hover{color:#0e1012;border-color:rgba(14,16,18,.4);}
-    @media (max-width:760px){.r-nav-lang{font-size:11.5px!important;padding:7px 8px!important;margin-left:3px!important;}}
+      color:#5b6469;padding:8px 12px;border-radius:999px;border:1px solid rgba(14,16,18,.16);
+      margin-left:5px;flex:none;
+      transition:color .2s ease,border-color .2s ease,background-color .2s ease;}
+    .r-nav-lang:hover{color:#0e1012;border-color:rgba(14,16,18,.4);background:rgba(14,16,18,.045);}
+    .r-nav-lang:focus-visible{outline:2px solid #E67206;outline-offset:2px;}
+    .r-nav-globe{display:block;flex:none;transition:transform .5s cubic-bezier(.22,1,.36,1);}
+    .r-nav-lang:hover .r-nav-globe{transform:rotate(-22deg);}
+    @media (prefers-reduced-motion:reduce){.r-nav-globe{transition:none;}}
+    @media (max-width:760px){.r-nav-lang{font-size:11.5px!important;padding:7px 9px!important;margin-left:3px!important;gap:5px!important;}}
+    @media (max-width:430px){.r-nav-lang-code{display:none!important;}
+      .r-nav-lang{padding:8px!important;}}
     @media (max-width:430px){.r-nav-word{display:none!important;}}
   </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -336,10 +346,10 @@
   </a>
   <div class="r-nav-links" style="display:flex;align-items:center;gap:2px;">
     <a href="#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
-    <a href="about.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
-    <a href="services.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
-    <a href="contact.dc.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
-    <a href="../nl/index.dc.html" class="r-nav-lang" hreflang="nl" lang="nl" title="Bekijk deze pagina in het Nederlands">NL</a>
+    <a href="about.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
+    <a href="services.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
+    <a href="contact.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
+    <a href="../index.html" class="r-nav-lang" hreflang="nl" lang="nl" title="Bekijk deze pagina in het Nederlands" aria-label="Bekijk deze pagina in het Nederlands"><svg class="r-nav-globe" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25"/><path d="M2.75 12h18.5"/><ellipse cx="12" cy="12" rx="4.6" ry="9.25"/></svg><span class="r-nav-lang-code">NL</span></a>
   </div>
 </nav>
 
@@ -939,7 +949,7 @@ class Component extends DCLogic {
       img: "../uploads/" + s.file + ".jpg",
       srcset: "../uploads/" + s.file + "-1200.jpg 1200w, ../uploads/" + s.file + ".jpg 2048w",
       loading: i === 0 ? "eager" : "lazy",
-      href: "services.dc.html#" + s.slug,
+      href: "services.html#" + s.slug,
       hidden: i === cur ? "false" : "true",
       tabIndex: i === cur ? 0 : -1,
       style: { opacity: i === cur ? 1 : 0, visibility: i === cur ? "visible" : "hidden", zIndex: i === cur ? 2 : 1 }
@@ -980,7 +990,7 @@ class Component extends DCLogic {
       const L = place[i] || place[place.length-1];
       return { key:i, idx:i, no: String(i+1).padStart(2,"0"), name:s.name, tag:s.title,
         url: imgFor[i] || "", onImgError,
-        href: "services.dc.html#" + (slugs[i] || ""),
+        href: "services.html#" + (slugs[i] || ""),
         style: Object.assign({ gridColumn:L.col, gridRow:L.row }, tileBase)
       };
     });
@@ -997,7 +1007,7 @@ class Component extends DCLogic {
     }}));
     const serviceItems = this.services.map((s,i)=>({
       key:i, idx:i, no: String(i+1).padStart(2,"0"), name:s.name, title:s.title, desc:s.desc, features:s.features, ctaHref:s.ctaHref, ctaLabel:s.ctaLabel,
-      detailHref: "services.dc.html#" + (slugs[i] || ""),
+      detailHref: "services.html#" + (slugs[i] || ""),
       blockStyle:{ minHeight:"58vh", display:"flex", alignItems:"center", boxSizing:"border-box", padding:"14px 0" },
       innerStyle:{ width:"100%", opacity: i===active ? 1 : 0.34, transition:"opacity .4s ease" }
     }));

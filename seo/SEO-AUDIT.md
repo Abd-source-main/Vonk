@@ -4,6 +4,25 @@
 **Date:** 20 August 2026
 **Caveat:** this is a design handoff bundle, not a deployed site. There is no live URL, no Search Console, no traffic baseline. Findings below come from source inspection. Anything measurable only on a live host (Core Web Vitals field data, index coverage, backlinks) is marked *verify after launch*.
 
+> **Status since this audit was written (21 August 2026).** The findings below are kept as the
+> original record and still name the prototype filenames as they were. What has changed since:
+>
+> - **T5 (URLs)** — largely fixed. The spaces, ampersand and mixed case are gone, and so is the
+>   `.dc.html` extension. Files are now `index.html`, `diensten.html`, `over-ons.html`,
+>   `contact.html` plus the two legal pages, with English under `en/`. The one part of T5 still
+>   open is the move from `.html` files to trailing-slash directory URLs
+>   (`/diensten/`), which is a build-system change — see `SITE-ARCHITECTURE.md`.
+> - **T6 (canonicals), T7 (robots/sitemap)** — done. Every page has a self-referencing absolute
+>   canonical and a full hreflang set; `seo/robots.txt` and `seo/sitemap.xml` exist and agree
+>   with the HTML.
+> - **Locale structure** — Dutch is the default locale and is served from the site root. There
+>   is no longer a language chooser at `/`; the switch is a globe in the nav of every page. See
+>   `I18N.md`.
+> - **C1 (placeholder reviews)** and the placeholder service imagery are **unchanged and still
+>   block launch.**
+>
+> Run `python seo/verify-i18n.py` after any change to a filename, canonical or hreflang.
+
 ---
 
 ## Executive summary

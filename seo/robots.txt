@@ -6,11 +6,12 @@ Allow: /
 
 # No crawlable value, and they leak form state into the index
 Disallow: /*?service=
-Disallow: /nl/bedankt/
+Disallow: /bedankt/
 Disallow: /en/thank-you/
 
-# The site root is a language chooser carrying meta robots noindex. It is left
-# crawlable on purpose: Googlebot has to fetch the page to see the noindex, and
-# the two locale links on it are how crawl reaches both routes.
+# Dutch is the default locale and is served straight from the site root — there
+# is no language chooser and no redirect in front of it, so / is a normal
+# indexable page. English lives under /en/. Both are reachable from the globe
+# switcher in the nav of every page, so crawl reaches both routes from any entry.
 
 Sitemap: https://vonkelektra.nl/sitemap.xml

@@ -1,21 +1,36 @@
 # Netlify / Cloudflare Pages redirect rules.
 # Copy to the published root as `_redirects` (no extension).
+#
+# Dutch is served from the root, so there is NO rule for `/` — it is a real page.
+# Adding one would put a redirect in front of the homepage for every visitor.
 
-# Send the bare root to Dutch. Optional: without it, index.html serves the
-# language chooser instead, which is also a valid setup.
-/                       /nl/                        301
+# The old two-folder layout. Keep these for as long as the old URLs have any
+# inbound links or index presence; they were live long enough to be crawled.
+/nl/                                 /                            301
+/nl/index.dc.html                    /                            301
+/nl/diensten.dc.html                 /diensten.html               301
+/nl/over-ons.dc.html                 /over-ons.html               301
+/nl/contact.dc.html                  /contact.html                301
+/nl/privacybeleid.html               /privacybeleid.html          301
+/nl/algemene-voorwaarden.html        /algemene-voorwaarden.html   301
+/nl/*                                /:splat                      301
+
+# The design-tool extension, dropped from every filename.
+/en/index.dc.html                    /en/                         301
+/en/services.dc.html                 /en/services.html            301
+/en/about.dc.html                    /en/about.html               301
+/en/contact.dc.html                  /en/contact.html             301
 
 # Old prototype filenames, in case any were ever shared or crawled.
-/Vonk%20Elektra%20Homepage.dc.html   /nl/index.dc.html      301
-/Services%20&%20Portfolio.dc.html    /nl/diensten.dc.html   301
-/About.dc.html                       /nl/over-ons.dc.html   301
-/Contact.dc.html                     /nl/contact.dc.html    301
-/privacy.html                        /nl/privacybeleid.html 301
-/terms.html                          /nl/algemene-voorwaarden.html 301
+/Vonk%20Elektra%20Homepage.dc.html   /                            301
+/Services%20&%20Portfolio.dc.html    /diensten.html               301
+/About.dc.html                       /over-ons.html               301
+/Contact.dc.html                     /contact.html                301
+/privacy.html                        /privacybeleid.html          301
+/terms.html                          /algemene-voorwaarden.html   301
 
 # Convenience aliases people type or print on a van.
-/nl                     /nl/                        301
-/en                     /en/                        301
-/contact                /nl/contact.dc.html         301
-/diensten               /nl/diensten.dc.html        301
-/storing                /nl/diensten.dc.html#storingsdienst  301
+/en                                  /en/                         301
+/contact                             /contact.html                301
+/diensten                            /diensten.html               301
+/storing                             /diensten.html#storingsdienst 301

@@ -11,38 +11,48 @@
   <!-- ================= SEO / head · EN =================
        This file is the EN route. Its text is hard-coded in English and is edited
        independently of the other locale — there is no runtime translation.
-       Sibling: /nl/diensten.dc.html
+       Sibling: /diensten.html
        Rationale: seo/SEO-AUDIT.md · seo/COPY-AND-META.md · seo/I18N.md
        ================================================== -->
   <title>Our services | Electrician &amp; installer in Nijmegen | Vonk Elektra</title>
   <meta name="description" content="Solar panels, home batteries, EV charging, air conditioning, heat pumps, fuse boxes and fault repair. One team for your home or business in Nijmegen.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://vonkelektra.nl/en/services.dc.html">
+  <link rel="canonical" href="https://vonkelektra.nl/en/services.html">
 
   <!-- hreflang: reciprocal, self-referencing, x-default on the Dutch route -->
-  <link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/diensten.dc.html">
-  <link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/services.dc.html">
-  <link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/diensten.dc.html">
+  <link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/diensten.html">
+  <link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/services.html">
+  <link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/diensten.html">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Vonk Elektra">
   <meta property="og:locale" content="en_GB">
   <meta property="og:title" content="Our services | Electrician &amp; installer in Nijmegen | Vonk Elektra">
   <meta property="og:description" content="Solar panels, home batteries, EV charging, air conditioning, heat pumps, fuse boxes and fault repair. One team for your home or business in Nijmegen.">
-  <meta property="og:url" content="https://vonkelektra.nl/en/services.dc.html">
+  <meta property="og:url" content="https://vonkelektra.nl/en/services.html">
   <meta property="og:image" content="https://vonkelektra.nl/img/og-vonk-elektra.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
   <style>
-    /* Language switch, sized to survive the nav's nowrap layout. */
-    .r-nav-lang{display:inline-flex;align-items:center;justify-content:center;
+    /* Language switch: globe + locale code, sized to survive the nav's nowrap layout.
+       The code is the label below 430px the globe carries alone; the title/aria-label
+       is written in the language you are switching TO, which is the convention that
+       lets a visitor who cannot read the current page still recognise the way out. */
+    .r-nav-lang{display:inline-flex;align-items:center;justify-content:center;gap:6px;
       font-family:'Outfit',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.04em;
-      color:#5b6469;padding:9px 10px;border-radius:999px;border:1px solid rgba(14,16,18,.16);
-      margin-left:5px;flex:none;transition:color .2s ease,border-color .2s ease;}
-    .r-nav-lang:hover{color:#0e1012;border-color:rgba(14,16,18,.4);}
-    @media (max-width:760px){.r-nav-lang{font-size:11.5px!important;padding:7px 8px!important;margin-left:3px!important;}}
+      color:#5b6469;padding:8px 12px;border-radius:999px;border:1px solid rgba(14,16,18,.16);
+      margin-left:5px;flex:none;
+      transition:color .2s ease,border-color .2s ease,background-color .2s ease;}
+    .r-nav-lang:hover{color:#0e1012;border-color:rgba(14,16,18,.4);background:rgba(14,16,18,.045);}
+    .r-nav-lang:focus-visible{outline:2px solid #E67206;outline-offset:2px;}
+    .r-nav-globe{display:block;flex:none;transition:transform .5s cubic-bezier(.22,1,.36,1);}
+    .r-nav-lang:hover .r-nav-globe{transform:rotate(-22deg);}
+    @media (prefers-reduced-motion:reduce){.r-nav-globe{transition:none;}}
+    @media (max-width:760px){.r-nav-lang{font-size:11.5px!important;padding:7px 9px!important;margin-left:3px!important;gap:5px!important;}}
+    @media (max-width:430px){.r-nav-lang-code{display:none!important;}
+      .r-nav-lang{padding:8px!important;}}
     @media (max-width:430px){.r-nav-word{display:none!important;}}
   </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -190,16 +200,16 @@
 </helmet>
 
 <nav class="r-nav" style="position: fixed; top: 16px; left: 50%; transform: translateX(-50%); z-index: 60; display: flex; align-items: center; gap: 6px; padding: 7px 7px 7px 16px; background: rgba(247,245,242,.72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(14,16,18,.11); border-radius: 999px; box-shadow: 0 8px 30px rgba(14,16,18,.08); max-width: calc(100vw - 24px)">
-  <a href="index.dc.html#top" style="display:flex;align-items:center;gap:4px;padding-right:8px;">
+  <a href="index.html#top" style="display:flex;align-items:center;gap:4px;padding-right:8px;">
     <img src="../uploads/logo-mark.png" class="r-nav-mark" alt="" style="height:54px;width:auto;display:block;flex:none;">
     <img src="../uploads/logo-full.png" class="r-nav-word" alt="Vonk Elektra" style="height:54px;width:auto;display:block;flex:none;">
   </a>
   <div class="r-nav-links" style="display:flex;align-items:center;gap:2px;">
-    <a href="index.dc.html#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
-    <a href="about.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
+    <a href="index.html#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
+    <a href="about.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
     <a href="#services" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
-    <a href="contact.dc.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
-    <a href="../nl/diensten.dc.html" class="r-nav-lang" hreflang="nl" lang="nl" title="Bekijk deze pagina in het Nederlands">NL</a>
+    <a href="contact.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
+    <a href="../diensten.html" class="r-nav-lang" hreflang="nl" lang="nl" title="Bekijk deze pagina in het Nederlands" aria-label="Bekijk deze pagina in het Nederlands"><svg class="r-nav-globe" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9.25"/><path d="M2.75 12h18.5"/><ellipse cx="12" cy="12" rx="4.6" ry="9.25"/></svg><span class="r-nav-lang-code">NL</span></a>
   </div>
 </nav>
 
@@ -392,7 +402,7 @@
           <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:17px;line-height:1.6;color:rgba(247,245,242,.7);margin:0;max-width:460px;">Tell us what you need and we'll come back with honest advice and a clear, no-obligation quote.</p>
         </div>
         <div style="display:flex;flex-direction:column;gap:12px;">
-          <a href="index.dc.html#book" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.3);">Book an appointment <span style="font-size:18px;">→</span></a>
+          <a href="index.html#book" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;box-shadow:0 12px 28px rgba(230,114,6,.3);">Book an appointment <span style="font-size:18px;">→</span></a>
           <a href="tel:+31247851050" style="display:inline-flex;align-items:center;justify-content:center;gap:10px;background:transparent;color:#f7f5f2;font-family:'Outfit',sans-serif;font-weight:600;font-size:16px;letter-spacing:-.01em;padding:16px 30px;border-radius:12px;border:1px solid rgba(247,245,242,.28);">Call 024 785 1050</a>
         </div>
       </div>
@@ -425,7 +435,7 @@
         <div>
           <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">More</div>
           <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
-            <a href="index.dc.html#top" style="color:rgba(247,245,242,.82);display:block;">Home</a>
+            <a href="index.html#top" style="color:rgba(247,245,242,.82);display:block;">Home</a>
             <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Services</a>
             <a href="#services" style="color:rgba(247,245,242,.82);display:block;">Our work</a>
           </div>
@@ -630,7 +640,7 @@ class Component extends DCLogic {
     }}));
     const serviceItems = raw.map((s,i)=>({
       key:i, idx:i, id:s.id, no:String(i+1).padStart(2,"0"), name:s.name, title:s.tagline, desc:s.desc, features:s.includes,
-      ctaLabel:s.ctaLabel, ctaHref: s.id==="fault-repair" ? "tel:+31639691798" : "contact.dc.html",
+      ctaLabel:s.ctaLabel, ctaHref: s.id==="fault-repair" ? "tel:+31639691798" : "contact.html",
       img: imgFor[s.id] || "", onImgError,
       sign: this.state.open===i ? "−" : "+",
       expanded: this.state.open===i ? "true" : "false",
