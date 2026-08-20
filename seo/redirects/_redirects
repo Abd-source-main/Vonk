@@ -1,0 +1,21 @@
+# Netlify / Cloudflare Pages redirect rules.
+# Copy to the published root as `_redirects` (no extension).
+
+# Send the bare root to Dutch. Optional: without it, index.html serves the
+# language chooser instead, which is also a valid setup.
+/                       /nl/                        301
+
+# Old prototype filenames, in case any were ever shared or crawled.
+/Vonk%20Elektra%20Homepage.dc.html   /nl/index.dc.html      301
+/Services%20&%20Portfolio.dc.html    /nl/diensten.dc.html   301
+/About.dc.html                       /nl/over-ons.dc.html   301
+/Contact.dc.html                     /nl/contact.dc.html    301
+/privacy.html                        /nl/privacybeleid.html 301
+/terms.html                          /nl/algemene-voorwaarden.html 301
+
+# Convenience aliases people type or print on a van.
+/nl                     /nl/                        301
+/en                     /en/                        301
+/contact                /nl/contact.dc.html         301
+/diensten               /nl/diensten.dc.html        301
+/storing                /nl/diensten.dc.html#storingsdienst  301

@@ -1,108 +1,151 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
   Vonk Elektra — XML sitemap
-  Reflects the Dutch-primary URL structure recommended in seo/SITE-ARCHITECTURE.md.
-  <lastmod> values are placeholders: emit the real file/CMS modification date at build
-  time. A stale or faked lastmod is ignored by Google and hurts nothing but your own
-  crawl-scheduling signal, so wire it up rather than hand-editing it.
+
+  Two locale routes, /nl/ (primary, x-default) and /en/. The site root is a
+  language chooser marked noindex and is deliberately absent from this file: a
+  sitemap should list only canonical, indexable URLs.
+
+  Every <url> carries the
+  full hreflang set INCLUDING a self-referencing entry — without that self-entry
+  Google discards the whole cluster for that page. Annotations are reciprocal:
+  each page names both siblings, and every <loc> here matches its page's own
+  <link rel="canonical"> exactly. HTML annotations and these must agree; where
+  they conflict, Google drops the pair.
+
+  <lastmod> values are placeholders. Emit the real file modification date at
+  build time rather than hand-editing them.
+
+  The .dc.html extension is a Claude Design artefact. When these prototypes are
+  rebuilt for production, drop it and use the clean paths from
+  seo/SITE-ARCHITECTURE.md — then update this file and the hreflang tags together.
 -->
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+
+  <!-- ============================ NEDERLANDS ============================ -->
 
   <url>
-    <loc>https://vonkelektra.nl/</loc>
+    <loc>https://vonkelektra.nl/nl/index.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/index.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/index.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/index.dc.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://vonkelektra.nl/diensten/</loc>
+    <loc>https://vonkelektra.nl/nl/diensten.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/diensten.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/services.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/diensten.dc.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://vonkelektra.nl/diensten/zonnepanelen/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/thuisbatterij/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/laadpaal/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/airconditioning/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/warmtepomp/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/meterkast-vervangen/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/storingsdienst/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://vonkelektra.nl/diensten/onderhoud/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://vonkelektra.nl/projecten/</loc>
-    <lastmod>2026-08-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://vonkelektra.nl/over-ons/</loc>
+    <loc>https://vonkelektra.nl/nl/over-ons.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/over-ons.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/about.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/over-ons.dc.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://vonkelektra.nl/contact/</loc>
+    <loc>https://vonkelektra.nl/nl/contact.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/contact.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/contact.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/contact.dc.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://vonkelektra.nl/privacybeleid/</loc>
+    <loc>https://vonkelektra.nl/nl/privacybeleid.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/privacybeleid.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+
   <url>
-    <loc>https://vonkelektra.nl/algemene-voorwaarden/</loc>
+    <loc>https://vonkelektra.nl/nl/algemene-voorwaarden.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/algemene-voorwaarden.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/algemene-voorwaarden.html"/>
     <lastmod>2026-08-20</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+
+  <!-- ============================== ENGLISH ============================== -->
+
+  <url>
+    <loc>https://vonkelektra.nl/en/index.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/index.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/index.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/index.dc.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://vonkelektra.nl/en/services.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/diensten.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/services.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/diensten.dc.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://vonkelektra.nl/en/about.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/over-ons.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/about.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/over-ons.dc.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://vonkelektra.nl/en/contact.dc.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/contact.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/contact.dc.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/contact.dc.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>https://vonkelektra.nl/en/privacy.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/privacybeleid.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/privacybeleid.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
+  </url>
+
+  <url>
+    <loc>https://vonkelektra.nl/en/terms.html</loc>
+    <xhtml:link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/algemene-voorwaarden.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/algemene-voorwaarden.html"/>
+    <lastmod>2026-08-20</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.2</priority>
   </url>
 
 </urlset>

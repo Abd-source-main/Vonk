@@ -3,38 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="../support.js"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <!-- ================= SEO / head =================
-       Added by the SEO pass. The live tags below are ENGLISH, matching the copy
-       currently on this prototype. Production targets Dutch as the primary locale:
-       the nl-NL title, description and canonical are given underneath, ready to lift.
-       Full rationale: seo/SEO-AUDIT.md · seo/COPY-AND-META.md
-       ============================================== -->
-  <title>Contact | Electrician Nijmegen — Vonk Elektra</title>
+  <!-- ================= SEO / head · EN =================
+       This file is the EN route. Its text is hard-coded in English and is edited
+       independently of the other locale — there is no runtime translation.
+       Sibling: /nl/contact.dc.html
+       Rationale: seo/SEO-AUDIT.md · seo/COPY-AND-META.md · seo/I18N.md
+       ================================================== -->
+  <title>Contact | Electrician Nijmegen &mdash; Vonk Elektra</title>
   <meta name="description" content="Call 024 785 1050 or request a free quote online. Vonk Elektra, De Kluijskamp 1273 Nijmegen. For faults we are reachable evenings and weekends too.">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <link rel="canonical" href="https://vonkelektra.nl/contact/">
+  <link rel="canonical" href="https://vonkelektra.nl/en/contact.dc.html">
+
+  <!-- hreflang: reciprocal, self-referencing, x-default on the Dutch route -->
+  <link rel="alternate" hreflang="nl" href="https://vonkelektra.nl/nl/contact.dc.html">
+  <link rel="alternate" hreflang="en" href="https://vonkelektra.nl/en/contact.dc.html">
+  <link rel="alternate" hreflang="x-default" href="https://vonkelektra.nl/nl/contact.dc.html">
 
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Vonk Elektra">
-  <meta property="og:locale" content="nl_NL">
-  <meta property="og:title" content="Contact | Electrician Nijmegen — Vonk Elektra">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:title" content="Contact | Electrician Nijmegen &mdash; Vonk Elektra">
   <meta property="og:description" content="Call 024 785 1050 or request a free quote online. Vonk Elektra, De Kluijskamp 1273 Nijmegen. For faults we are reachable evenings and weekends too.">
-  <meta property="og:url" content="https://vonkelektra.nl/contact/">
+  <meta property="og:url" content="https://vonkelektra.nl/en/contact.dc.html">
   <meta property="og:image" content="https://vonkelektra.nl/img/og-vonk-elektra.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- PRODUCTION (nl-NL) — swap these in when the copy is translated,
-       and change <html lang="en"> to <html lang="nl"> at the top of the file:
-       <title>Contact | Elektricien Nijmegen &mdash; Vonk Elektra</title>
-       <meta name="description" content="Bel 024 785 1050 of vraag online een gratis offerte aan. Vonk Elektra, De Kluijskamp 1273 Nijmegen. Bij storing ook &#39;s avonds en in het weekend."> -->
-
+  <style>
+    /* Language switch, sized to survive the nav's nowrap layout. */
+    .r-nav-lang{display:inline-flex;align-items:center;justify-content:center;
+      font-family:'Outfit',sans-serif;font-weight:600;font-size:12.5px;letter-spacing:.04em;
+      color:#5b6469;padding:9px 10px;border-radius:999px;border:1px solid rgba(14,16,18,.16);
+      margin-left:5px;flex:none;transition:color .2s ease,border-color .2s ease;}
+    .r-nav-lang:hover{color:#0e1012;border-color:rgba(14,16,18,.4);}
+    @media (max-width:760px){.r-nav-lang{font-size:11.5px!important;padding:7px 8px!important;margin-left:3px!important;}}
+    @media (max-width:430px){.r-nav-word{display:none!important;}}
+  </style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Rubik:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -131,15 +141,16 @@
 </helmet>
 
 <nav class="r-nav" style="position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:6px;padding:7px 7px 7px 16px;background:rgba(247,245,242,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(14,16,18,.11);border-radius:999px;box-shadow:0 8px 30px rgba(14,16,18,.08);max-width:calc(100vw - 24px);">
-  <a href="Vonk Elektra Homepage.dc.html#top" style="display:flex;align-items:center;gap:4px;padding-right:8px;">
-    <img src="uploads/logo-mark.png" class="r-nav-mark" alt="" style="height:54px;width:auto;display:block;flex:none;" />
-    <img src="uploads/logo-full.png" class="r-nav-word" alt="Vonk Elektra" style="height:54px;width:auto;display:block;flex:none;" />
+  <a href="index.dc.html#top" style="display:flex;align-items:center;gap:4px;padding-right:8px;">
+    <img src="../uploads/logo-mark.png" class="r-nav-mark" alt="" style="height:54px;width:auto;display:block;flex:none;" />
+    <img src="../uploads/logo-full.png" class="r-nav-word" alt="Vonk Elektra" style="height:54px;width:auto;display:block;flex:none;" />
   </a>
   <div class="r-nav-links" style="display:flex;align-items:center;gap:2px;">
-    <a href="Vonk Elektra Homepage.dc.html#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
-    <a href="About.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
-    <a href="Services &amp; Portfolio.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
-    <a href="Contact.dc.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
+    <a href="index.dc.html#top" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Home</a>
+    <a href="about.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">About</a>
+    <a href="services.dc.html" class="r-nav-link" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:14.5px;letter-spacing:-.01em;color:#0e1012;padding:9px 13px;border-radius:999px;">Services</a>
+    <a href="contact.dc.html" class="r-nav-link r-nav-contact" style="display:inline-flex;align-items:center;background:#E67206;color:#ffffff;font-family:'Outfit',sans-serif;font-weight:600;font-size:14.5px;letter-spacing:-.01em;padding:10px 18px;border-radius:999px;box-shadow:0 8px 20px rgba(230,114,6,.30);">Contact</a>
+    <a href="../nl/contact.dc.html" class="r-nav-lang" hreflang="nl" lang="nl" title="Bekijk deze pagina in het Nederlands">NL</a>
   </div>
 </nav>
 
@@ -252,8 +263,8 @@
       <div class="r-foot" style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px;">
         <div>
           <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
-            <img src="uploads/logo-mark-dark.png" loading="lazy" decoding="async" alt="" style="height:74px;width:auto;display:block;flex:none;" />
-            <img src="uploads/logo-full-dark.png" loading="lazy" decoding="async" alt="Vonk Elektra" style="height:74px;width:auto;display:block;flex:none;" />
+            <img src="../uploads/logo-mark-dark.png" loading="lazy" decoding="async" alt="" style="height:74px;width:auto;display:block;flex:none;" />
+            <img src="../uploads/logo-full-dark.png" loading="lazy" decoding="async" alt="Vonk Elektra" style="height:74px;width:auto;display:block;flex:none;" />
           </div>
           <p style="font-family:'Rubik',sans-serif;font-weight:300;font-size:15px;line-height:1.6;color:rgba(247,245,242,.62);margin:0;max-width:280px;">Your electrical partner for comfortable living and working in Nijmegen and the surrounding area.</p>
         </div>
@@ -272,9 +283,9 @@
         <div>
           <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:rgba(247,245,242,.5);margin-bottom:16px;">More</div>
           <div style="font-family:'Rubik',sans-serif;font-size:15px;line-height:1.9;">
-            <a href="Vonk Elektra Homepage.dc.html#top" style="color:rgba(247,245,242,.82);display:block;">Home</a>
-            <a href="About.dc.html" style="color:rgba(247,245,242,.82);display:block;">About</a>
-            <a href="Services &amp; Portfolio.dc.html#work" style="color:rgba(247,245,242,.82);display:block;">Our work</a>
+            <a href="index.dc.html#top" style="color:rgba(247,245,242,.82);display:block;">Home</a>
+            <a href="about.dc.html" style="color:rgba(247,245,242,.82);display:block;">About</a>
+            <a href="services.dc.html#work" style="color:rgba(247,245,242,.82);display:block;">Our work</a>
           </div>
         </div>
       </div>

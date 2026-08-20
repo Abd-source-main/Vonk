@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Vonk Elektra — Elektricien in Nijmegen</title>
+<meta name="description" content="Vonk Elektra, elektricien en duurzame-energie-installateur in Nijmegen. Kies uw taal — choose your language.">
+
+<!--
+  Language chooser at the site root. Routes people; deliberately not an SEO page.
+
+  It does NOT redirect on Accept-Language or IP. Googlebot crawls from US addresses
+  without an Accept-Language header, so a negotiated redirect hides one locale from
+  it entirely — and a visitor who wants the other language should not have to fight
+  the site for it. The choice is one click, and the fault number is on this page so
+  nobody with a dead fuse box is blocked by a language picker.
+
+  noindex,follow, no hreflang, and absent from sitemap.xml — all three on purpose.
+  This page has no content of its own, so letting it into the index would only put
+  a thin chooser in front of /nl/ for brand searches. "follow" still passes link
+  equity through to both locales. The hreflang cluster is nl <-> en with x-default
+  on the Dutch page, which stays correct whether or not you add the 301 below.
+
+  Preferred production setup: 301 / -> /nl/ at the edge, which makes this file a
+  fallback that few people ever see. Ready-made rules in seo/redirects/.
+-->
+<link rel="canonical" href="https://vonkelektra.nl/">
+<meta name="robots" content="noindex,follow">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Vonk Elektra">
+<meta property="og:locale" content="nl_NL">
+<meta property="og:title" content="Vonk Elektra — Elektricien in Nijmegen">
+<meta property="og:description" content="Elektricien en duurzame-energie-installateur in Nijmegen. Kies uw taal — choose your language.">
+<meta property="og:url" content="https://vonkelektra.nl/">
+<meta property="og:image" content="https://vonkelektra.nl/img/og-vonk-elektra.jpg">
+
+<!-- Fonts are not loaded from a third party here; see the note in nl/privacybeleid.html. -->
+<style>
+  *{box-sizing:border-box;}
+  :root{
+    --bg:#f7f5f2; --ink:#0e1012; --muted:#5b6469;
+    --line:rgba(14,16,18,.11); --brand:#E67206; --brand-deep:#A34E03;
+    --head:'Outfit','Segoe UI',system-ui,-apple-system,sans-serif;
+    --body:'Rubik','Segoe UI',system-ui,-apple-system,sans-serif;
+  }
+  body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);
+    font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased;
+    display:flex;flex-direction:column;}
+
+  .orb{position:fixed;left:-327px;top:-327px;width:822px;height:822px;border-radius:50%;
+    background:rgba(230,114,6,.16);filter:blur(120px);pointer-events:none;z-index:0;}
+  .rules{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:repeating-linear-gradient(90deg,rgba(14,16,18,.06) 0 1px,transparent 1px 88px);
+    -webkit-mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);
+    mask-image:linear-gradient(180deg,transparent,#000 18%,#000 72%,transparent);}
+
+  main{position:relative;z-index:1;flex:1;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;text-align:center;
+    padding:clamp(48px,9vw,96px) 24px;gap:clamp(22px,3vw,34px);}
+
+  .logo{display:flex;align-items:center;justify-content:center;gap:clamp(12px,2vw,24px);}
+  .logo img{height:clamp(78px,12vw,148px);width:auto;display:block;flex:none;}
+
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-family:var(--head);
+    font-weight:600;font-size:13px;letter-spacing:.04em;text-transform:uppercase;
+    color:var(--brand-deep);}
+  .eyebrow::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--brand);flex:none;}
+
+  h1{font-family:var(--head);font-weight:800;font-size:clamp(27px,4.4vw,44px);
+    letter-spacing:-.045em;line-height:1.04;margin:0;max-width:16ch;}
+
+  .choose{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:6px;}
+  .choose a{display:flex;flex-direction:column;align-items:flex-start;gap:3px;
+    min-width:210px;padding:18px 24px;border-radius:14px;text-decoration:none;
+    border:1px solid var(--line);background:#fff;text-align:left;
+    box-shadow:0 10px 26px rgba(14,16,18,.06);
+    transition:transform .24s cubic-bezier(.22,1,.36,1),box-shadow .24s ease,border-color .24s ease;}
+  .choose a:hover{transform:translateY(-2px);border-color:rgba(14,16,18,.3);
+    box-shadow:0 20px 44px rgba(14,16,18,.14);}
+  .choose .code{font-family:var(--head);font-weight:800;font-size:12px;letter-spacing:.1em;
+    color:var(--brand);}
+  .choose .label{font-family:var(--head);font-weight:700;font-size:19px;letter-spacing:-.025em;
+    color:var(--ink);display:flex;align-items:center;gap:9px;}
+  .choose .sub{font-size:14px;color:var(--muted);}
+  .choose .arrow{transition:transform .3s cubic-bezier(.22,1,.36,1);}
+  .choose a:hover .arrow{transform:translateX(5px);}
+
+  .urgent{margin-top:10px;padding-top:22px;border-top:1px solid var(--line);
+    font-size:15.5px;color:var(--muted);max-width:46ch;line-height:1.6;}
+  .urgent a{color:var(--ink);font-family:var(--head);font-weight:700;font-size:19px;
+    letter-spacing:-.02em;text-decoration:none;white-space:nowrap;}
+  .urgent a:hover{color:var(--brand-deep);}
+
+  footer{position:relative;z-index:1;padding:26px 24px 30px;text-align:center;
+    font-size:13px;color:var(--muted);line-height:1.8;}
+
+  @media (max-width:520px){ .choose a{min-width:0;width:100%;} }
+</style>
+</head>
+<body>
+
+<div class="orb" aria-hidden="true"></div>
+<div class="rules" aria-hidden="true"></div>
+
+<main>
+  <div class="logo">
+    <img src="uploads/logo-mark.png" alt="" width="1198" height="1209">
+    <img src="uploads/logo-full.png" alt="Vonk Elektra" width="1811" height="1205">
+  </div>
+
+  <div class="eyebrow">Elektricien · Nijmegen &amp; omgeving</div>
+
+  <h1>Wonen en werken in comfort.</h1>
+
+  <nav class="choose" aria-label="Taal kiezen / Choose language">
+    <a href="nl/index.dc.html" hreflang="nl" lang="nl">
+      <span class="code">NL</span>
+      <span class="label">Nederlands <span class="arrow">→</span></span>
+      <span class="sub">Elektricien in Nijmegen</span>
+    </a>
+    <a href="en/index.dc.html" hreflang="en" lang="en">
+      <span class="code">EN</span>
+      <span class="label">English <span class="arrow">→</span></span>
+      <span class="sub">Electrician in Nijmegen</span>
+    </a>
+  </nav>
+
+  <p class="urgent">
+    Storing en haast? Bel direct <a href="tel:+31639691798">06 39 69 17 98</a><br>
+    <span lang="en">Urgent fault? Call us straight away.</span>
+  </p>
+</main>
+
+<footer>
+  Vonk Installatie &amp; Onderhoud B.V. · De Kluijskamp 1273, 6545 JK Nijmegen<br>
+  KvK 90693655 · BTW NL865415171B01 · © Vonk Elektra 2026
+</footer>
+
+</body>
+</html>

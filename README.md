@@ -1,12 +1,35 @@
 # CODING AGENTS: READ THIS FIRST
 
+> **Structure changed — read this before the section below.**
+>
+> The four prototypes that used to sit at the repo root have been split into two
+> complete, independently editable locale routes. The old filenames no longer exist:
+>
+> | Was | Now |
+> |-----|-----|
+> | `Vonk Elektra Homepage.dc.html` | `nl/index.dc.html` · `en/index.dc.html` |
+> | `Services & Portfolio.dc.html` | `nl/diensten.dc.html` · `en/services.dc.html` |
+> | `About.dc.html` | `nl/over-ons.dc.html` · `en/about.dc.html` |
+> | `Contact.dc.html` | `nl/contact.dc.html` · `en/contact.dc.html` |
+>
+> Dutch is the primary locale. `index.html` at the root is a language chooser.
+> `support.js` and `uploads/` stay at the root and are shared by both routes, which is
+> why the pages reference them as `../support.js` and `../uploads/`.
+>
+> **Start with `seo/I18N.md`** — it explains the split, the editing rules, and the one
+> command (`python seo/verify-i18n.py`) that catches the hreflang mistakes which
+> otherwise fail silently in production. `seo/SEO-AUDIT.md` lists what is still
+> outstanding before launch; the reviews and service photos are still placeholders.
+
+---
+
 This is a **handoff bundle** from Claude Design (claude.ai/design).
 
 A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
 
 ## What you should do — IMPORTANT
 
-**Read `vonk-elektra-homepage-design/project/Vonk Elektra Homepage.dc.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+**Read `nl/index.dc.html` in full** (formerly `project/Vonk Elektra Homepage.dc.html`). The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
 
 **If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
 

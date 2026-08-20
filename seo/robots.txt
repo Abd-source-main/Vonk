@@ -6,6 +6,11 @@ Allow: /
 
 # No crawlable value, and they leak form state into the index
 Disallow: /*?service=
-Disallow: /bedankt/
+Disallow: /nl/bedankt/
+Disallow: /en/thank-you/
+
+# The site root is a language chooser carrying meta robots noindex. It is left
+# crawlable on purpose: Googlebot has to fetch the page to see the noindex, and
+# the two locale links on it are how crawl reaches both routes.
 
 Sitemap: https://vonkelektra.nl/sitemap.xml
