@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vonk Elektra — teksten aanpassen</title>
+<style>
+  :root{
+    --orange:#E67206; --ink:#0e1012; --muted:#5b6469;
+    --line:rgba(14,16,18,.14); --bg:#f4f5f6; --panel:#fff; --green:#2ea043;
+    --bar:64px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:'Segoe UI',system-ui,-apple-system,sans-serif;
+    display:flex;flex-direction:column;overflow:hidden}
+
+  /* ---- top bar ---- */
+  header{height:var(--bar);flex:none;background:var(--panel);
+    border-bottom:1px solid var(--line);display:flex;align-items:center;
+    gap:18px;padding:0 18px;box-shadow:0 1px 3px rgba(14,16,18,.06);z-index:5}
+  .brand{display:flex;align-items:center;gap:10px;flex:none}
+  .spark{width:26px;height:26px;border-radius:7px;background:var(--orange);
+    display:grid;place-items:center;color:#fff;font-size:15px}
+  .brand b{font-size:14.5px;letter-spacing:-.01em}
+  .brand span{display:block;font-size:11.5px;color:var(--muted);font-weight:400}
+
+  nav{display:flex;gap:6px;align-items:center;overflow-x:auto;flex:1;
+    scrollbar-width:thin}
+  .grp{display:flex;align-items:center;gap:4px;padding:0 4px}
+  .grp>i{font-style:normal;font-size:10.5px;font-weight:700;color:var(--muted);
+    letter-spacing:.09em;padding-right:2px}
+  .tab{border:1px solid transparent;background:none;cursor:pointer;
+    font:inherit;font-size:13px;padding:7px 13px;border-radius:999px;
+    color:var(--muted);white-space:nowrap;position:relative}
+  .tab:hover{background:rgba(14,16,18,.05);color:var(--ink)}
+  .tab[aria-current="true"]{background:var(--ink);color:#fff}
+  .tab .dot{display:none;position:absolute;top:4px;right:6px;width:6px;height:6px;
+    border-radius:50%;background:var(--green)}
+  .tab.dirty .dot{display:block}
+  .tab[aria-current="true"].dirty .dot{background:#7ee08f}
+
+  .actions{display:flex;align-items:center;gap:12px;flex:none}
+  .count{font-size:12.5px;color:var(--muted);white-space:nowrap}
+  .count b{color:var(--ink)}
+  button.act{font:inherit;font-size:13px;font-weight:600;cursor:pointer;
+    padding:9px 16px;border-radius:9px;border:1px solid var(--line);
+    background:#fff;color:var(--ink)}
+  button.act:hover{border-color:rgba(14,16,18,.35)}
+  button.save{background:var(--orange);border-color:var(--orange);color:#fff}
+  button.save:hover{background:#cf6605;border-color:#cf6605}
+  button.act:disabled{opacity:.45;cursor:not-allowed}
+
+  /* ---- stage ---- */
+  main{flex:1;position:relative;background:#e9eaec}
+  iframe{position:absolute;inset:0;width:100%;height:100%;border:0;background:#fff}
+  .loading{position:absolute;inset:0;display:grid;place-items:center;
+    color:var(--muted);font-size:13.5px;background:#e9eaec;z-index:2}
+  .loading.hide{display:none}
+
+  /* ---- toast ---- */
+  .toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,20px);
+    background:var(--ink);color:#fff;font-size:13px;padding:11px 18px;
+    border-radius:9px;opacity:0;pointer-events:none;transition:.25s;z-index:40;
+    box-shadow:0 8px 24px rgba(14,16,18,.25)}
+  .toast.on{opacity:1;transform:translate(-50%,0)}
+
+  /* ---- intro ---- */
+  .veil{position:fixed;inset:0;background:rgba(14,16,18,.55);z-index:30;
+    display:grid;place-items:center;padding:24px}
+  .veil.hide{display:none}
+  .card{background:#fff;border-radius:16px;max-width:520px;width:100%;
+    padding:30px 32px;box-shadow:0 24px 60px rgba(14,16,18,.3)}
+  .card h1{margin:0 0 6px;font-size:21px;letter-spacing:-.02em}
+  .card p.lead{margin:0 0 20px;color:var(--muted);font-size:14px;line-height:1.55}
+  .card ol{margin:0 0 22px;padding-left:20px;font-size:14px;line-height:1.75}
+  .card li b{font-weight:600}
+  .swatch{display:inline-block;width:11px;height:11px;border-radius:3px;
+    vertical-align:-1px;margin-right:3px}
+  .card .note{font-size:12.5px;color:var(--muted);line-height:1.6;
+    border-top:1px solid var(--line);padding-top:14px;margin:0 0 20px}
+  .card button{width:100%;font:inherit;font-size:14.5px;font-weight:600;
+    padding:13px;border-radius:10px;border:0;background:var(--orange);
+    color:#fff;cursor:pointer}
+  .card button:hover{background:#cf6605}
+
+  @media(max-width:900px){
+    .brand span{display:none}
+    .count{display:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="spark">&#9889;</div>
+    <div><b>Teksten aanpassen</b><span>Vonk Elektra</span></div>
+  </div>
+  <nav id="tabs"></nav>
+  <div class="actions">
+    <div class="count" id="count">nog geen wijzigingen</div>
+    <button class="act" id="reset">Alles terugzetten</button>
+    <button class="act save" id="save" disabled>Wijzigingen opslaan</button>
+  </div>
+</header>
+
+<main>
+  <div class="loading" id="loading">pagina laden&hellip;</div>
+  <iframe id="stage" title="Voorbeeld van de pagina"></iframe>
+</main>
+
+<div class="toast" id="toast"></div>
+
+<div class="veil" id="veil">
+  <div class="card">
+    <h1>Pas de teksten aan</h1>
+    <p class="lead">Dit is een kopie van de website. Wat u hier typt verandert
+      niets aan de echte site &mdash; u levert alleen de nieuwe teksten aan.</p>
+    <ol>
+      <li>Beweeg met de muis over de pagina. Alles wat
+        <span class="swatch" style="background:rgba(230,114,6,.4)"></span>oranje
+        oplicht kunt u aanpassen.</li>
+      <li>Klik erop en typ uw nieuwe tekst. Aangepaste tekst wordt
+        <span class="swatch" style="background:rgba(46,160,67,.4)"></span>groen.</li>
+      <li>Wissel bovenin tussen de pagina&rsquo;s. Uw werk blijft bewaard,
+        ook als u het venster sluit.</li>
+      <li>Klaar? Klik op <b>Wijzigingen opslaan</b> en mail het bestand terug.</li>
+    </ol>
+    <p class="note">De Nederlandse en Engelse pagina&rsquo;s staan los van elkaar.
+      Past u een Nederlandse tekst aan, pas dan ook de Engelse versie aan &mdash;
+      anders blijft daar de oude tekst staan.</p>
+    <button id="begin">Beginnen</button>
+  </div>
+</div>
+
+<script>
+var MANIFEST = /*__MANIFEST__*/;
+var IMAGES   = /*__IMAGES__*/;
+var DOCS     = /*__DOCS__*/;
+
+var STORE_KEY = "vonk-copy-edits-v1";
+var store = load();
+var active = MANIFEST[0].id;
+
+function load(){
+  try { return JSON.parse(localStorage.getItem(STORE_KEY)) || {}; }
+  catch(e){ return {}; }
+}
+function persist(){
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(store)); } catch(e){}
+}
+
+/* The injected overlay talks to us over postMessage, not window.parent, so
+   this keeps working when the file is opened straight from disk. */
+window.addEventListener("message", function(e){
+  var d = e.data;
+  if(!d || d.channel !== "vonk-copy-editor") return;
+
+  if(d.type === "record"){
+    if(!store[d.page]) store[d.page] = {};
+    if(d.entry.dirty) store[d.page][d.key] = d.entry;
+    else delete store[d.page][d.key];
+    persist();
+    paint();
+  }
+  else if(d.type === "ready"){
+    document.getElementById("loading").classList.add("hide");
+    var frame = document.getElementById("stage");
+    if(frame.contentWindow){
+      frame.contentWindow.postMessage({
+        channel:"vonk-copy-editor", type:"saved", saved: store[d.page] || {}
+      }, "*");
+
+      /* Images the page built its own paths for, after the build's
+         search-and-replace had already run. Send only those. */
+      if(d.needImages && d.needImages.length){
+        var late = {};
+        d.needImages.forEach(function(ref){
+          if(IMAGES[ref]) late[ref] = IMAGES[ref];
+        });
+        if(Object.keys(late).length){
+          frame.contentWindow.postMessage({
+            channel:"vonk-copy-editor", type:"images", images: late
+          }, "*");
+        }
+      }
+    }
+  }
+  else if(d.type === "notify"){
+    toast(d.message);
+  }
+});
+
+function dirtyCount(page){
+  return Object.keys(store[page] || {}).length;
+}
+function totalCount(){
+  return MANIFEST.reduce(function(n,p){ return n + dirtyCount(p.id); }, 0);
+}
+
+/* ---- chrome ---- */
+
+function buildTabs(){
+  var nav = document.getElementById("tabs"), langs = {};
+  MANIFEST.forEach(function(p){ (langs[p.lang] = langs[p.lang] || []).push(p); });
+  Object.keys(langs).forEach(function(lang){
+    var g = document.createElement("div");
+    g.className = "grp";
+    var tag = document.createElement("i");
+    tag.textContent = lang;
+    g.appendChild(tag);
+    langs[lang].forEach(function(p){
+      var b = document.createElement("button");
+      b.className = "tab";
+      b.type = "button";
+      b.dataset.page = p.id;
+      var label = document.createElement("span");
+      label.textContent = p.label;
+      var dot = document.createElement("span");
+      dot.className = "dot";
+      b.appendChild(label);
+      b.appendChild(dot);
+      b.onclick = function(){ show(p.id); };
+      g.appendChild(b);
+    });
+    nav.appendChild(g);
+  });
+}
+
+function paint(){
+  MANIFEST.forEach(function(p){
+    var b = document.querySelector('[data-page="' + p.id + '"]');
+    if(!b) return;
+    b.setAttribute("aria-current", p.id === active ? "true" : "false");
+    b.classList.toggle("dirty", dirtyCount(p.id) > 0);
+  });
+  var n = totalCount();
+  var box = document.getElementById("count");
+  if(n === 0){
+    box.textContent = "nog geen wijzigingen";
+  } else {
+    box.textContent = "";
+    var strong = document.createElement("b");
+    strong.textContent = n;
+    box.appendChild(strong);
+    box.appendChild(document.createTextNode(
+      " " + (n === 1 ? "wijziging" : "wijzigingen")));
+  }
+  document.getElementById("save").disabled = n === 0;
+}
+
+/* Swap the shared image map into the page just before it is handed to the
+   iframe, so 24 photos are stored once instead of eight times over. */
+function docFor(id){
+  var html = DOCS[id];
+  for(var ref in IMAGES) html = html.split(ref).join(IMAGES[ref]);
+  return html;
+}
+
+function show(id){
+  active = id;
+  document.getElementById("loading").classList.remove("hide");
+  document.getElementById("stage").srcdoc = docFor(id);
+  paint();
+}
+
+var toastTimer;
+function toast(msg){
+  var el = document.getElementById("toast");
+  el.textContent = msg;
+  el.classList.add("on");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ el.classList.remove("on"); }, 2600);
+}
+
+/* ---- hand-off ---- */
+
+function download(){
+  var out = { site:"vonkelektra.nl", generated:new Date().toISOString(),
+              format:"vonk-copy-edits/1", pages:{} };
+  MANIFEST.forEach(function(p){
+    var edits = store[p.id];
+    if(!edits || !Object.keys(edits).length) return;
+    out.pages[p.id] = { file:p.file, lang:p.lang, label:p.label,
+      changes:Object.keys(edits).map(function(k){
+        return { key:k, where:edits[k].where,
+                 from:edits[k].original, to:edits[k].updated };
+      }) };
+  });
+  var blob = new Blob([JSON.stringify(out, null, 2)], {type:"application/json"});
+  var a = document.createElement("a");
+  var url = URL.createObjectURL(blob);
+  a.href = url;
+  a.download = "vonk-teksten-" + new Date().toISOString().slice(0,10) + ".json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
+  toast("Bestand opgeslagen. Mail het terug en u bent klaar.");
+}
+
+document.getElementById("save").onclick = download;
+document.getElementById("reset").onclick = function(){
+  if(!totalCount()){ toast("Er is nog niets aangepast."); return; }
+  if(!confirm("Alle aangepaste teksten terugzetten naar het origineel?")) return;
+  store = {};
+  persist();
+  show(active);
+  toast("Alles staat weer op de oorspronkelijke tekst.");
+};
+document.getElementById("begin").onclick = function(){
+  document.getElementById("veil").classList.add("hide");
+  try { localStorage.setItem(STORE_KEY + "-seen", "1"); } catch(e){}
+};
+
+window.addEventListener("beforeunload", function(e){
+  if(totalCount()){ e.preventDefault(); e.returnValue = ""; }
+});
+
+buildTabs();
+try {
+  if(localStorage.getItem(STORE_KEY + "-seen"))
+    document.getElementById("veil").classList.add("hide");
+} catch(e){}
+show(active);
+</script>
+</body>
+</html>
