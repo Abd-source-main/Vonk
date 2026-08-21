@@ -1,0 +1,81 @@
+# Cloudflare Pages redirect rules.
+# This file must sit at the root of the published output (public/), named
+# `_redirects` with no extension. It is the live copy; seo/redirects/ keeps the
+# Apache equivalent for reference if the host ever changes.
+#
+# Cloudflare Pages serves clean URLs: diensten.html is served at /diensten, and
+# /diensten.html 301s to /diensten automatically. Targets below are therefore
+# written extensionless, matching the canonical tags.
+#
+# Dutch lives in /nl/ alongside /en/, so the bare root MUST be sent somewhere —
+# without the rule below, vonkelektra.nl serves nothing. It is the one redirect
+# every visitor and every crawl of the homepage passes through, so it has to be
+# a single 301 straight to the destination: never / -> /nl -> /nl/, and never
+# language-sniffed (Googlebot crawls from the US with no Accept-Language header,
+# so a negotiated redirect would hide one locale from it entirely).
+#
+# Cloudflare Pages limits: 2,000 static rules, 100 with a splat (*). We use 3.
+# Query strings (e.g. /?p=123) are NOT matchable here — use a Redirect Rule in
+# the Cloudflare dashboard for those.
+
+# =====================================================================
+# THE RULES THAT ACTUALLY MATTER — the live WordPress site being replaced
+# =====================================================================
+# vonkelektra.nl is a live WordPress site today with six indexed pages. Those
+# URLs carry the ranking and inbound links the business already has, and every
+# one of them 404s the moment this site replaces it unless it is mapped here.
+# Everything below this block is prototype housekeeping with no traffic behind it.
+#
+# VERIFY THE RIGHT-HAND COLUMN BEFORE DEPLOYING. Three old pages collapse onto
+# one new /diensten, and which anchor each lands on is a judgement call about
+# your own content.
+#
+# This list came from the live navigation and is not necessarily complete. Pull
+# the full set from Google Search Console (Pages report) or crawl the live site,
+# and add anything missing before switching DNS.
+
+/                       /nl/                         301
+
+/over/                  /nl/over-ons                 301
+/contact/               /nl/contact                  301
+/duurzameoplossingen/   /nl/diensten#zonnepanelen    301
+/elektrawerkzaamheden/  /nl/diensten#meterkast       301
+/klussenenonderhoud/    /nl/diensten#onderhoud       301
+
+# /cookiebeleid — the old cookie policy. The new site sets no cookies, so there
+# is nothing to point this at yet. Send it to the privacy page once that exists.
+# /cookiebeleid         /nl/privacybeleid            301
+
+# Old WordPress plumbing Google has crawled and will keep requesting.
+/wp-content/*           /nl/                         301
+/wp-admin/*             /nl/                         301
+/feed/                  /nl/                         301
+# For /?p=123 style permalinks, add a Redirect Rule in the dashboard instead —
+# _redirects cannot match a query string.
+
+# ================== prototype housekeeping below ==================
+
+# The design-tool extension, dropped from every filename.
+/nl/index.dc.html       /nl/                         301
+/nl/diensten.dc.html    /nl/diensten                 301
+/nl/over-ons.dc.html    /nl/over-ons                 301
+/nl/contact.dc.html     /nl/contact                  301
+/en/index.dc.html       /en/                         301
+/en/services.dc.html    /en/services                 301
+/en/about.dc.html       /en/about                    301
+/en/contact.dc.html     /en/contact                  301
+
+# Original prototype filenames, in case any were ever shared.
+/Vonk%20Elektra%20Homepage.dc.html   /nl/           301
+/Services%20&%20Portfolio.dc.html    /nl/diensten   301
+/About.dc.html                       /nl/over-ons   301
+/Contact.dc.html                     /nl/contact    301
+
+# Convenience aliases people type or print on a van. These matter more now that
+# the real pages are a folder deep — nobody prints /nl/diensten on a van.
+/nl                     /nl/                         301
+/en                     /en/                         301
+/contact                /nl/contact                  301
+/diensten               /nl/diensten                 301
+/over-ons               /nl/over-ons                 301
+/storing                /nl/diensten#storingsdienst  301

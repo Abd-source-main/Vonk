@@ -4,6 +4,45 @@
 # Dutch is served from the root, so there is NO rule for `/` — it is a real page.
 # Adding one would put a redirect in front of the homepage for every visitor.
 
+# =====================================================================
+# THE RULES THAT ACTUALLY MATTER — the live WordPress site being replaced
+# =====================================================================
+# vonkelektra.nl is currently a live WordPress site with six indexed pages.
+# Those URLs carry whatever ranking and inbound links the business already has;
+# every one of them 404s the moment this site replaces it unless it is mapped
+# here. The rules below are the ONLY ones on this page with real traffic behind
+# them — everything further down is prototype housekeeping.
+#
+# VERIFY THE RIGHT-HAND COLUMN BEFORE DEPLOYING. Three old pages collapse onto
+# one new /diensten.html, and which anchor each should land on is a judgement
+# call about your own content, not something that can be read off the old site.
+#
+# This list came from the live navigation. It is not necessarily complete —
+# pull the full set from Google Search Console (Pages report) or a crawl of the
+# live site before launch, and add anything missing.
+
+/over/                  /over-ons.html                       301
+/contact/               /contact.html                        301
+/duurzameoplossingen/   /diensten.html#zonnepanelen          301
+/elektrawerkzaamheden/  /diensten.html#meterkast             301
+/klussenenonderhoud/    /diensten.html#onderhoud             301
+
+# /cookiebeleid — the old cookie policy. The new site sets no cookies, so there
+# is nothing to point this at yet. Send it to the privacy page once that exists.
+# /cookiebeleid         /privacybeleid.html                  301
+
+# Old WordPress plumbing that Google has crawled and will keep requesting.
+/wp-content/*           /                                    301
+/wp-admin/*             /                                    301
+/feed/                  /                                    301
+/?p=*                   /                                    301
+
+# NOTE: www -> apex is NOT handled here. On Netlify/Cloudflare set the primary
+# domain in the dashboard instead; the old site links to www.vonkelektra.nl in
+# places, so this must be working on day one.
+
+# ============ prototype housekeeping below this line ============
+
 # The old two-folder layout. Keep these for as long as the old URLs have any
 # inbound links or index presence; they were live long enough to be crawled.
 /nl/                                 /                            301
@@ -11,8 +50,6 @@
 /nl/diensten.dc.html                 /diensten.html               301
 /nl/over-ons.dc.html                 /over-ons.html               301
 /nl/contact.dc.html                  /contact.html                301
-/nl/privacybeleid.html               /privacybeleid.html          301
-/nl/algemene-voorwaarden.html        /algemene-voorwaarden.html   301
 /nl/*                                /:splat                      301
 
 # The design-tool extension, dropped from every filename.
@@ -26,8 +63,6 @@
 /Services%20&%20Portfolio.dc.html    /diensten.html               301
 /About.dc.html                       /over-ons.html               301
 /Contact.dc.html                     /contact.html                301
-/privacy.html                        /privacybeleid.html          301
-/terms.html                          /algemene-voorwaarden.html   301
 
 # Convenience aliases people type or print on a van.
 /en                                  /en/                         301

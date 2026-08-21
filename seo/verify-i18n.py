@@ -5,18 +5,24 @@ Checks the two locale routes for the errors that silently kill hreflang:
   - non-reciprocal pair             (pair dropped)
   - canonical not in the hreflang set (all hreflang ignored)
   - HTML annotations disagreeing with the sitemap (conflicting pair dropped)
-  - leftovers from the old /nl/ + .dc.html layout
+  - leftovers from the old flat + .dc.html layout
   - broken local links
 
-Layout: Dutch is the default locale and lives at the repo root; English lives
-under en/. Both homepages canonicalise to their directory form (/ and /en/),
-never to /index.html.
+Layout: everything published lives in public/ — the Cloudflare Pages output
+directory. seo/ and README.md sit outside it and are never served. Dutch is the
+locale routes are public/nl/ and public/en/, side by side. Nothing is served at
+the published root: / is a 301 to /nl/, declared in _redirects.
+
+URLs: Cloudflare Pages serves clean URLs, so canonicals are extensionless
+(/nl/diensten, /en/services) and the two homepages use the directory form
+(/nl/ and /en/). Internal href="diensten.html" links are intentional — they keep
+the files openable over file:// and Cloudflare resolves both to one page.
 """
 import io, os, re, sys, glob
 import xml.etree.ElementTree as ET
 
 sys.stdout.reconfigure(encoding="utf-8")
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "public")
 SITE = "https://vonkelektra.nl/"
 os.chdir(ROOT)
 
@@ -36,7 +42,7 @@ def key_of(url):
 
 # ---------------------------------------------------------------- gather pages
 pages = {}   # file -> dict(canonical, alts{lang:url}, lang, body)
-files = sorted(glob.glob("*.html") + glob.glob("en/*.html"))
+files = sorted(glob.glob("nl/*.html") + glob.glob("en/*.html"))
 for f in files:
     s = io.open(f, encoding="utf-8").read()
     can = re.search(r'<link rel="canonical" href="([^"]+)"', s)
@@ -68,12 +74,23 @@ for f, p in sorted(pages.items()):
         note(p["canonical"] in p["alts"].values(),
              "  canonical appears in its own hreflang set")
 
-# the two homepages must canonicalise to the directory form, or the page and the
-# sitemap point at two different URLs for the same document
-print("\n== homepages canonicalise to their directory form")
-for f, want in (("index.html", SITE), ("en/index.html", SITE + "en/")):
+# Cloudflare Pages serves diensten.html at /diensten and 301s /diensten.html to
+# it. A canonical ending in .html would therefore point at a redirect rather than
+# at the page, which is a self-conflicting signal. Homepages take the directory
+# form; every other page takes the extensionless form.
+print("\n== canonicals match the URL Cloudflare actually serves")
+for f, want in (("nl/index.html", SITE + "nl/"), ("en/index.html", SITE + "en/")):
     note(pages[f]["canonical"] == want,
          "%s canonical is %s (got %s)" % (f, want, pages[f]["canonical"]))
+for f, p in sorted(pages.items()):
+    if f in ("nl/index.html", "en/index.html"):
+        continue
+    note(not (p["canonical"] or ".html").endswith(".html"),
+         "%s canonical is extensionless (%s)" % (f, p["canonical"]))
+for f, p in sorted(pages.items()):
+    bad = [u for u in p["alts"].values() if u.endswith(".html")]
+    note(not bad, "%s: no hreflang target ends in .html%s"
+                  % (f, (" — " + ", ".join(bad)) if bad else ""))
 
 # x-default belongs on the Dutch route, which is the root
 print("\n== x-default points at the Dutch route")
@@ -98,7 +115,7 @@ for f, p in sorted(pages.items()):
 print("\n== sitemap agrees with the HTML annotations")
 ns = {"s": "http://www.sitemaps.org/schemas/sitemap/0.9",
       "x": "http://www.w3.org/1999/xhtml"}
-tree = ET.parse("seo/sitemap.xml")
+tree = ET.parse("sitemap.xml")
 sm = {}
 for u in tree.getroot().findall("s:url", ns):
     loc = u.find("s:loc", ns).text
@@ -116,14 +133,24 @@ for loc, alts in sorted(sm.items()):
 
 # ---------------------------------------------------------------- old layout
 print("\n== no leftovers from the old /nl/ + .dc.html layout")
-STALE = re.compile(r'(?:href|src)="([^"]*(?:\.dc\.html|/nl/)[^"]*)"')
+STALE = re.compile(r'(?:href|src)="([^"]*\.dc\.html[^"]*)"')
 stale = 0
 for f, p in sorted(pages.items()):
     for hit in STALE.findall(p["body"]):
         print("  FAIL %s -> %s" % (f, hit))
         stale += 1
 note(stale == 0, "%d stale link(s) to the old layout" % stale)
-note(not os.path.isdir("nl"), "the nl/ directory is gone")
+note(os.path.isdir("nl") and os.path.isdir("en"), "both locale folders exist")
+note(not os.path.exists("index.html"),
+     "no page at the published root — / is a redirect to /nl/, handled in _redirects")
+rd = io.open("_redirects", encoding="utf-8").read()
+note(any(l.split()[:2] == ["/", "/nl/"] for l in rd.splitlines() if l.startswith("/")),
+     "_redirects sends / to /nl/ (without it the bare domain serves nothing)")
+note(os.path.exists("_redirects"), "_redirects is in the published directory")
+note(os.path.exists("robots.txt") and os.path.exists("sitemap.xml"),
+     "robots.txt and sitemap.xml are in the published directory")
+note(not os.path.exists("README.md") and not os.path.isdir("seo"),
+     "internal notes are NOT in the published directory")
 note(not os.path.exists("index.html.orig"), "no stray backup files at the root")
 
 # ---------------------------------------------------------------- language switch

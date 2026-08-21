@@ -20,6 +20,10 @@
 >   `I18N.md`.
 > - **C1 (placeholder reviews)** and the placeholder service imagery are **unchanged and still
 >   block launch.**
+> - **C3 (privacy policy and terms)** — the delivered pages have been **removed again on
+>   purpose.** They were templates; the real ones are being written as the final pre-launch
+>   step. C3 is therefore open, not fixed, and is still legally required before the site goes
+>   live.
 >
 > Run `python seo/verify-i18n.py` after any change to a filename, canonical or hreflang.
 
@@ -237,7 +241,16 @@ These are good, specific, differentiating claims — exactly the kind that conve
 
 **Impact:** Medium (E-E-A-T, and legally required) · **Priority:** 1
 
-**Fix:** delivered — `privacy.html` and `terms.html`, to be linked from the footer.
+**Fix:** drafted and then withdrawn. Template versions were delivered and have since been
+removed from the repo, because template legal text was not worth shipping — the real pages are
+the last item before launch. **Still outstanding, and still legally required.** Two things to
+carry over when they are rewritten:
+
+- Whatever backend the contact form is wired to determines whether the privacy text is true.
+  A US form service breaks the "processed within the EEA", "no database" and "data processing
+  agreement" claims at once. Choose the backend and the policy together.
+- The terms referred to separate *algemene leveringsvoorwaarden* for the work itself. Those are
+  a different document and need to actually exist.
 
 ### C4 — No Google Business Profile signals
 

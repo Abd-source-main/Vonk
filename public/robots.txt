@@ -1,0 +1,18 @@
+# https://vonkelektra.nl/robots.txt
+# Vonk Installatie & Onderhoud B.V.
+
+User-agent: *
+Allow: /
+
+# No crawlable value, and they leak form state into the index
+Disallow: /*?service=
+Disallow: /nl/bedankt/
+Disallow: /en/thank-you/
+
+# Two locale routes, /nl/ (primary, x-default) and /en/. The bare root is not a
+# page: it 301s to /nl/. That redirect is deliberately not language-sniffed —
+# Googlebot crawls from US addresses without an Accept-Language header, so a
+# negotiated redirect would hide one locale from it entirely. Both routes are
+# also reachable from the globe switch in the nav of every page.
+
+Sitemap: https://vonkelektra.nl/sitemap.xml

@@ -6,23 +6,35 @@
 > independently editable locale routes, and **Dutch is now the default locale served from the
 > site root**. There is no language chooser and no root redirect. The old filenames are gone:
 >
-> | Was | Now (Dutch, at the root) | Now (English) |
-> |-----|--------------------------|---------------|
-> | `Vonk Elektra Homepage.dc.html` | `index.html` | `en/index.html` |
-> | `Services & Portfolio.dc.html` | `diensten.html` | `en/services.html` |
-> | `About.dc.html` | `over-ons.html` | `en/about.html` |
-> | `Contact.dc.html` | `contact.html` | `en/contact.html` |
-> | — | `privacybeleid.html` | `en/privacy.html` |
-> | — | `algemene-voorwaarden.html` | `en/terms.html` |
+> | Was | Now (Dutch) | Now (English) |
+> |-----|-------------|---------------|
+> | `Vonk Elektra Homepage.dc.html` | `public/nl/index.html` | `public/en/index.html` |
+> | `Services & Portfolio.dc.html` | `public/nl/diensten.html` | `public/en/services.html` |
+> | `About.dc.html` | `public/nl/over-ons.html` | `public/en/about.html` |
+> | `Contact.dc.html` | `public/nl/contact.html` | `public/en/contact.html` |
 >
-> The `.dc.html` extension has been dropped, and the short-lived `nl/` folder no longer exists
-> (`seo/redirects/` 301s both). `support.js` and `uploads/` stay at the root and are shared:
-> Dutch pages reference them as `support.js` and `uploads/`, English pages as `../support.js`
-> and `../uploads/`.
+> The privacy policy and terms pages were removed on purpose; they are the last thing to be
+> written before launch, so a reviewed text ships instead of a template. Restoring them means
+> four things, not one: the files, a footer link on every page, a `sitemap.xml` entry, and a
+> reciprocal hreflang pair.
+>
+> **Everything published lives in `public/`** — that is the Cloudflare Pages output directory.
+> `seo/` and this README sit outside it and are never served, which is deliberate: `seo/`
+> contains an audit stating the reviews are fabricated and must not be readable at
+> `vonkelektra.nl/seo/`.
+>
+> The two locales are `public/nl/` and `public/en/`, side by side. Nothing is served at the
+> published root — `/` 301s to `/nl/` via `public/_redirects`. The `.dc.html` extension is gone;
+> `support.js` and `uploads/` are shared and both routes reference them as `../support.js` and
+> `../uploads/`.
+>
+> Canonicals are extensionless (`/nl/diensten`, `/en/services`) because Cloudflare Pages serves
+> clean URLs and 301s the `.html` form. In-page links still say `diensten.html` on purpose, so
+> the files open over `file://` during design work.
 >
 > Every page carries a language switch in the nav — a globe icon plus the target language code,
 > `.r-nav-lang` — pointing at its own equivalent page in the other locale, never at the
-> homepage. The two legal pages use a worded footer link instead, since they have no nav.
+> homepage.
 >
 > **Start with `seo/I18N.md`** — it explains the split, the editing rules, and the one command
 > (`python seo/verify-i18n.py`) that catches the hreflang and broken-link mistakes which
@@ -37,7 +49,7 @@ A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported t
 
 ## What you should do — IMPORTANT
 
-**Read `index.html` in full** — the Dutch homepage at the repo root (formerly `project/Vonk Elektra Homepage.dc.html`). The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+**Read `public/nl/index.html` in full** — the Dutch homepage (formerly `project/Vonk Elektra Homepage.dc.html`). The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
 
 **If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
 
