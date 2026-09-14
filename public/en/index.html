@@ -139,6 +139,8 @@
   /* visibility rides the same transition, so the outgoing slide stays painted while it fades */
   .vonk-slide{position:absolute;inset:0;transition:opacity .55s cubic-bezier(.22,1,.36,1),visibility .55s;}
   .vonk-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
+  /* slide 02 is a square crop of a portrait photo: the units sit high in it, so each tier picks the band */
+  .vonk-slide:nth-child(2) .vonk-slide-img{object-position:center 6%;}
   .vonk-slide-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(251,250,248,.96) 0%,rgba(251,250,248,.8) 32.8%,rgba(251,250,248,.22) 49.3%,rgba(251,250,248,0) 75.5%);}
   .vonk-slide-scrim2{position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,250,248,.9) 0%,rgba(251,250,248,0) 17%,rgba(251,250,248,0) 60%,rgba(251,250,248,.55) 100%);}
   .vonk-slide-body{position:absolute;left:var(--inset);right:var(--inset);bottom:96px;display:flex;flex-direction:column;align-items:flex-start;gap:20px;max-width:560px;}
@@ -166,6 +168,7 @@
     .vonk-slide-desc{font-size:17px;max-width:460px;}
     .vonk-slider-nav{bottom:40px;}
     .vonk-slider-dots{bottom:28px;}
+    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:center 30%;}
   }
   @media (max-width:560px){
     .vonk-svc-sec{padding-top:48px;}
@@ -179,11 +182,11 @@
     .vonk-slider-btn{width:52px;height:52px;}
     .vonk-slider-dots{bottom:22px;}
     /* At 393×600 a 16:9 photo is cropped to a 36.6% window, so where that window sits decides
-       what survives. Tuned per photo: the outdoor airco units (02) and the charger (03) sit right of
+       what survives. Tuned per photo: the heat pump (02) and the charger (03) sit right of
        centre, the multimeter hands (05) sit left, the roof panels (01) sit right. Slide 04 is fine centred. Desktop
        and tablet are centred FILL, which is why this lives in the phone tier only. */
     .vonk-slide:nth-child(1) .vonk-slide-img{object-position:58% center;}
-    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:70% center;}
+    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:80% center;}
     .vonk-slide:nth-child(3) .vonk-slide-img{object-position:60% center;}
     .vonk-slide:nth-child(5) .vonk-slide-img{object-position:45% center;}
   }
@@ -742,9 +745,9 @@ class Component extends DCLogic {
       { file:"slide-01-solar", w:1536, kicker:"01  ·  Sustainable solutions", title:"Solar panels & home batteries",
         desc:"Rooftop solar that turns daylight into lower energy bills, paired with a home battery that stores what you don't use for the evening. Most systems installed within four weeks of approval.",
         alt:"Solar panels on a tiled roof", slug:"solar-panels" },
-      { file:"slide-02-airco", w:1944, kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
+      { file:"slide-02-heatpump-gevel", w:908, kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
         desc:"Modern air conditioning and heat pumps that cool in summer and heat efficiently in winter — cutting your gas use while keeping every room comfortable.",
-        alt:"Air conditioning outdoor units on the wall of a house", slug:"air-conditioning" },
+        alt:"Two heat pump outdoor units on the brick wall of a house", slug:"air-conditioning" },
       { file:"slide-03-charging", w:1288, kicker:"03  ·  Sustainable solutions", title:"Charging stations",
         desc:"Safe EV charging at home or at work. We fit your wallbox, upgrade the electrical panel where needed, and test everything before handover.",
         alt:"Electric car at a charging point in a parking garage", slug:"ev-charging" },
