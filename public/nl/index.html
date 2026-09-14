@@ -955,8 +955,12 @@ class Component extends DCLogic {
     const slides = this.slides.map((s,i)=>({
       key:i, idx:i, kicker:s.kicker, title:s.title, desc:s.desc, alt:s.alt,
       img: "../uploads/" + s.file + ".jpg",
-      // slides are cropped at native width, so the 1200 variant only exists where the source is wider than that
-      srcset: s.w > 1200 ? ("../uploads/" + s.file + "-1200.jpg 1200w, ../uploads/" + s.file + ".jpg " + s.w + "w") : "",
+      // The slider is full-bleed, so sizes is 100vw and a 1920 monitor asks for ~1920w. These are
+      // phone photos: the native crop IS the ceiling, so the ladder only steps down from it —
+      // a rung is cut whenever the source is narrower than that rung.
+      srcset: [1200, 1600].filter((w)=> w < s.w)
+        .map((w)=> "../uploads/" + s.file + "-" + w + ".jpg " + w + "w")
+        .concat("../uploads/" + s.file + ".jpg " + s.w + "w").join(", "),
       loading: i === 0 ? "eager" : "lazy",
       href: "diensten.html#" + s.slug,
       hidden: i === cur ? "false" : "true",
