@@ -179,14 +179,13 @@
     .vonk-slider-btn{width:52px;height:52px;}
     .vonk-slider-dots{bottom:22px;}
     /* At 393×600 a 16:9 photo is cropped to a 36.6% window, so where that window sits decides
-       what survives. Figma pushes each image left to keep its subject in frame; these are that
-       crop, converted from each fill's imageTransform (tx / (1 - 0.3656)). Slide 01 is the one
-       Figma left uncropped, so it keeps the 50% default. Desktop and tablet are centred FILL
-       in Figma too, which is why this lives in the phone tier only. */
-    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:72.09% center;}
-    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:68.55% center;}
-    .vonk-slide:nth-child(4) .vonk-slide-img{object-position:65.76% center;}
-    .vonk-slide:nth-child(5) .vonk-slide-img{object-position:82.76% center;}
+       what survives. Tuned per photo: the outdoor airco units (02) and the charger (03) sit right of
+       centre, the multimeter hands (05) sit left, the roof panels (01) sit right. Slide 04 is fine centred. Desktop
+       and tablet are centred FILL, which is why this lives in the phone tier only. */
+    .vonk-slide:nth-child(1) .vonk-slide-img{object-position:58% center;}
+    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:70% center;}
+    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:60% center;}
+    .vonk-slide:nth-child(5) .vonk-slide-img{object-position:45% center;}
   }
   @media (prefers-reduced-motion:reduce){
     .vonk-slide{transition:none;}
@@ -740,21 +739,21 @@ class Component extends DCLogic {
     // WHAT WE DO slider — five slides, mirroring the Figma homepage. Each one links
     // through to its own service on the Services & Portfolio page.
     this.slides = [
-      { file:"slide-01-solar", kicker:"01  ·  Sustainable solutions", title:"Solar panels & home batteries",
+      { file:"slide-01-solar", w:1536, kicker:"01  ·  Sustainable solutions", title:"Solar panels & home batteries",
         desc:"Rooftop solar that turns daylight into lower energy bills, paired with a home battery that stores what you don't use for the evening. Most systems installed within four weeks of approval.",
-        alt:"Solar panels installed on a roof", slug:"solar-panels" },
-      { file:"slide-02-airco", kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
+        alt:"Solar panels on a tiled roof", slug:"solar-panels" },
+      { file:"slide-02-airco", w:1944, kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
         desc:"Modern air conditioning and heat pumps that cool in summer and heat efficiently in winter — cutting your gas use while keeping every room comfortable.",
-        alt:"Air conditioning unit mounted on a wall", slug:"air-conditioning" },
-      { file:"slide-03-charging", kicker:"03  ·  Sustainable solutions", title:"Charging stations",
+        alt:"Air conditioning outdoor units on the wall of a house", slug:"air-conditioning" },
+      { file:"slide-03-charging", w:1288, kicker:"03  ·  Sustainable solutions", title:"Charging stations",
         desc:"Safe EV charging at home or at work. We fit your wallbox, upgrade the electrical panel where needed, and test everything before handover.",
-        alt:"Electric vehicle charging point", slug:"ev-charging" },
-      { file:"slide-04-fusebox", kicker:"04  ·  Electrical services", title:"Fuse box replacement",
+        alt:"Electric car at a charging point in a parking garage", slug:"ev-charging" },
+      { file:"slide-04-fusebox", w:2016, kicker:"04  ·  Electrical services", title:"Fuse box replacement",
         desc:"A safe, modern fuse box that meets today's standards — ready for the extra load of solar, a charger and an all-electric home.",
-        alt:"Newly installed distribution board", slug:"fuse-box" },
-      { file:"slide-05-fault", kicker:"05  ·  Electrical services", title:"Fault repair & maintenance",
+        alt:"Fuse box with residual-current devices and wiring", slug:"fuse-box" },
+      { file:"slide-05-fault", w:2000, kicker:"05  ·  Electrical services", title:"Fault repair & maintenance",
         desc:"Fast fault-finding when something fails, plus routine maintenance and the odd jobs that keep your home running safely — one team, one call.",
-        alt:"Electrician tracing a fault in a fuse box", slug:"fault-repair" }
+        alt:"Electrician testing a fault in a distribution panel", slug:"fault-repair" }
     ];
     this.goSlide = (i)=>{ const n = this.slides.length; this.setState({ slide: ((i % n) + n) % n }); };
     this.state = { sent:false, slide:0, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
@@ -947,7 +946,8 @@ class Component extends DCLogic {
     const slides = this.slides.map((s,i)=>({
       key:i, idx:i, kicker:s.kicker, title:s.title, desc:s.desc, alt:s.alt,
       img: "../uploads/" + s.file + ".jpg",
-      srcset: "../uploads/" + s.file + "-1200.jpg 1200w, ../uploads/" + s.file + ".jpg 2048w",
+      // slides are cropped at native width, so the 1200 variant only exists where the source is wider than that
+      srcset: s.w > 1200 ? ("../uploads/" + s.file + "-1200.jpg 1200w, ../uploads/" + s.file + ".jpg " + s.w + "w") : "",
       loading: i === 0 ? "eager" : "lazy",
       href: "services.html#" + s.slug,
       hidden: i === cur ? "false" : "true",
@@ -964,13 +964,13 @@ class Component extends DCLogic {
     const prevSlide = ()=>this.goSlide(cur - 1);
     const nextSlide = ()=>this.goSlide(cur + 1);
     const imgFor = {
-      0:"../uploads/Huis-zonnepanelen-scaled.jpg",
-      1:"https://images.unsplash.com/photo-1780445392417-68b9dccc45f2?auto=format&fit=crop&w=900&q=60",
-      2:"../uploads/out.jpg",
-      3:"../uploads/Screenshot_2026-08-08_235630_2026-08-08_20_58_06.936542.webp",
-      4:"../uploads/images.jpeg",
-      5:"../uploads/1-1.png",
-      6:"../uploads/4-1.png",
+      0:"../uploads/zonnepanelen-woning-dak.jpg",
+      1:"../uploads/thuisbatterij-omvormer-wand.jpg",
+      2:"../uploads/laadpaal-parkeergarage.jpg",
+      3:"../uploads/airco-buitenunits-gevel.jpg",
+      4:"../uploads/warmtepomp-buitenunits-gevel.jpg",
+      5:"../uploads/meterkast-aardlekschakelaars.jpg",
+      6:"../uploads/meterkast-controle-laadpaalgroep.jpg",
       7:"../uploads/van.jpg"
     };
     const onImgError = (e)=>{ e.target.style.display="none"; };

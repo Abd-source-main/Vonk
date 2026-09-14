@@ -140,6 +140,11 @@
   /* ——— SERVICES WALKTHROUGH ——— tablet: rail + text with a pinned quarter preview; phone: accordion */
   .r-acc-head{display:none;}
   .r-acc-img{display:none;}
+  /* Portrait photos in the landscape accordion window: keep the subject in frame
+     (the wallbox and the wall unit sit near the top, the outdoor units sit low). */
+  [id="ev-charging"] .r-acc-img{object-position:center 12%;}
+  [id="air-conditioning"] .r-acc-img{object-position:center 10%;}
+  [id="heat-pump"] .r-acc-img{object-position:center 60%;}
   @media (min-width:701px) and (max-width:1000px){
     .r-walk{grid-template-columns:168px 1fr!important;gap:26px!important;}
     .r-walk-rail{display:block!important;}
@@ -614,18 +619,17 @@ class Component extends DCLogic {
         img:"[ photo: electrician on a maintenance visit ]", ctaLabel:"Request a free quote",
         stats:[{v:"1 call",k:"Trusted contact"},{v:"Safe",k:"Preventive checks"},{v:"Flexible",k:"Big or small"}] }
     ];
-    // One artwork per service, used at every breakpoint. These are the "mobile_*" sources,
-    // re-encoded to JPEG (they carry a fully opaque alpha channel, so nothing is lost) —
-    // 364KB for the set instead of 11MB of PNG.
+    // One photo per service, used at every breakpoint (sticky panel, intro fan and the
+    // mobile accordion). Real installation photos supplied by the client, September 2026.
     const imgFor = {
-      "solar-panels":     "../uploads/svc-solar-panels.jpg",
-      "home-batteries":   "../uploads/svc-home-batteries.jpg",
-      "ev-charging":      "../uploads/svc-ev-charging.jpg",
-      "air-conditioning": "../uploads/svc-air-conditioning.jpg",
-      "heat-pump":        "../uploads/svc-heat-pump.jpg",
-      "fuse-box":         "../uploads/svc-fuse-box.jpg",
-      "fault-repair":     "../uploads/svc-fault-repair.jpg",
-      "maintenance":      "../uploads/svc-maintenance.jpg"
+      "solar-panels":     "../uploads/zonnepanelen-woning-dak.jpg",
+      "home-batteries":   "../uploads/thuisbatterij-accu-modules.jpg",
+      "ev-charging":      "../uploads/laadpaal-wallbox-buiten.jpg",
+      "air-conditioning": "../uploads/airco-binnenunit-woonkamer.jpg",
+      "heat-pump":        "../uploads/warmtepomp-buitenunits-gevel.jpg",
+      "fuse-box":         "../uploads/meterkast-groepen-close-up.jpg",
+      "fault-repair":     "../uploads/storing-meten-multimeter.jpg",
+      "maintenance":      "../uploads/meterkast-controle-laadpaalgroep.jpg"
     };
     const onImgError = (e)=>{ e.target.style.display="none"; };
     const active = 0;

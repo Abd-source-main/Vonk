@@ -37,11 +37,11 @@
       if (n.tagName === "NAV") { section = "menu"; break; }
     }
     var tag = el.tagName.toLowerCase();
-    var kind = /^h[1-6]$/.test(tag) ? "kop" :
-               tag === "a" ? "link/knop" :
-               tag === "button" ? "knop" :
-               tag === "li" ? "lijstitem" : "tekst";
-    return (section || "pagina") + " · " + kind;
+    var kind = /^h[1-6]$/.test(tag) ? "heading" :
+               tag === "a" ? "link/button" :
+               tag === "button" ? "button" :
+               tag === "li" ? "list item" : "text";
+    return (section || "page") + " · " + kind;
   }
 
   function sectionOf(el) {
@@ -90,7 +90,7 @@
     try { host.contentEditable = "plaintext-only"; }
     catch (e) { host.contentEditable = "true"; }
     host.spellcheck = true;
-    host.setAttribute("title", "Klik om deze tekst te wijzigen");
+    host.setAttribute("title", "Click to edit this text");
 
     var rec = { key: key, host: host, original: original, where: describe(parent) };
     nodes.push(rec);
@@ -190,7 +190,7 @@
       var href = a.getAttribute("href") || "";
       if (href.charAt(0) === "#") return;      /* in-page anchors still work */
       e.preventDefault();
-      send("notify", { message: "Links zijn uitgeschakeld in deze tekstversie." });
+      send("notify", { message: "Links are disabled in this text-editing copy." });
     }, true);
     Array.prototype.forEach.call(document.querySelectorAll("form"), function (f) {
       f.addEventListener("submit", function (e) { e.preventDefault(); });

@@ -5,7 +5,7 @@ repo, a CMS, or the live site.
 
 `build-copy-editor.py` bundles all eight pages into a single HTML file. The
 client opens it, edits the words in place on what looks like the real site, and
-clicks **Wijzigingen opslaan** to get a small JSON file back.
+clicks **Save changes** to get a small JSON file back.
 `apply-copy-changes.py` writes those edits into `public/`.
 
 ## Making the file

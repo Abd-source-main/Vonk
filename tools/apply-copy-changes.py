@@ -105,7 +105,7 @@ def apply_page(path: Path, changes, dry_run: bool):
 
         matches = list(pattern_for(want).finditer(source))
         if len(matches) != 1:
-            problems.append((change, "geen match" if not matches
+            problems.append((change, "no match" if not matches
                              else "%d matches" % len(matches)))
             continue
 
@@ -154,8 +154,8 @@ def main():
               % len(unresolved))
         for file, change, why in unresolved:
             print("\n  %s  [%s]  %s" % (file, why, change.get("where", "")))
-            print("    van: %s" % change["from"][:110])
-            print("    naar: %s" % change["to"][:110])
+            print("    from: %s" % change["from"][:110])
+            print("    to:   %s" % change["to"][:110])
         sys.exit(1)
 
 

@@ -17,8 +17,8 @@ OUT = Path(__file__).resolve().parent / "out"
 
 PAGES = [
     ("nl-home",     "nl/index.html",     "NL", "Home"),
-    ("nl-diensten", "nl/diensten.html",  "NL", "Diensten"),
-    ("nl-over-ons", "nl/over-ons.html",  "NL", "Over ons"),
+    ("nl-diensten", "nl/diensten.html",  "NL", "Services"),
+    ("nl-over-ons", "nl/over-ons.html",  "NL", "About"),
     ("nl-contact",  "nl/contact.html",   "NL", "Contact"),
     ("en-home",     "en/index.html",     "EN", "Home"),
     ("en-services", "en/services.html",  "EN", "Services"),
