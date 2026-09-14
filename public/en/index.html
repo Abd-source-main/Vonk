@@ -140,7 +140,7 @@
   .vonk-slide{position:absolute;inset:0;transition:opacity .55s cubic-bezier(.22,1,.36,1),visibility .55s;}
   .vonk-slide-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;}
   /* slide 02 is a square crop of a portrait photo: the units sit high in it, so each tier picks the band */
-  .vonk-slide:nth-child(2) .vonk-slide-img{object-position:center 6%;}
+  .vonk-slide:nth-child(3) .vonk-slide-img{object-position:center 6%;}
   .vonk-slide-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(251,250,248,.96) 0%,rgba(251,250,248,.8) 32.8%,rgba(251,250,248,.22) 49.3%,rgba(251,250,248,0) 75.5%);}
   .vonk-slide-scrim2{position:absolute;inset:0;background:linear-gradient(180deg,rgba(251,250,248,.9) 0%,rgba(251,250,248,0) 17%,rgba(251,250,248,0) 60%,rgba(251,250,248,.55) 100%);}
   .vonk-slide-body{position:absolute;left:var(--inset);right:var(--inset);bottom:96px;display:flex;flex-direction:column;align-items:flex-start;gap:20px;max-width:560px;}
@@ -168,7 +168,7 @@
     .vonk-slide-desc{font-size:17px;max-width:460px;}
     .vonk-slider-nav{bottom:40px;}
     .vonk-slider-dots{bottom:28px;}
-    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:center 30%;}
+    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:center 30%;}
   }
   @media (max-width:560px){
     .vonk-svc-sec{padding-top:48px;}
@@ -182,13 +182,13 @@
     .vonk-slider-btn{width:52px;height:52px;}
     .vonk-slider-dots{bottom:22px;}
     /* At 393×600 a 16:9 photo is cropped to a 36.6% window, so where that window sits decides
-       what survives. Tuned per photo: the heat pump (02) and the charger (03) sit right of
-       centre, the multimeter hands (05) sit left, the roof panels (01) sit right. Slide 04 is fine centred. Desktop
+       what survives. Tuned per photo: the heat pump (03) and the charger (04) sit right of
+       centre, the multimeter hands (02) sit left, the roof panels (05) sit right. Slide 01 is fine centred. Desktop
        and tablet are centred FILL, which is why this lives in the phone tier only. */
-    .vonk-slide:nth-child(1) .vonk-slide-img{object-position:58% center;}
-    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:80% center;}
-    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:60% center;}
-    .vonk-slide:nth-child(5) .vonk-slide-img{object-position:45% center;}
+    .vonk-slide:nth-child(5) .vonk-slide-img{object-position:58% center;}
+    .vonk-slide:nth-child(3) .vonk-slide-img{object-position:80% center;}
+    .vonk-slide:nth-child(4) .vonk-slide-img{object-position:60% center;}
+    .vonk-slide:nth-child(2) .vonk-slide-img{object-position:45% center;}
   }
   @media (prefers-reduced-motion:reduce){
     .vonk-slide{transition:none;}
@@ -742,21 +742,21 @@ class Component extends DCLogic {
     // WHAT WE DO slider — five slides, mirroring the Figma homepage. Each one links
     // through to its own service on the Services & Portfolio page.
     this.slides = [
-      { file:"slide-01-solar", w:1536, kicker:"01  ·  Sustainable solutions", title:"Solar panels & home batteries",
-        desc:"Rooftop solar that turns daylight into lower energy bills, paired with a home battery that stores what you don't use for the evening. Most systems installed within four weeks of approval.",
-        alt:"Solar panels on a tiled roof", slug:"solar-panels" },
-      { file:"slide-02-heatpump-gevel", w:908, kicker:"02  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
-        desc:"Modern air conditioning and heat pumps that cool in summer and heat efficiently in winter — cutting your gas use while keeping every room comfortable.",
-        alt:"Two heat pump outdoor units on the brick wall of a house", slug:"air-conditioning" },
-      { file:"slide-03-charging", w:1288, kicker:"03  ·  Sustainable solutions", title:"Charging stations",
-        desc:"Safe EV charging at home or at work. We fit your wallbox, upgrade the electrical panel where needed, and test everything before handover.",
-        alt:"Electric car at a charging point in a parking garage", slug:"ev-charging" },
-      { file:"slide-04-fusebox", w:2016, kicker:"04  ·  Electrical services", title:"Fuse box replacement",
+      { file:"slide-04-fusebox", w:2016, kicker:"01  ·  Electrical services", title:"Fuse box replacement",
         desc:"A safe, modern fuse box that meets today's standards — ready for the extra load of solar, a charger and an all-electric home.",
         alt:"Fuse box with residual-current devices and wiring", slug:"fuse-box" },
-      { file:"slide-05-fault", w:2000, kicker:"05  ·  Electrical services", title:"Fault repair & maintenance",
+      { file:"slide-05-fault", w:2000, kicker:"02  ·  Electrical services", title:"Fault repair & maintenance",
         desc:"Fast fault-finding when something fails, plus routine maintenance and the odd jobs that keep your home running safely — one team, one call.",
-        alt:"Electrician testing a fault in a distribution panel", slug:"fault-repair" }
+        alt:"Electrician testing a fault in a distribution panel", slug:"fault-repair" },
+      { file:"slide-02-heatpump-gevel", w:908, kicker:"03  ·  Sustainable solutions", title:"Air conditioning & heat pumps",
+        desc:"Modern air conditioning and heat pumps that cool in summer and heat efficiently in winter — cutting your gas use while keeping every room comfortable.",
+        alt:"Two heat pump outdoor units on the brick wall of a house", slug:"air-conditioning" },
+      { file:"slide-03-charging", w:1288, kicker:"04  ·  Sustainable solutions", title:"Charging stations",
+        desc:"Safe EV charging at home or at work. We fit your wallbox, upgrade the electrical panel where needed, and test everything before handover.",
+        alt:"Electric car at a charging point in a parking garage", slug:"ev-charging" },
+      { file:"slide-01-solar", w:1536, kicker:"05  ·  Sustainable solutions", title:"Solar panels & home batteries",
+        desc:"Rooftop solar that turns daylight into lower energy bills, paired with a home battery that stores what you don't use for the evening. Most systems installed within four weeks of approval.",
+        alt:"Solar panels on a tiled roof", slug:"solar-panels" }
     ];
     this.goSlide = (i)=>{ const n = this.slides.length; this.setState({ slide: ((i % n) + n) % n }); };
     this.state = { sent:false, slide:0, form:{ name:"", email:"", phone:"", service:"Solar panels", message:"" } };
