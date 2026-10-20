@@ -107,11 +107,16 @@
   .vonk-cert-strip:hover .vonk-cert-track{animation-play-state:paused;}
   .vonk-cert{flex:none;box-sizing:border-box;display:flex;align-items:center;justify-content:center;width:clamp(150px,18vw,230px);height:clamp(84px,9vw,110px);padding:clamp(16px,1.8vw,24px) clamp(20px,2.4vw,34px);border-right:1px solid rgba(14,16,18,.11);}
   .vonk-cert img{display:block;max-width:100%;max-height:100%;width:auto;height:auto;}
+  .vonk-cert img{pointer-events:none;-webkit-user-drag:none;}
   @media (prefers-reduced-motion:reduce){
-    .vonk-cert-strip{overflow-x:auto;-webkit-mask-image:none;mask-image:none;}
     .vonk-cert-track{animation:none;}
-    .vonk-cert[aria-hidden="true"]{display:none;}
   }
+  /* Once initStrips() takes over, both strips are moved from script instead of by CSS so they
+     can also be dragged, swiped or trackpad-scrolled — with no scrollbar, since nothing here
+     is a native scroll box. Vertical swipes still scroll the page (pan-y). */
+  .vonk-marquee.is-live .vonk-marquee-track,.vonk-cert-strip.is-live .vonk-cert-track{animation:none;will-change:transform;}
+  .vonk-marquee.is-live,.vonk-cert-strip.is-live{touch-action:pan-y;cursor:grab;-webkit-user-select:none;user-select:none;}
+  .vonk-marquee.is-dragging,.vonk-cert-strip.is-dragging{cursor:grabbing;}
   .vonk-svc-grid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:188px;gap:14px;}
   .vonk-svc-card{position:relative;display:block;height:100%;width:100%;border-radius:16px;overflow:hidden;border:1px solid rgba(14,16,18,.11);background:repeating-linear-gradient(135deg,#efece7 0 14px,#f7f5f2 14px 28px);box-shadow:0 10px 26px rgba(14,16,18,.08);transition:box-shadow .3s ease;}
   .vonk-svc-card:hover{box-shadow:0 24px 52px rgba(14,16,18,.20);}
@@ -816,6 +821,7 @@ class Component extends DCLogic {
     this.onScroll();
     this._settle = setTimeout(()=>this.onScroll(), 120);
     this.initWireTint();
+    this.initStrips();
     this.initSliderAuto();
   }
   // The What we do slider advances on its own, but holds whenever someone is actually reading
@@ -878,6 +884,109 @@ class Component extends DCLogic {
     if(document.fonts && document.fonts.ready) document.fonts.ready.then(sync).catch(()=>{});
     this._wireSettle = setTimeout(sync, 400);
   }
+  // The proof strip and the certification strip run on their own (opposite ways) and can
+  // also be dragged, swiped or trackpad-scrolled by hand; the auto-scroll carries on from
+  // wherever they're let go. The offset is applied as a transform rather than by native
+  // scrolling, so no scrollbar ever shows and the orange "lit" copy of the proof strip moves
+  // in lockstep. Each track holds its list at least twice, so the offset wraps at half width.
+  initStrips(){
+    const reduce = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
+    const specs = [
+      { sel:".vonk-marquee", track:".vonk-marquee-track", secs:30, dir:-1 },
+      { sel:".vonk-cert-strip", track:".vonk-cert-track", secs:40, dir:1 }
+    ];
+    const strips = [];
+    const measure = ()=>strips.forEach(s=>{
+      if(!s.tracks[0] || !s.tracks[0].isConnected) s.tracks = [...s.el.querySelectorAll(s.sp.track)];
+      s.half = s.tracks[0] ? s.tracks[0].scrollWidth / 2 : 0;
+    });
+    const wrap = s=>{ if(s.half) s.off = ((s.off % s.half) - s.half) % s.half; };
+    specs.forEach(sp=>{
+      const el = document.querySelector(sp.sel);
+      if(!el) return;
+      const s = { el, sp, tracks:[...el.querySelectorAll(sp.track)], off:0, half:0, glide:0, drag:null, hover:false, wheelT:0, visible:true, t:"" };
+      const end = e=>{
+        const d = s.drag;
+        if(!d || (e && e.pointerId !== d.id)) return;
+        // a finger that stopped before lifting shouldn't fling
+        if(d.moved && e && e.timeStamp - d.lastT < 80) s.glide = d.v;
+        s.drag = null;
+        el.classList.remove("is-dragging");
+      };
+      el.addEventListener("pointerdown", e=>{
+        if(e.pointerType === "mouse" && e.button !== 0) return;
+        s.drag = { id:e.pointerId, x:e.clientX, off:s.off, lastX:e.clientX, lastT:e.timeStamp, v:0, moved:false };
+        s.glide = 0;
+      });
+      el.addEventListener("pointermove", e=>{
+        const d = s.drag;
+        if(!d || e.pointerId !== d.id) return;
+        const dx = e.clientX - d.x;
+        if(!d.moved){
+          if(Math.abs(dx) < 4) return;
+          d.moved = true;
+          el.classList.add("is-dragging");
+          try{ el.setPointerCapture(e.pointerId); }catch(err){}
+        }
+        s.off = d.off + dx;
+        const dt = e.timeStamp - d.lastT;
+        if(dt > 0) d.v = .8 * ((e.clientX - d.lastX) / dt * 1000) + .2 * d.v;
+        d.lastX = e.clientX; d.lastT = e.timeStamp;
+      });
+      el.addEventListener("pointerup", end);
+      el.addEventListener("pointercancel", end);
+      // only the strip's own capture: taking over a touch fires this on the inner node too
+      el.addEventListener("lostpointercapture", e=>{ if(e.target === el) end(e); });
+      el.addEventListener("pointerenter", e=>{ if(e.pointerType === "mouse") s.hover = true; });
+      el.addEventListener("pointerleave", e=>{ if(e.pointerType === "mouse") s.hover = false; });
+      // sideways trackpad / shift+wheel only — a plain vertical wheel still scrolls the page
+      el.addEventListener("wheel", e=>{
+        if(Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+        e.preventDefault();
+        s.off -= e.deltaX; s.glide = 0; s.wheelT = performance.now();
+      }, { passive:false });
+      el.classList.add("is-live");
+      strips.push(s);
+    });
+    if(!strips.length) return;
+
+    measure();
+    window.addEventListener("resize", measure);
+    this._stripMeasure = measure;
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(measure).catch(()=>{});
+    if(window.ResizeObserver){
+      this._stripRO = new ResizeObserver(measure);
+      strips.forEach(s=>s.tracks[0] && this._stripRO.observe(s.tracks[0]));
+    }
+    if(window.IntersectionObserver){
+      this._stripIO = new IntersectionObserver(es=>es.forEach(en=>{
+        const s = strips.find(x=>x.el === en.target);
+        if(s) s.visible = en.isIntersecting;
+      }));
+      strips.forEach(s=>this._stripIO.observe(s.el));
+    }
+
+    let last = performance.now();
+    const tick = now=>{
+      const dt = Math.min(64, now - last) / 1000;
+      last = now;
+      strips.forEach(s=>{
+        if(!s.half || !s.visible) return;
+        const still = (reduce && reduce.matches) || s.drag || s.hover || now - s.wheelT < 400;
+        if(!still) s.off += s.sp.dir * (s.half / s.sp.secs) * dt;
+        if(s.glide){
+          s.off += s.glide * dt;
+          s.glide *= Math.pow(.03, dt);
+          if(Math.abs(s.glide) < 4) s.glide = 0;
+        }
+        wrap(s);
+        const t = "translate3d(" + s.off.toFixed(2) + "px,0,0)";
+        if(t !== s.t){ s.t = t; s.tracks.forEach(tr=>{ tr.style.transform = t; }); }
+      });
+      this._stripRaf = requestAnimationFrame(tick);
+    };
+    this._stripRaf = requestAnimationFrame(tick);
+  }
   componentDidUpdate(){
     // a re-render restores the inline start values, so re-apply the scroll state at once
     this.onScroll();
@@ -888,6 +997,10 @@ class Component extends DCLogic {
     window.removeEventListener("resize", this.onScroll);
     if(this._wireSettle) clearTimeout(this._wireSettle);
     if(this._wireSync) window.removeEventListener("resize", this._wireSync);
+    if(this._stripRaf) cancelAnimationFrame(this._stripRaf);
+    if(this._stripMeasure) window.removeEventListener("resize", this._stripMeasure);
+    if(this._stripRO) this._stripRO.disconnect();
+    if(this._stripIO) this._stripIO.disconnect();
   }
   onScroll(){
     if(this._pending) return;
